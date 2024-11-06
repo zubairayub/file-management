@@ -19,6 +19,6 @@ class RoleMiddleware
             return $next($request);
         }
     
-        return redirect('/home'); // or wherever you want to redirect
+        return redirect('/home'); // or wherever you want to redirecthe
     }
 }
