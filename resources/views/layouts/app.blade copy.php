@@ -12,33 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite([
-        'resources/css/app.css', // Main Laravel CSS
-        'resources/js/app.js',   // Main Laravel JS
-        // Theme CSS files
-        'resources/css/theme/custom.min.css',
-        'resources/css/theme/customizer.min.css',
-        'resources/css/theme/file-manager.min.css',
-        'resources/css/theme/libs.min.css',
-        'resources/css/theme/pf-ui.min.css',
-        'resources/css/theme/pro.min.css',
-        'resources/css/theme/rtl.min.css',
-        // Theme JS files
-        'resources/js/theme/alternate-dashboard.js',
-        'resources/js/theme/dashboard.js',
-        'resources/js/theme/external.min.js',
-        'resources/js/theme/file-manager.js',
-        'resources/js/theme/libs.min.js',
-        'resources/js/theme/lodash.min.js',
-        'resources/js/theme/pf-ui.js',
-        'resources/js/theme/pf-uipro.js',
-        'resources/js/theme/setting.min.js',
-        'resources/js/theme/setting-init.js',
-        'resources/js/theme/sidebar.js',
-        'resources/js/theme/slider-tabs.js',
-        'resources/js/theme/utility.min.js',
-        'resources/js/theme/widgetcharts.js'
-    ])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
