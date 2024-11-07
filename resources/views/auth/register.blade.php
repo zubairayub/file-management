@@ -1,10 +1,12 @@
 <x-guest-layout>
    
     <section class="login-content">
-               <div class="row m-0 align-items-center bg-white vh-100">
-                     <div class="col-md-6 d-md-block d-none bg-primary p-0 vh-100 overflow-hidden">
-                     <img src="https://images.pexels.com/photos/3791130/pexels-photo-3791130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="img-fluid gradient-main animated-scaleX" alt="images" loading="lazy">
-                  </div>
+    <div class="row m-0 align-items-center bg-white vh-100">
+    <div class="col-md-6 d-md-block d-none bg-primary p-0 vh-100 overflow-hidden">
+    <img src="https://images.pexels.com/photos/3791130/pexels-photo-3791130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+         class="img-fluid gradient-main animated-scaleX" alt="images" loading="lazy" 
+         style="height: 100%; width: auto; object-fit: cover;">
+</div>
                   <div class="col-md-6">
                      <div class="row justify-content-center">
                         <div class="col-md-10">
@@ -29,20 +31,20 @@
                                  @csrf
                                     <div class="row">
                                     <div hidden>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', 'John Doe')"  autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            </div>
-             <!-- Role -->
-        <div hidden>
-            <x-input-label for="role" :value="__('Role')" />
-            <select id="role" name="role" class="block mt-1 w-full" required>
-                <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>Customer</option>
-                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="staff" {{ old('role') == 'staff' ? 'selected' : '' }}>Staff</option>
-            </select>
-            <x-input-error :messages="$errors->get('role')" class="mt-2" />
-        </div>
+                                            <x-input-label for="name" :value="__('Name')" />
+                                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', 'John Doe')"  autofocus autocomplete="name" />
+                                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                            </div>
+                                            <!-- Role -->
+                                        <div hidden>
+                                            <x-input-label for="role" :value="__('Role')" />
+                                            <select id="role" name="role" class="block mt-1 w-full" required>
+                                                <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>Customer</option>
+                                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                                <option value="staff" {{ old('role') == 'staff' ? 'selected' : '' }}>Staff</option>
+                                            </select>
+                                            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                                        </div>
                                        <div class="col-lg-6">
                                           <div class="form-group">
                                              <label for="email" class="form-label">Email</label>
@@ -76,7 +78,7 @@
                                     </p>
                                     
                                  </form>
-                              </div>
+                                 </div>
                            </div>
                         </div>
                      </div>
