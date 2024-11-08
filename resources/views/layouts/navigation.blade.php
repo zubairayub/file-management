@@ -30,8 +30,10 @@
                         </div>
                     </div>
                     <div class="sidebar-profile-detail">
-                        <h6 class="sidebar-profile-name">Administrator</h6>
-                        <span class="sidebar-profile-username">Prompt Filings</span>
+                        <h6 class="sidebar-profile-name">{{ ucfirst(auth()->user()->role ?? 'Guest') }}</h6>
+                       
+                       
+                        <span class="sidebar-profile-username">{{ ucfirst(auth()->user()->name ?? 'Guest') }}</span>
                     </div> 
                 </div>
             </div>        <hr class="hr-horizontal">
