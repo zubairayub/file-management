@@ -124,7 +124,7 @@
                             <span class="mini-icon">-</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="#">
                             <i class="icon">
                                 <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +184,30 @@
                             </i>
                             <span class="item-name">EIN</span>
                         </a>
-                    </li>  
+                    </li>   -->
+                   
+                    <!-- Check if the user has folders -->
+@if(auth()->user()->folders->isEmpty())
+    <!-- Display a message if no folders are found -->
+    <li class="nav-item">
+        <span class="item-name">No Folders Available</span>
+    </li>
+@else
+    <!-- Loop through each folder if they exist -->
+    @foreach(auth()->user()->folders as $folder)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ $folder->link }}">
+                <!-- Generate random color for each icon -->
+                <i class="{{ $folder->icon }}" style="color: {{ sprintf('#%06X', mt_rand(0, 0xFFFFFF)) }};"></i> <!-- Random color applied here -->
+                <span class="item-name">{{ $folder->name }}</span> <!-- Display folder name -->
+            </a>
+        </li>
+    @endforeach
+@endif
+
+
+                   
+
                 </ul>
                 <!-- Sidebar Menu End -->        </div>
         </div>
