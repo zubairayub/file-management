@@ -47,7 +47,9 @@
     
     </aside>
     <main class="main-content">
+    @include('partials.header')
     {{ $slot }}
+    @include('partials.footer')
     </main> 
         <script src="{{ asset('js/libs.min.js') }}"></script>
         <script src="{{ asset('js/slider-tabs.js') }}"></script>

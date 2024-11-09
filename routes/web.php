@@ -20,10 +20,14 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/file-manager', [FileManagerController::class, 'index'])->name('file-manager.index');
+    Route::get('/folder/{folderId}/subfolders', [FileManagerController::class, 'showSubFolders'])->name('folder.showSubFolders');
     Route::post('/file-manager/folder', [FileManagerController::class, 'createFolder'])->name('file-manager.create-folder');
+    Route::post('/create-subfolder/{parentFolderId}', [FileManagerController::class, 'createSubFolder'])->name('folder.createSubFolder');
+    Route::post('/subfolder/{folderId}', [FileManagerController::class, 'createSubFolder'])->name('subfolder.create');
     Route::post('/file-manager/upload', [FileManagerController::class, 'uploadFile'])->name('file-manager.upload-file');
     Route::delete('/file-manager/file/{file}', [FileManagerController::class, 'deleteFile'])->name('file-manager.delete-file');
     Route::delete('/file-manager/folder/{folder}', [FileManagerController::class, 'deleteFolder'])->name('file-manager.delete-folder');
+    
 });
 
 require __DIR__.'/auth.php';

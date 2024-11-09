@@ -17,6 +17,15 @@ class Folder extends Model
         return $this->hasMany(File::class);
     }
 
+    /**
+     * Relationship with the SubFolder model.
+     * Each folder can have many subfolders.
+     */
+    public function subFolders()
+    {
+        return $this->hasMany(SubFolder::class, 'parent_folder_id');
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);

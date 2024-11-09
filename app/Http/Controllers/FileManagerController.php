@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Folder;
 use App\Models\File;
+use App\Models\User;
+use App\Models\SubFolder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +28,7 @@ class FileManagerController extends Controller
 
         // Create the folder in the file system (storage/app/public by default)
         $folderName = $request->name;
-        $folderPath = 'files/' . $folderName;
+        $folderPath = $folderPath = 'files/' . $user->id . '_' . str_replace(' ', '_', $user->name) .'/'. $folderName ;
 
         // Make sure the folder exists in the storage path
         Storage::makeDirectory($folderPath);
@@ -42,6 +44,56 @@ class FileManagerController extends Controller
         return redirect()->route('file-manager.index')->with('success', 'Folder created successfully!');
     }
  
+
+    // Show subfolders of a particular folder
+    public function showSubFolders($folderId)
+    {
+        // Get the folder by its ID
+        $folder = Folder::findOrFail($folderId);
+
+        // Get the subfolders of this folder
+        $subfolders = SubFolder::where('parent_folder_id', $folderId)->get();
+
+        // Return the view with folder and its subfolders
+        return view('folders.subfolders', compact('folder', 'subfolders'));
+    }
+
+
+    // Create a subfolder under a parent folder
+    public function createSubFolder(Request $request, $parentFolderId)
+    {
+        // Validate the subfolder name and ensure it's not empty
+        $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
+        
+        // Fetch the user information using the authenticated user's ID
+        $user = User::findOrFail(Auth::id());
+        // Find the parent folder to associate the subfolder with
+        $parentFolder = Folder::findOrFail($parentFolderId);
+
+        // Create a new folder in the file system (storage/app/public by default)
+        $subFolderName = $request->name;
+        $subFolderPath = $folderPath = 'files/' . $user->id . '_' . str_replace(' ', '_', $user->name) .'/'. $parentFolder->name .'/'. $subFolderName  ;
+
+
+        // Make sure the subfolder exists in the storage path
+        Storage::makeDirectory($subFolderPath);
+
+        // Save the subfolder information in the database
+        $subFolder = SubFolder::create([
+            'name' => $subFolderName,
+            'user_id' => $user->id,  // Use the logged-in user ID
+            'parent_folder_id' => $parentFolderId,  // Link to the immediate parent folder
+            'parent_id' => $parentFolder->parent_folder_id, // Link to the higher-level parent folder (if needed)
+            'path' => $subFolderPath  // Save the path
+        ]);
+        
+        // Redirect back to the file manager with success message
+        return redirect()->route('folder.showSubFolders', ['folderId' => $parentFolderId])->with('success', 'Subfolder created successfully!');
+    }
+
+    
      // Upload a file
      public function uploadFile(Request $request)
      {
