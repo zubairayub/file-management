@@ -20,7 +20,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/file-manager', [FileManagerController::class, 'index'])->name('file-manager.index');
-    Route::get('/folder/{folderId}/subfolders', [FileManagerController::class, 'showSubFolders'])->name('folder.showSubFolders');
+    Route::get('/folder/{folderId}/subfolders/{subfolderId?}', [FileManagerController::class, 'showSubFolders'])
+    ->name('folder.showSubFolders');
     Route::post('/file-manager/folder', [FileManagerController::class, 'createFolder'])->name('file-manager.create-folder');
     Route::post('/create-subfolder/{parentFolderId}', [FileManagerController::class, 'createSubFolder'])->name('folder.createSubFolder');
     Route::post('/subfolder/{folderId}', [FileManagerController::class, 'createSubFolder'])->name('subfolder.create');
