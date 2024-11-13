@@ -45,70 +45,107 @@ class FileManagerController extends Controller
             }
         
 
-            // Show subfolders of a particular folder or a specific subfolder if requested
             public function showSubFolders($folderId, $subfolderId = null)
-            {
-                // Get the folder by its ID
-                $folder = Folder::findOrFail($folderId);
+                {
+                    // Get the main root folder by its ID
+                    $folder = Folder::findOrFail($folderId);
 
-                // Initialize $files as an empty array by default
-                $files = [];
+                    // Initialize $files and $subfolders as empty arrays by default
+                    $files = [];
+                    $subfolders = [];
 
-                // If subfolderId is provided, show the specific subfolder
-                if ($subfolderId) {
-                    // Get the specific subfolder by its ID
-                    $subfolder = SubFolder::findOrFail($subfolderId);
+                    // If subfolderId is provided, show the specific subfolder and its files
+                    if ($subfolderId) {
+                        // Get the specific subfolder by its ID
+                        $subfolder = SubFolder::findOrFail($subfolderId);
 
-                    // Optionally, get files or other data associated with the subfolder
-                    $files = File::where('folder_id', $subfolderId)->get(); // Adjust if needed
+                        // Check if the subfolder belongs to the specified root folder
+                        if ($subfolder->parent_folder_id != $folderId) {
+                            abort(404, 'Subfolder not found in this folder.');
+                        }
 
-                    // Return the view for the specific subfolder with folder, subfolder, and files data
-                    return view('folders.subfolders', compact('folder', 'subfolder', 'files'));
-                } else {
-                    // Otherwise, show the list of subfolders for the folder
-                    $subfolders = SubFolder::where('parent_folder_id', $folderId)->get();
+                        // Get files associated with the subfolder if any
+                        $files = File::where('folder_id', $subfolderId)->get();
 
-                    // Return the view with folder and its subfolders
-                    return view('folders.subfolders', compact('folder', 'subfolders', 'files'));
+                        // Retrieve nested subfolders of this subfolder, if any
+                        $nestedSubfolders = SubFolder::where('parent_id', $subfolderId)->get();
+
+                        // Return view with folder, subfolder, nested subfolders, and files
+                        return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files'));
+
+                    } else {
+                        // If no specific subfolder is requested, show all subfolders under the root folder
+                        $subfolders = SubFolder::where('parent_folder_id', $folderId)->get();
+
+                        // Return view with folder and its immediate subfolders
+                        return view('folders.subfolders', compact('folder', 'subfolders', 'files'));
+                    }
                 }
-            }
+
 
 
 
                             // Create a subfolder under a parent folder
-                public function createSubFolder(Request $request, $parentFolderId)
-                {
-                    // Validate the subfolder name and ensure it's not empty
-                    $request->validate([
-                        'name' => 'required|string|max:255'
-                    ]);
-                    
-                    // Fetch the user information using the authenticated user's ID
-                    $user = User::findOrFail(Auth::id());
-                    
-                    // Find the parent folder to associate the subfolder with
-                    $parentFolder = Folder::findOrFail($parentFolderId);
+                            public function createSubFolder(Request $request, $parentFolderId)
+                            {
+                                // Validate the subfolder name
+                                $request->validate([
+                                    'name' => 'required|string|max:255'
+                                ]);
+                            
+                                // Get the authenticated user
+                                $user = User::findOrFail(Auth::id());
+                                
+                                
+                               if($request->is_subfolder == true){
+                                    // Find the parent folder in the database
+                                $parentFolder = SubFolder::findOrFail($parentFolderId);
+                                $parentsubfolder = $parentFolder->parent_folder_id;
+                                $param = ['folderId' => $parentsubfolder, 'subfolderId' => $parentFolderId];
+                               }else{
+                                $parentFolder = Folder::findOrFail($parentFolderId);
+                                $parentsubfolder = $parentFolder->id;
+                                $param = ['folderId' => $parentsubfolder];
+                               }
+                                
+                                
+                                
+                                // Helper function to construct the full path based on parent hierarchy
+                                $fullPath = $this->getFullPath($parentFolder) . '/' . $request->name;
+                            
+                                // Create the directory in storage if it doesn't already exist
+                                Storage::makeDirectory($fullPath);
+                            
+                                // Save subfolder in database
+                                $subFolder = SubFolder::create([
+                                    'name' => $request->name,
+                                    'user_id' => $user->id,
+                                    'parent_folder_id' => $parentsubfolder,
+                                    'parent_id' => $parentFolderId,
+                                    'path' => $fullPath
+                                ]);
 
-                    // Create a new folder in the file system (storage/app/public by default)
-                    $subFolderName = $request->name;
-                    $subFolderPath = $folderPath = 'files/' . $user->id . '_' . str_replace(' ', '_', $user->name) .'/'. $parentFolder->name .'/'. $subFolderName;
-
-                    // Make sure the subfolder exists in the storage path
-                    Storage::makeDirectory($subFolderPath);
-
-                    // Save the subfolder information in the database
-                    $subFolder = SubFolder::create([
-                        'name' => $subFolderName,
-                        'user_id' => $user->id,  // Use the logged-in user ID
-                        'parent_folder_id' => $parentFolderId,  // Link to the immediate parent folder
-                        'parent_id' => $parentFolder->parent_folder_id, // Link to the higher-level parent folder (if needed)
-                        'path' => $subFolderPath  // Save the path
-                    ]);
-
-                    // Redirect to the specific subfolder URL after creation
-                    return redirect()->route('folder.showSubFolders', ['folderId' => $parentFolderId, 'subfolderId' => $subFolder->id])
-                                    ->with('success', 'Subfolder created successfully!');
-                }
+                                
+                            
+                                // Redirect back to show the newly created subfolder
+                                return redirect()->route('folder.showSubFolders', $param )
+                                                 ->with('success', 'Subfolder created successfully!');
+                            }
+                            
+                            // Helper function to get full path recursively
+                            private function getFullPath($folder)
+                            {
+                                if ($folder->parent_folder_id) {
+                                    // Recursively build the path from parent folders
+                                    $parentFolder = Folder::findOrFail($folder->parent_folder_id);
+                                    return $this->getFullPath($parentFolder) . '/' . $folder->name;
+                                } else {
+                                    // Base folder path for user
+                                    $user = User::findOrFail(Auth::id());
+                                    return 'files/' . $user->id . '_' . str_replace(' ', '_', $user->name) . '/' . $folder->name;
+                                }
+                            }
+                            
 
 
     

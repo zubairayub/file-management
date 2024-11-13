@@ -30,7 +30,7 @@
             </nav>
     
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" 
-                    data-folder-id="{{ $folder->id }}">
+                    data-folder-id="{{ isset($subfolder) ? $subfolder->id : $folder->id }}">
                 <span class="d-flex justify-content-center">
                     <svg class="icon-22" width="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
@@ -99,27 +99,28 @@
          
       </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create New Folder</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('subfolder.create', ['folderId' => $folder->id]) }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="folderName" class="form-label">Folder Name</label>
-                        <input type="text" class="form-control" id="folderName" name="name" required>
-                    </div>
-                    <input type="hidden" id="parent_folder_id" name="parent_folder_id">
-                    <button type="submit" class="btn btn-primary">Create Folder</button>
-                </form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create New Folder</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('subfolder.create', ['folderId' =>  isset($subfolder) ? $subfolder->id : $folder->id ]) }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="folderName" class="form-label">Folder Name</label>
+                            <input type="text" class="form-control" id="folderName" name="name" required>
+                        </div>
+                        <input type="hidden" id="parent_folder_id" name="parent_folder_id">
+                        <input type="hidden" id="parent_folder_id" name="is_subfolder" value="{{isset($subfolder) ? true : false }}">
+                        <button type="submit" class="btn btn-primary">Create Folder</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var folderButton = document.querySelector('[data-bs-toggle="modal"]');

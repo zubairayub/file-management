@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
                 Storage::makeDirectory($folderPath);
 
                 // Define default folders to create in the storage and database
-                $defaultFolders = ['Bookkeeping', 'Taxes', 'Payroll', 'ITIN', 'EIN'];
+                $defaultFolders = ['Bookkeeping', 'Taxes', 'Payroll', 'Business Formation'];
                 
                 // Loop to create each default folder in storage and add a record in the database
                 foreach ($defaultFolders as $folderName) {
