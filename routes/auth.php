@@ -59,5 +59,5 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/', [RegisteredUserController::class, 'create'])
-->name('register');
+Route::get('/', [AuthenticatedSessionController::class, 'create'])
+->name('login');

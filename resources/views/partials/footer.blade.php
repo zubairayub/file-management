@@ -6,7 +6,7 @@
                   <li class="list-inline-item"><a href="#">Terms of Use</a></li>
               </ul>
               <div class="right-panel">
-                  ©<script>2024</script> <span>Prompt Filings</span>, Built for the Future by <a href="https://brandlessdigital.com/" target="_blank">Brandless Digital</a>.
+                  <small> <span>Powered By</span>, <a href="https://rasulcllc.com/" target="_blank">Rasul Consulting</a>.</small>
               </div>
           </div>
       </footer>

@@ -152,25 +152,28 @@ class FileManagerController extends Controller
                 // Upload a file
                 public function uploadFile(Request $request)
                 {
+                   
                     $request->validate([
-                        'file' => 'required|file|mimes:jpg,jpeg,png,pdf,docx,txt|max:2048',
-                        'folder_id' => 'nullable|exists:folders,id',
+                        'file' => 'required|file|mimes:jpg,jpeg,png,PNG,pdf,docx,txt|max:2048',
+                        'subfolder_id' => 'nullable|exists:sub_folder,id',
+                        
                     ]);
-                
+                   
                     $file = $request->file('file');
                 
                     // Default directory for private storage
-                    $directory = 'files';
+                    $directory = null;
                 
                     // Check if a folder ID is provided and fetch the folder name
-                    if ($request->folder_id) {
-                        $folder = Folder::find($request->folder_id);
+                    if ($request->subfolder_id) {
+                        $folder = SubFolder::find($request->subfolder_id);
+                        $subfolder = Folder::find($folder->parent_folder_id);
                         if ($folder) {
                             // Append the folder's name to the directory path
-                            $directory .= '/' . $folder->name;
+                            $directory .= '/' . $folder->path;
                         }
                     }
-                
+                   
                     // Store the file in the private disk within the specified directory
                     $path = $file->store($directory, 'local'); // Specify 'local' to use the private disk
                 
@@ -179,10 +182,17 @@ class FileManagerController extends Controller
                         'name' => $file->getClientOriginalName(),
                         'path' => $path,
                         'user_id' => Auth::id(),
-                        'folder_id' => $request->folder_id,
+                        'folder_id' => $folder->parent_folder_id,
+                        'subfolder_id' => $request->subfolder_id,
                     ]);
-                
-                    return redirect()->route('file-manager.index');
+
+                    $files = File::find($folder->parent_folder_id);
+                    
+                    // print_r($files);
+                    // exit;
+                    
+                     // Return view with folder and its immediate subfolders
+                     return view('folders.subfolders', compact('subfolder', 'folder', 'files'));
                 }
             
                 // Delete a file

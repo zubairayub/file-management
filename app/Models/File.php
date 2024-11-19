@@ -9,7 +9,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'path', 'user_id', 'folder_id'];
+    protected $fillable = ['name', 'path', 'user_id', 'folder_id','subfolder_id'];
 
     public function folder()
     {

@@ -3,14 +3,37 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileManagerController;
+use App\Http\Controllers\ItinController;
+use App\Http\Controllers\einapplication;
+use App\Http\Controllers\Bussinesformation;
+use App\Http\Controllers\BoiController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = auth()->user();
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    } elseif ($user->role === 'customer') {
+        return redirect()->route('user.dashboard');
+    }
+
+    abort(403, 'Unauthorized'); // Handle unexpected roles or no role
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/admin/dashboard', function () {
+    return view('dashboard'); // Admin dashboard view
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
+
+Route::get('/user/dashboard', function () {
+    return view('user.dashboard'); // User dashboard view
+})->middleware(['auth', 'verified'])->name('user.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,6 +42,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/boi', [BoiController::class, 'index'])->name('showboi');
+    Route::get('/business', [Bussinesformation::class, 'index'])->name('showbusiness');
+    Route::get('/einapplication', [einapplication::class, 'index'])->name('showein');
+    Route::get('/itin', [ItinController::class, 'index'])->name('showitin');
     Route::get('/file-manager', [FileManagerController::class, 'index'])->name('file-manager.index');
     Route::get('/folder/{folderId}/subfolders/{subfolderId?}', [FileManagerController::class, 'showSubFolders'])
     ->name('folder.showSubFolders');
