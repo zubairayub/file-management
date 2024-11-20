@@ -7,6 +7,11 @@ use App\Http\Controllers\ItinController;
 use App\Http\Controllers\einapplication;
 use App\Http\Controllers\Bussinesformation;
 use App\Http\Controllers\BoiController;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,7 +60,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/file-manager/upload', [FileManagerController::class, 'uploadFile'])->name('file-manager.upload-file');
     Route::delete('/file-manager/file/{file}', [FileManagerController::class, 'deleteFile'])->name('file-manager.delete-file');
     Route::delete('/file-manager/folder/{folder}', [FileManagerController::class, 'deleteFolder'])->name('file-manager.delete-folder');
+
     
 });
+
+
+
+Route::get('/download/file/{file_id}', [FileManagerController::class, 'downloadFile'])->name('file.download');
+
+
+
 
 require __DIR__.'/auth.php';

@@ -9,101 +9,192 @@
             <div class="border-bottom pb-3 d-flex align-items-center justify-content-between">
                         <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
 
-    <!-- Folder breadcrumb -->
-    <li class="breadcrumb-item">
-        <a href="{{ route('folder.showSubFolders', $folder->id) }}">{{ $folder->name }}</a>
-    </li>
+                <!-- Folder breadcrumb -->
+                <li class="breadcrumb-item">
+                    <a href="{{ route('folder.showSubFolders', $folder->id) }}">{{ $folder->name }}</a>
+                </li>
 
-    <!-- Subfolder breadcrumb (only visible when inside a subfolder) -->
-    @isset($subfolder)
-        <li class="breadcrumb-item">
-            <a href="{{ route('folder.showSubFolders', ['folderId' => $folder->id, 'subfolderId' => $subfolder->id]) }}">
-                {{ $subfolder->name }}
-            </a>
-        </li>
-    @endisset
-</ol>
+                <!-- Subfolder breadcrumb (only visible when inside a subfolder) -->
+                @isset($subfolder)
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('folder.showSubFolders', ['folderId' => $folder->id, 'subfolderId' => $subfolder->id]) }}">
+                            {{ $subfolder->name }}
+                        </a>
+                    </li>
+                @endisset
+            </ol>
 
 
-            </nav>
+        </nav>
     
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" 
-                    data-folder-id="{{ isset($subfolder) ? $subfolder->id : $folder->id }}">
-                <span class="d-flex justify-content-center">
-                    <svg class="icon-22" width="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
-                    </svg>
-                    <span class="ms-3 mb-0">Add Folder</span>
-                </span>
-            </button>
-           <!-- Modal Trigger Button -->
-<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal" type="button" 
-    data-folder-id="{{ isset($subfolder) ? $subfolder->id : $folder->id }}">
-    <span class="d-flex justify-content-center">
-        <svg class="icon-22" width="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
-        </svg>
-        <span class="ms-3 mb-0">Upload Files</span>
-    </span>
-</button>
+                                data-folder-id="{{ isset($subfolder) ? $subfolder->id : $folder->id }}">
+                            <span class="d-flex justify-content-center">
+                                <svg class="icon-22" width="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
+                                </svg>
+                                <span class="ms-3 mb-0">Add Folder</span>
+                            </span>
+                        </button>
+                                <!-- Modal Trigger Button -->
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal" type="button" 
+                            data-folder-id="{{ isset($subfolder) ? $subfolder->id : $folder->id }}">
+                            <span class="d-flex justify-content-center">
+                                <svg class="icon-22" width="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
+                                </svg>
+                                <span class="ms-3 mb-0">Upload Files</span>
+                            </span>
+                        </button>
            
-                </div>
+    </div>
              <div class="col-lg-8 foldericons">
              
-                <div class="container">
-                    {{-- If we are displaying a specific subfolder --}}
-                    @isset($subfolder)
-                        <div class="row">
-                            <div class="col-12">
-                                <h2>Subfolder: {{ strtoupper($subfolder->name) }}</h2>
-                                <p>Subfolder ID: {{ $subfolder->id }}</p>
+             <div class="container">
+    {{-- If we are displaying a specific subfolder --}}
+    @isset($subfolder)
+        <div class="row">
+            <div class="col-12">
+                <h2>Subfolder: {{ strtoupper($subfolder->name) }}</h2>
+                
 
-                                {{-- Check if files exist and display them --}}
-                                @if($files)
-                             
-                                    <div>
-                                        @foreach($files as $file)
-                                            <div>{{ $file->name }}</div>  {{-- Customize as needed --}}
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <div>No files in this subfolder.</div>
-                                @endif
-                            </div>
-                        </div>
+                {{-- Check if files exist and display them --}}
+                @if($files && $files->isNotEmpty())
+                    <div>
+                        <h4>Files:</h4>
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+                        @foreach($files as $file)
+                        <div class="col">
+                            <div class="card iq-file-manager">
+                                <div class="card-body card-thumbnail">
+                                <a href="{{ route('file.download', ['file_id' => $file->id]) }}">
+ 
+
+                  
+                    <!-- Your link content, like the file name or icon -->
+                    @php
+                        $fileExtension = pathinfo($file->path, PATHINFO_EXTENSION); // Get the file extension from the path
+                    @endphp
+
+                    @if(in_array(strtolower($fileExtension), ['pdf']))
+                        <img src="{{ asset('img/pdf.png') }}" class="img-fluid" alt="PDF">
+                    @elseif(in_array(strtolower($fileExtension), ['xlsx', 'xls']))
+                        <img src="{{ asset('img/excel.png') }}" class="img-fluid" alt="Excel">
+                    @elseif(in_array(strtolower($fileExtension), ['docx']))
+                        <img src="{{ asset('img/word.png') }}" class="img-fluid" alt="Word">
                     @else
-                        {{-- If we are displaying the list of subfolders --}}
-                        <div class="row row-cols-lg-4 row-cols-md-4 row-cols-1">
-                            @forelse($subfolders as $subfolder)
-                                <div class="col">
-                                    <div class="card card-folder" onclick="window.location='{{ route('folder.showSubFolders', ['folderId' => $folder->id, 'subfolderId' => $subfolder->id]) }}'">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between">
-                                                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
-                                                    <i class="{{ $subfolder->icon ?? 'fa fa-folder' }}" style="font-size: 20px;"></i>
-                                                </a>
-                                            </div>
-                                            <div class="mt-4">
-                                                <h5>{{ strtoupper($subfolder->name) }}</h5>
-                                                <p class="mb-0">Subfolder ID: {{ $subfolder->id }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <div class="col-12">
-                                    <div class="alert alert-info text-center">
-                                        <strong>No subfolders available for this folder.</strong>
-                                    </div>
-                                </div>
-                            @endforelse
-                        </div>
-                    @endisset
+                        <img src="{{ asset('img/file.png') }}" class="img-fluid" alt="File">
+                    @endif
+                    </a>
+                <div class="mt-2">
+                    <div class="d-flex justify-content-between">
+                        <p class="small mb-2">Created on {{ $file->created_at->format('M d, Y') }}</p>
+                        <a href="">
+                            @php
+                                $fileSize = Storage::size($file->path); // Get file size in bytes
+                                if ($fileSize < 1024) {
+                                    $size = number_format($fileSize, 2) . ' B'; // Bytes
+                                } elseif ($fileSize < 1048576) {
+                                    $size = number_format($fileSize / 1024, 2) . ' KB'; // Kilobytes
+                                } elseif ($fileSize < 1073741824) {
+                                    $size = number_format($fileSize / 1024 / 1024, 2) . ' MB'; // Megabytes
+                                } elseif ($fileSize < 1099511627776) {
+                                    $size = number_format($fileSize / 1024 / 1024 / 1024, 2) . ' GB'; // Gigabytes
+                                } else {
+                                    $size = number_format($fileSize / 1024 / 1024 / 1024 / 1024, 2) . ' TB'; // Terabytes
+                                }
+                            @endphp
+                            {{ $size }}
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-2 text-primary gap-2">
+                        <svg class="icon-24" width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
+                        </svg>
+                        <p class="mb-0 text-dark">{{ $file->name }}</p>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
+</div>
+
+                    </div>
+                @else
+                    <div>No files in this subfolder.</div>
+                @endif
+
+
+                {{-- Display nested subfolders --}}
+                @if($nestedSubfolders->isNotEmpty())
+    <h4>Nested Subfolders:</h4>
+    <div class="row row-cols-lg-4 row-cols-md-4 row-cols-1">
+        @foreach($nestedSubfolders as $nestedSubfolder)
+            <div class="col">
+                <div class="card card-folder" onclick="window.location='{{ route('folder.showSubFolders', ['folderId' => $folder->id, 'subfolderId' => $nestedSubfolder->id]) }}'">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
+                                <i class="{{ $nestedSubfolder->icon ?? 'fa fa-folder' }}" style="font-size: 20px;"></i>
+                            </a>
+                        </div>
+                        <div class="mt-4">
+                            <h5>{{ strtoupper($nestedSubfolder->name) }}</h5>
+                            <p class="mb-0">
+                                {{-- Count of subfolders within the current subfolder --}}
+                                Subfolders: {{ $nestedSubfolder->children->count() }}
+                            </p>
+                            <p>
+                                Files: {{ $nestedSubfolder->files->count() }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+@else
+    <p>No nested subfolders in this subfolder.</p>
+@endif
+
+            </div>
+        </div>
+    @else
+        {{-- If we are displaying the list of subfolders --}}
+        <div class="row row-cols-lg-4 row-cols-md-4 row-cols-1">
+        @foreach($subfolders as $subfolder)
+    <div class="col">
+        <div class="card card-folder" onclick="window.location='{{ route('folder.showSubFolders', ['folderId' => $folder->id, 'subfolderId' => $subfolder->id]) }}'">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
+                        <i class="{{ $subfolder->icon ?? 'fa fa-folder' }}" style="font-size: 20px;"></i>
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <h5>{{ strtoupper($subfolder->name) }}</h5>
+                    <p class="mb-0">
+                        {{-- Count of subfolders within the current subfolder --}}
+                        Subfolders: {{ $subfolder->children->count() }}
+                    </p>
+                    <p>Files: {{ $subfolder->files->count() }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
+
+        </div>
+    @endisset
+</div>
 
 
 
@@ -120,16 +211,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('subfolder.create', ['folderId' =>  isset($subfolder) ? $subfolder->id : $folder->id ]) }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="folderName" class="form-label">Folder Name</label>
-                            <input type="text" class="form-control" id="folderName" name="name" required>
-                        </div>
-                        <input type="hidden" id="parent_folder_id" name="parent_folder_id">
-                        <input type="hidden" id="parent_folder_id" name="is_subfolder" value="{{isset($subfolder) ? true : false }}">
-                        <button type="submit" class="btn btn-primary">Create Folder</button>
-                    </form>
+<form action="{{ route('subfolder.create', ['folderId' => isset($subfolderIdmain) ? $subfolderIdmain : $folderIdmain ]) }}" method="POST">
+    @csrf
+    <div class="mb-3">
+        <label for="folderName" class="form-label">Folder Name</label>
+        <input type="text" class="form-control" id="folderName" name="name" required>
+    </div>
+
+    <input type="hidden" id="parent_folder_id" name="parent_folder_id" value="{{ isset($subfolder) ? $subfolder->id : $folder->id }}">
+    
+    <input type="hidden" id="is_subfolder" name="is_subfolder" 
+    value="{{ $isSubfolder }}">
+    
+    <button type="submit" class="btn btn-primary">Create Folder</button>
+</form>
+
                 </div>
             </div>
         </div>
@@ -154,15 +250,28 @@
                     <div class="mb-3">
                         <label for="folder_id" class="form-label">Select Folder</label>
                         <select name="subfolder_id" id="folder_id" class="form-select">
-                        <option value="">Select Folder</option>
-                        @if(!empty($subfolders) && is_iterable($subfolders))
-                            @foreach($subfolders as $folder)
+                                                <option value="">Select Folder</option>
+                                                
+                                              
+
+                        @php
+                            // Ensure $subfolders and $nestedSubfolders are always set as collections
+                            $subfolders = isset($subfolders) ? $subfolders : collect();
+                            $nestedSubfolders = isset($nestedSubfolders) ? $nestedSubfolders : collect();
+                            // Merge both collections (subfolders and nestedSubfolders) into one collection
+                            $mergedFolders = $subfolders->merge($nestedSubfolders);
+                        @endphp
+
+                        @if(!empty($mergedFolders) && is_iterable($mergedFolders))
+                            @foreach($mergedFolders as $folder)
                                 <option value="{{ $folder->id }}">{{ $folder->name }}</option>
-                                
                             @endforeach
+                            <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option>
                         @else
+                                
                             <option value="">No folders available</option>
                         @endif
+
 
                         </select>
                     </div>

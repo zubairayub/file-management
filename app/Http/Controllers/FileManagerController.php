@@ -45,42 +45,125 @@ class FileManagerController extends Controller
             }
         
 
+            // public function showSubFolders($folderId, $subfolderId = null)
+            //     {
+            //         // Get the main root folder by its ID
+            //         $folder = Folder::findOrFail($folderId);
+
+            //         // Initialize $files and $subfolders as empty arrays by default
+            //         $files = [];
+            //         $subfolders = [];
+
+            //         // If subfolderId is provided, show the specific subfolder and its files
+            //         if ($subfolderId) {
+            //             // Get the specific subfolder by its ID
+            //             $subfolder = SubFolder::findOrFail($subfolderId);
+
+            //             // Check if the subfolder belongs to the specified root folder
+            //             if ($subfolder->parent_folder_id != $folderId) {
+            //                 abort(404, 'Subfolder not found in this folder.');
+            //             }
+
+            //             // Get files associated with the subfolder if any
+            //             $files = File::where('folder_id', $subfolderId)->get();
+
+            //             // Retrieve nested subfolders of this subfolder, if any
+            //             $nestedSubfolders = SubFolder::where('parent_id', $subfolderId)->get();
+
+            //             // Return view with folder, subfolder, nested subfolders, and files
+            //             return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files'));
+
+            //         } else {
+            //             // If no specific subfolder is requested, show all subfolders under the root folder
+            //             $subfolders = SubFolder::where('parent_folder_id', $folderId)->get();
+
+            //             // Return view with folder and its immediate subfolders
+            //             return view('folders.subfolders', compact('folder', 'subfolders', 'files'));
+            //         }
+            //     }
             public function showSubFolders($folderId, $subfolderId = null)
-                {
-                    // Get the main root folder by its ID
-                    $folder = Folder::findOrFail($folderId);
+            {
+                // Get the main root folder by its ID
+                $folder = Folder::findOrFail($folderId);
 
-                    // Initialize $files and $subfolders as empty arrays by default
-                    $files = [];
-                    $subfolders = [];
+                $subfolderIdmain =  $subfolderId;
 
-                    // If subfolderId is provided, show the specific subfolder and its files
-                    if ($subfolderId) {
-                        // Get the specific subfolder by its ID
-                        $subfolder = SubFolder::findOrFail($subfolderId);
+                $folderIdmain =  $folderId;
 
-                        // Check if the subfolder belongs to the specified root folder
-                        if ($subfolder->parent_folder_id != $folderId) {
-                            abort(404, 'Subfolder not found in this folder.');
-                        }
+                // Determine if it's a subfolder scenario
+                $isSubfolder = $subfolderId ? 1 : 0;
 
-                        // Get files associated with the subfolder if any
-                        $files = File::where('folder_id', $subfolderId)->get();
-
-                        // Retrieve nested subfolders of this subfolder, if any
-                        $nestedSubfolders = SubFolder::where('parent_id', $subfolderId)->get();
-
-                        // Return view with folder, subfolder, nested subfolders, and files
-                        return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files'));
-
-                    } else {
-                        // If no specific subfolder is requested, show all subfolders under the root folder
-                        $subfolders = SubFolder::where('parent_folder_id', $folderId)->get();
-
-                        // Return view with folder and its immediate subfolders
-                        return view('folders.subfolders', compact('folder', 'subfolders', 'files'));
+                
+            
+                // Initialize $files, $subfolders, and $nestedSubfolders as empty collections by default
+                $files = collect();  // Default to an empty collection
+                $subfolders = [];
+                $nestedSubfolders = collect(); // Default to an empty collection
+            
+                // If subfolderId is provided, show the specific subfolder and its files
+                if ($subfolderId) {
+                    // Get the specific subfolder by its ID
+                    $subfolder = SubFolder::findOrFail($subfolderId);
+            
+                    // Check if the subfolder belongs to the specified root folder
+                    if ($subfolder->parent_folder_id != $folderId) {
+                        abort(404, 'Subfolder not found in this folder.');
                     }
+            
+                    // Get files associated with the subfolder if any
+                    $files = $subfolder->files;  // Using the relationship to get files
+            
+                    // Retrieve nested subfolders of this subfolder, if any
+                    $nestedSubfolders = $subfolder->children;  // Use the `children()` relationship
+            
+                    // Return view with folder, subfolder, nested subfolders, and files
+                    return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files' , 'isSubfolder', 'subfolderIdmain', 'folderIdmain'));
+            
+                } else {
+                    // If no specific subfolder is requested, show all subfolders under the root folder
+                    $subfolders = SubFolder::where('parent_folder_id', $folderId)
+                    ->Where('parent_id', null)
+                    ->get();
+            
+                    // Return view with folder and its immediate subfolders
+                    return view('folders.subfolders', compact('folder', 'subfolders', 'nestedSubfolders', 'files', 'isSubfolder', 'subfolderIdmain', 'folderIdmain'));
                 }
+            }
+
+
+             // Ensure the user is authenticated before accessing the file
+             public function downloadFile($file_id)
+             {
+                 // Check if the user is logged in
+                 if (!auth()->check()) {
+                     return redirect()->route('login');  // Redirect to login page if not logged in
+                 }
+             
+                 // Retrieve the file record from the database using the file_id
+                 $file = File::find($file_id);
+             
+                 // Check if the file exists and if the logged-in user is the owner
+                 if (!$file || $file->user_id != auth()->id()) {
+                     abort(403); // Forbidden if the user does not own the file
+                 }
+             
+                 // Construct the file path using the information from the database
+                 $filePath = storage_path('app/private/' . $file->path); // Adjust this path based on your storage setup
+                 
+                 // Check if the file exists on the server
+                 if (!file_exists($filePath)) {
+                     abort(404); // Return a 404 error if the file doesn't exist
+                 }
+             
+                 // Return the file as a download response
+                 return response()->download($filePath);
+             }
+             
+             
+            
+            
+            
+
 
 
 
@@ -104,6 +187,7 @@ class FileManagerController extends Controller
                                 $param = ['folderId' => $parentsubfolder, 'subfolderId' => $parentFolderId];
                                }else{
                                 $parentFolder = Folder::findOrFail($parentFolderId);
+                                $parentFolderId = null;
                                 $parentsubfolder = $parentFolder->id;
                                 $param = ['folderId' => $parentsubfolder];
                                }
@@ -150,50 +234,112 @@ class FileManagerController extends Controller
 
     
                 // Upload a file
+                // public function uploadFile(Request $request)
+                // {
+                   
+                //     $request->validate([
+                //         'file' => 'required|file|mimes:jpg,jpeg,png,PNG,pdf,docx,txt|max:2048',
+                //         'subfolder_id' => 'nullable|exists:sub_folder,id',
+                        
+                //     ]);
+                   
+                //     $file = $request->file('file');
+                
+                //     // Default directory for private storage
+                //     $directory = null;
+                
+                //     // Check if a folder ID is provided and fetch the folder name
+                //     if ($request->subfolder_id) {
+                //         $folder = SubFolder::find($request->subfolder_id);
+                //         $subfolder = Folder::find($folder->parent_folder_id);
+                //         if ($folder) {
+                //             // Append the folder's name to the directory path
+                //             $directory .= '/' . $folder->path;
+                //         }
+                //     }
+                   
+                //     // Store the file in the private disk within the specified directory
+                //     $path = $file->store($directory, 'local'); // Specify 'local' to use the private disk
+                
+                //     // Store file information in the database
+                //     File::create([
+                //         'name' => $file->getClientOriginalName(),
+                //         'path' => $path,
+                //         'user_id' => Auth::id(),
+                //         'folder_id' => $folder->parent_folder_id,
+                //         'subfolder_id' => $request->subfolder_id,
+                //     ]);
+
+                //     $files = File::find($folder->parent_folder_id);
+                    
+                //     // print_r($files);
+                //     // exit;
+                    
+                //      // Return view with folder and its immediate subfolders
+                //      return view('folders.subfolders', compact('subfolder', 'folder', 'files'));
+                // }
                 public function uploadFile(Request $request)
                 {
-                   
+                    // Validate the incoming request
                     $request->validate([
-                        'file' => 'required|file|mimes:jpg,jpeg,png,PNG,pdf,docx,txt|max:2048',
+                        'file' => 'required|file|mimes:jpg,jpeg,png,PNG,pdf,docx,doc,xlsx,xls,txt|max:2048',
                         'subfolder_id' => 'nullable|exists:sub_folder,id',
-                        
                     ]);
-                   
+
+                    $isSubfolder = 1 ;
+                    $subfolderIdmain = $request->subfolder_id;
+
                     $file = $request->file('file');
-                
-                    // Default directory for private storage
+
+                    // Initialize variables for file storage and subfolder details
                     $directory = null;
-                
-                    // Check if a folder ID is provided and fetch the folder name
+                    $folder = null;
+                    $subfolder = null;
+                    $nestedSubfolders = collect(); // Default to an empty collection
+                    $files = collect(); // Default to an empty collection
+
+                    // If a subfolder_id is provided, process the file in the subfolder
                     if ($request->subfolder_id) {
-                        $folder = SubFolder::find($request->subfolder_id);
-                        $subfolder = Folder::find($folder->parent_folder_id);
-                        if ($folder) {
-                            // Append the folder's name to the directory path
-                            $directory .= '/' . $folder->path;
+                        $subfolder = SubFolder::find($request->subfolder_id);
+
+                        // Check if the subfolder exists and is linked to the correct folder
+                        if ($subfolder) {
+                            $folder = Folder::find($subfolder->parent_folder_id);
+                            $directory = '/' . $folder->path . '/' . $subfolder->path; // Set directory path
+
+                            // Retrieve the nested subfolders for the subfolder
+                            $nestedSubfolders = $subfolder->children;
                         }
+                    } else {
+                        // If no subfolder_id is provided, work with the root folder or other structure
+                        // You can set a default directory or handle as per your app's logic
                     }
-                   
-                    // Store the file in the private disk within the specified directory
-                    $path = $file->store($directory, 'local'); // Specify 'local' to use the private disk
-                
-                    // Store file information in the database
+
+                    // Store the file in the private storage disk with the calculated directory path
+                    $path = $file->store($directory, 'local'); // Store file in the private disk
+
+                    // Store file metadata in the database
                     File::create([
                         'name' => $file->getClientOriginalName(),
                         'path' => $path,
                         'user_id' => Auth::id(),
-                        'folder_id' => $folder->parent_folder_id,
-                        'subfolder_id' => $request->subfolder_id,
+                        'folder_id' => $folder ? $folder->id : null,
+                        'subfolder_id' => $subfolder ? $subfolder->id : null,
                     ]);
+                    $folderIdmain = $folder ? $folder->id : null;
+                    // Retrieve files and subfolder counts
+                    if ($subfolder) {
+                        $files = $subfolder->files; // Get files associated with this subfolder
+                        $subfolderCount = $subfolder->children->count(); // Get count of nested subfolders
+                    } else {
+                        $subfolderCount = 0; // No subfolder if not provided
+                    }
 
-                    $files = File::find($folder->parent_folder_id);
-                    
-                    // print_r($files);
-                    // exit;
-                    
-                     // Return view with folder and its immediate subfolders
-                     return view('folders.subfolders', compact('subfolder', 'folder', 'files'));
+                    // Return the view with the appropriate data
+                    return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files', 'subfolderCount' , 'isSubfolder' , 'subfolderIdmain' , 'folderIdmain'));
                 }
+
+
             
                 // Delete a file
                 public function deleteFile(File $file)
