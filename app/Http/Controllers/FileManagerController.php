@@ -6,6 +6,7 @@ use App\Models\Folder;
 use App\Models\File;
 use App\Models\User;
 use App\Models\SubFolder;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -291,6 +292,34 @@ class FileManagerController extends Controller
 
                     $file = $request->file('file');
 
+                                        // Get the current user
+                        $user = Auth::user();
+
+                        // Retrieve the user's package and allowed quota
+                        $package = Package::find($user->package_id); // Assuming user has a 'package_id' field
+                        if (!$package) {
+                            return response()->json(['error' => 'Invalid package, please upgrade your package.'], 400);
+                        }
+
+                        // Get the allowed quota from the user's package
+                        $allowedQuota = $package->quota; // Assuming 'quota' is stored in the Package model
+                        $file = $request->file('file');
+
+                        // Get the file size in kilobytes (KB) and round it to two decimal places
+                        $fileSizeInBytes = $file->getSize();
+                        $fileSizeInKB = round($fileSizeInBytes / 1024, 2); // Convert to KB
+
+                        // Check if the user has enough remaining quota to upload the file
+                        $remainingQuota = $allowedQuota - $user->quota_used;
+
+                        if ($remainingQuota < $fileSizeInKB) {
+                            // Retrieve all available packages for upgrade
+                            $packages = Package::all(); // Fetch all packages
+                    
+                            // Return the view with the error message and packages
+                            return view('user.quota-exceeded', compact('packages'));
+                        }
+
                     // Initialize variables for file storage and subfolder details
                     $directory = null;
                     $folder = null;
@@ -334,6 +363,11 @@ class FileManagerController extends Controller
                     } else {
                         $subfolderCount = 0; // No subfolder if not provided
                     }
+
+                    // Update the user's quota_used with the size of the uploaded file (in KB)
+                    $user = Auth::user(); // Get the current logged-in user
+                    $user->quota_used += $fileSizeInKB; // Add the file size in KB to the quota_used
+                    $user->save(); // Save the updated quota_used
 
                     // Return the view with the appropriate data
                     return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files', 'subfolderCount' , 'isSubfolder' , 'subfolderIdmain' , 'folderIdmain'));

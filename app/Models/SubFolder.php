@@ -40,6 +40,12 @@ class SubFolder extends Model
         return $this->hasMany(SubFolder::class, 'parent_id');
     }
 
+      // Relationship to nested subfolders
+      public function subfolders()
+      {
+          return $this->hasMany(SubFolder::class, 'parent_id');
+      }
+
     /**
      * Relationship with the User model.
      * Each subfolder belongs to a specific user.

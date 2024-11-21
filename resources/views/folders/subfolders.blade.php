@@ -266,7 +266,9 @@
                             @foreach($mergedFolders as $folder)
                                 <option value="{{ $folder->id }}">{{ $folder->name }}</option>
                             @endforeach
-                            <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option>
+                            @if(isset($subfolder) && $subfolder->id)
+                                <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option>
+                            @endif
                         @else
                                 
                             <option value="">No folders available</option>

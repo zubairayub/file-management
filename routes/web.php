@@ -7,6 +7,8 @@ use App\Http\Controllers\ItinController;
 use App\Http\Controllers\einapplication;
 use App\Http\Controllers\Bussinesformation;
 use App\Http\Controllers\BoiController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PackageController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +38,9 @@ Route::get('/admin/dashboard', function () {
     return view('dashboard'); // Admin dashboard view
 })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
-Route::get('/user/dashboard', function () {
-    return view('user.dashboard'); // User dashboard view
-})->middleware(['auth', 'verified'])->name('user.dashboard');
+Route::get('/user/dashboard', [UserController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('user.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -60,7 +62,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/file-manager/upload', [FileManagerController::class, 'uploadFile'])->name('file-manager.upload-file');
     Route::delete('/file-manager/file/{file}', [FileManagerController::class, 'deleteFile'])->name('file-manager.delete-file');
     Route::delete('/file-manager/folder/{folder}', [FileManagerController::class, 'deleteFolder'])->name('file-manager.delete-folder');
-
+    Route::resource('packages', PackageController::class);
+    Route::get('/quota-exceeded', [PackageController::class, 'quotaExceeded'])->name('quota.exceeded');
     
 });
 

@@ -31,20 +31,27 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', Rules\Password::defaults()],
-            'role' => ['required', 'in:customer,admin,staff'], // Role validation
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                'password' => ['required', Rules\Password::defaults()],
+                'role' => ['required', 'in:customer,admin,staff'], // Role validation
+                'package_id' => ['nullable', 'integer', 'exists:packages,id'], // Validate package_id
+                'prefix' => ['nullable', 'string', 'max:10'], // Validate prefix (optional)
+                'last_name' => ['required', 'string', 'max:255'], // Last name is required
+                'phone_number' => ['nullable', 'string', 'max:15', 'unique:' . User::class], // Validate phone_number (optional, unique)
+            ]);
             
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role, // Save the role
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role, // Save the role
+                'package_id' => $request->package_id ?? 1, // Default to 1 if not provided
+                'prefix' => $request->prefix, // Save the prefix
+                'last_name' => $request->last_name, // Save the last name
+                'phone_number' => $request->phone_number, // Save the phone_number
+            ]);
 
                 // Check if the user role is 'customer'
             if ($user->role === 'customer') {
