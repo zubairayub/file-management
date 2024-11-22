@@ -35,10 +35,10 @@
               </div>
               <div class="d-flex align-items-center justify-content-between product-offcanvas">
                  <div class="breadcrumb-title border-end me-3 pe-3 d-none d-xl-block">
-                    <small class="mb-0 text-capitalize">Admin Dashboard</small>
+                    <small class="mb-0 text-capitalize">File Manager</small>
                  </div>
                  <div class="offcanvas offcanvas-end shadow-none iq-product-menu-responsive" tabindex="-1" id="offcanvasBottom">
-                    <div class="offcanvas-body">
+                 <div class="offcanvas-body">
                        <ul class="iq-nav-menu list-unstyled">
                           <li class="nav-item active">
                              <a class="nav-link menu-arrow justify-content-start" data-bs-toggle="collapse" href="/"
@@ -48,19 +48,21 @@
                                     <path opacity="0.4" d="M16.0842 2.56737C15.7852 2.25637 15.2632 2.47037 15.2632 2.90137V5.53837C15.2632 6.64437 16.1742 7.55437 17.2802 7.55437C17.9772 7.56237 18.9452 7.56437 19.7672 7.56237C20.1882 7.56137 20.4022 7.05837 20.1102 6.75437C19.0552 5.65737 17.1662 3.69137 16.0842 2.56737Z" fill="currentColor"></path>
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M8.97398 11.3877H12.359C12.77 11.3877 13.104 11.0547 13.104 10.6437C13.104 10.2327 12.77 9.89868 12.359 9.89868H8.97398C8.56298 9.89868 8.22998 10.2327 8.22998 10.6437C8.22998 11.0547 8.56298 11.3877 8.97398 11.3877ZM8.97408 16.3819H14.4181C14.8291 16.3819 15.1631 16.0489 15.1631 15.6379C15.1631 15.2269 14.8291 14.8929 14.4181 14.8929H8.97408C8.56308 14.8929 8.23008 15.2269 8.23008 15.6379C8.23008 16.0489 8.56308 16.3819 8.97408 16.3819Z" fill="currentColor"></path>
                                     </svg>  
-                                <span class="nav-text ms-2">Manage Users</span>
+                                <span class="nav-text ms-2">More e-Filing Services</span>
                              </a>
                              <ul class="iq-header-sub-menu list-unstyled collapse" id="homeData">
                                 <li class="nav-item"><a class="nav-link "
-                                      href="#"> Add User-Profile
+                                      href="https://promptfilings.com/client/itin"> ITIN Application
                                     </a></li>
                                 <li class="nav-item"><a
                                       class="nav-link "
-                                      href="#">In Active User</a></li>
-                                      <li class="nav-item"><a
-                                        class="nav-link "
-                                        href="{{ route('quota.exceeded') }}">Upgrade Storage</a>
-                                      </li>
+                                      href="https://promptfilings.com/client/ein">EIN Application</a></li>
+                                    
+                                <li class="nav-item"><a
+                                      class="nav-link "
+                                      href="https://promptfilings.com/client/business-formation">Business Formation</a></li>
+                                <li class="nav-item"><a class="nav-link "
+                                      href="https://promptfilings.com/client/boi-reporting">BOI Reporting</a></li>
                                  
                              </ul>
                           </li>     

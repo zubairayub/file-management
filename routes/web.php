@@ -8,6 +8,7 @@ use App\Http\Controllers\einapplication;
 use App\Http\Controllers\Bussinesformation;
 use App\Http\Controllers\BoiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PackageController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
@@ -34,9 +35,13 @@ Route::get('/dashboard', function () {
     abort(403, 'Unauthorized'); // Handle unexpected roles or no role
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/admin/dashboard', function () {
-    return view('dashboard'); // Admin dashboard view
-})->middleware(['auth', 'verified'])->name('admin.dashboard');
+// Route::get('/admin/dashboard', function () {
+//     return view('dashboard'); // Admin dashboard view
+// })->middleware(['auth', 'verified'])->name('admin.dashboard');
+
+Route::get('/admin/dashboard', [AdminController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.dashboard');
 
 Route::get('/user/dashboard', [UserController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -64,6 +69,15 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/file-manager/folder/{folder}', [FileManagerController::class, 'deleteFolder'])->name('file-manager.delete-folder');
     Route::resource('packages', PackageController::class);
     Route::get('/quota-exceeded', [PackageController::class, 'quotaExceeded'])->name('quota.exceeded');
+        // Edit User Route
+    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+
+    // Update User Route
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+
+    // Delete User Route
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
     
 });
 
