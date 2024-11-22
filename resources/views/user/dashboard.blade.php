@@ -241,10 +241,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="text-center">
-                                <img src="img/upgradestorage.webp" class="img-fluid w-75" alt="18" loading="lazy">
+                                <img src="{{ asset('img/upgradestorage.webp') }}" class="img-fluid w-75" alt="18" loading="lazy">
                                 <h5 class="mb-3">Upgrade to Special Offer For Unlimited Storage</h5>
                                 <div class="d-flex justify-content-center ms-2">
-                                    <button type="button" class="btn btn-info">Buy storage</button>
+                                    <a href="{{ route('quota.exceeded') }}"><button type="button" class="btn btn-info">Buy storage</button></a>
                                 </div>
                             </div>
                         </div>
