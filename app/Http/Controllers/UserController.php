@@ -33,9 +33,15 @@ class UserController extends Controller
                     $files = File::orderBy('created_at', 'desc')
                     ->where('user_id',auth()->user()->id)
                     ->limit(5)->get(); 
+                    // Fetch total storage from the related package
+                    $package = auth()->user()->package; // Assuming there is a relationship set up in the User model
+                     
+                    $totalStorage = $package ? $package->quota : 0; // Replace `storage_limit` with the appropriate column name in the packages table
 
-            
-                // Pass folders to the view
-                return view('user.dashboard', compact('folders','files'));
+                    // Fetch the storage used from the `quota_used` column
+                    $quotaUsed = auth()->user()->quota_used; // Assuming `quota_used` exists in the users table
+
+                    // Pass the required data to the view
+                    return view('user.dashboard', compact('folders', 'files', 'totalStorage', 'quotaUsed'));
             }
 }

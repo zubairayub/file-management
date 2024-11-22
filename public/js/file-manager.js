@@ -125,99 +125,102 @@ Index Of Script
 
   }
 
-  if (document.querySelectorAll('#storage-chart').length) {
+ 
+  if ($('#storage-chart').length) {
+    // Get the dynamic storage used and total storage values from the data attributes
+    let storageUsedKB = $('#storage-chart').data('storage'); // Storage used in KB
+    let totalStorageKB = $('#storage-chart').data('total-storage'); // Total storage in KB
+
+    // Convert storage from KB to appropriate units (MB, GB, TB)
+    function formatStorage(kb) {
+        if (kb >= 1024 * 1024 * 1024) {
+            return (kb / (1024 * 1024 * 1024)).toFixed(2) + "TB";
+        } else if (kb >= 1024 * 1024) {
+            return (kb / (1024 * 1024)).toFixed(2) + "GB";
+        } else if (kb >= 1024) {
+            return (kb / 1024).toFixed(2) + "MB";
+        } else {
+            return kb + "KB"; // If under 1MB, still display in KB
+        }
+    }
+
+    // Convert storage values
+    let storageUsed = formatStorage(storageUsedKB);
+    let totalStorage = formatStorage(totalStorageKB);
+
     const variableColors = IQUtils.getVariableColor();
     const colors = [variableColors.primary];
 
     const options = {
-          series: [75],
-          labels: ['used of 100MB'],
-          chart: {
-          type: 'radialBar',
-          offsetY: -20,
-          sparkline: {
-            enabled: true
-          },
+        series: [(storageUsedKB / totalStorageKB) * 100], // Percentage of storage used
+        labels: [`${storageUsed} of ${totalStorage}`], // Display storage in appropriate units
+        chart: {
+            type: 'radialBar',
+            offsetY: -20,
+            sparkline: {
+                enabled: true
+            },
         },
         colors: colors,
-
         plotOptions: {
-          radialBar: {
-            startAngle: -90,
-            endAngle: 90,
-            track: {
-              background: colors[0]+'1a',
-              show: true,
-              startAngle: undefined,
-              endAngle: undefined,
-              strokeWidth: '97%',
-              opacity: 1,
-              margin: 5,
-              dropShadow: {
-                  enabled: false,
-                  top: 0,
-                  left: 0,
-                  blur: 3,
-                  opacity: 0.5
-              }
-          },
-            dataLabels: {
-             name: {
-                fontSize: '16px',
-                color: undefined,
-                offsetY: 20,
-              },
-              value: {
-                offsetY: -25,
-                fontSize: '40px',
-                color: undefined,
-                formatter: function (val) {
-                  return val + "MB";
+            radialBar: {
+                startAngle: -90,
+                endAngle: 90,
+                track: {
+                    background: colors[0] + '1a',
+                    show: true,
+                    strokeWidth: '97%',
+                    opacity: 1,
+                    margin: 5,
+                    dropShadow: {
+                        enabled: false,
+                        top: 0,
+                        left: 0,
+                        blur: 3,
+                        opacity: 0.5
+                    }
+                },
+                dataLabels: {
+                    name: {
+                        fontSize: '16px',
+                        color: undefined,
+                        offsetY: 20,
+                    },
+                    value: {
+                        offsetY: -25,
+                        fontSize: '40px',
+                        color: undefined,
+                        formatter: function (val) {
+                            return val.toFixed(1) + "%"; // Display percentage used
+                        }
+                    },
                 }
-              },
-
             }
-          }
         },
         grid: {
-          padding: {
-            top: -10
-          }
+            padding: {
+                top: -10
+            }
         },
-      };
+    };
 
-      var chart = new ApexCharts(document.querySelector("#storage-chart"), options);
-      chart.render();
-      document.addEventListener('theme_color', (e) => {
-        const variableColors = IQUtils.getVariableColor();
-        const colors = [variableColors.primary];
+    var chart = new ApexCharts(document.querySelector("#storage-chart"), options);
+    chart.render();
 
-        const newOpt = {
-          colors: colors,
-          plotOptions: {
-            radialBar: {
-              track: {
-                background: colors[0]+'1a',
-              }
-            }
-          }
-        }
-        chart.updateOptions(newOpt)
-      })
-      document.addEventListener('body_font_family',(e) =>{
-        let prefix = getComputedStyle(document.body).getPropertyValue('--prefix') || 'bs-';
-        if (prefix) {
-            prefix = prefix.trim()
-        }
-        const font_1 = getComputedStyle(document.body).getPropertyValue(`--${prefix}body-font-family`);
-        const fonts = [font_1.trim()];
-        const newOpt = {
-            chart: {
-                fontFamily: fonts,
-            }
-          }
-        chart.updateOptions(newOpt)
-      })
-  }
+    // Optional: Update the chart dynamically when storage values change
+    $(document).on('storageUpdated', function (e, newStorageUsedKB, newTotalStorageKB) {
+        let newStorageUsed = formatStorage(newStorageUsedKB);
+        let newTotalStorage = formatStorage(newTotalStorageKB);
+        let newPercentageUsed = (newStorageUsedKB / newTotalStorageKB) * 100;
+
+        chart.updateOptions({
+            series: [newPercentageUsed],
+            labels: [`${newStorageUsed} of ${newTotalStorage}`]
+        });
+    });
+}
+
+
+
 
 })(jQuery)

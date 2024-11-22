@@ -139,9 +139,11 @@
             <div class="card bg-white">
                 <div id="admin-chart-03" class="admin-chart-03"></div>
                 <div class="card-body">
-                 <h5 class="mb-0 text-center">Storage Details</h5>
-                     <div id="storage-chart"></div>
+                    <h5 class="mb-0 text-center">Storage Details</h5>
+                    <!-- Add data-storage attribute to store the used storage value -->
+                    <div id="storage-chart" data-storage="{{ $quotaUsed }}" data-total-storage="{{ $totalStorage }}"></div>  <!-- Example with 75MB used -->
                 </div>
+
              </div>
         </div>
         <div class="col-lg-12">
