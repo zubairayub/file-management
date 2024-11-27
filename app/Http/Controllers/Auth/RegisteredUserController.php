@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Folder;
+use Carbon\Carbon;
+use App\Models\SubFolder;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -63,18 +65,45 @@ class RegisteredUserController extends Controller
 
                 // Define default folders to create in the storage and database
                 $defaultFolders = ['Bookkeeping', 'Taxes', 'Payroll', 'Business Formation'];
-                
+                // Get the current year
+                $currentYear = Carbon::now()->year;
+                // Loop to create each default folder in storage and add a record in the database
+                // foreach ($defaultFolders as $folderName) {
+                //     $subFolderPath = "$folderPath/$folderName";
+                //     Storage::makeDirectory($subFolderPath);
+
+                //     // Save the folder information in the database
+                //     Folder::create([
+                //         'name' => $folderName,
+                //         'user_id' => $user->id,
+                //         'path' => $subFolderPath,  // Optionally store the folder path
+                //     ]);
+                // }
                 // Loop to create each default folder in storage and add a record in the database
                 foreach ($defaultFolders as $folderName) {
                     $subFolderPath = "$folderPath/$folderName";
                     Storage::makeDirectory($subFolderPath);
 
                     // Save the folder information in the database
-                    Folder::create([
+                    $folder = Folder::create([
                         'name' => $folderName,
                         'user_id' => $user->id,
-                        'path' => $subFolderPath,  // Optionally store the folder path
+                        'path' => $subFolderPath, // Optionally store the folder path
                     ]);
+
+                    // Create subfolders for the last 3 years inside each main folder
+                    for ($year = $currentYear; $year > $currentYear - 3; $year--) {
+                        $yearSubFolderPath = "$subFolderPath/$year";
+                        Storage::makeDirectory($yearSubFolderPath);
+
+                        // Save each subfolder in the database
+                        SubFolder::create([
+                            'name' => (string)$year,
+                            'user_id' => $user->id,
+                            'parent_folder_id' => $folder->id, // Link to the main folder
+                            'path' => $yearSubFolderPath,      // Store subfolder path
+                        ]);
+                    }
                 }
             }
 

@@ -7,20 +7,10 @@
                  <!--Logo start-->
                  <div class="logo-main">
                      <div class="logo-normal">
-                         <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                             <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2" transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
-                             <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
-                             <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
-                             <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2" transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
-                         </svg>
+                        <img width="30" src="https://promptfilings.com/wp-content/uploads/2024/04/symbol-300x300.png"/>
                      </div>
                      <div class="logo-mini">
-                         <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                             <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2" transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
-                             <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
-                             <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
-                             <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2" transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
-                         </svg>
+                     <img width="30" src="https://promptfilings.com/wp-content/uploads/2024/04/symbol-300x300.png"/>
                      </div>
                  </div>
                  <!--logo End-->
@@ -98,7 +88,7 @@
                           </label> 
                        </div>
                     </li>
-                    <li class="nav-item dropdown border-end pe-3 d-none d-xl-block">
+                    <!-- <li class="nav-item dropdown border-end pe-3 d-none d-xl-block">
                        <div class="form-group input-group mb-0 search-input">
                           <input type="text" class="form-control" placeholder="Search...">
                           <span class="input-group-text">
@@ -111,8 +101,8 @@
                              </svg>
                           </span>
                        </div>
-                    </li>
-                    <li class="nav-item dropdown iq-responsive-menu border-end d-block d-xl-none">
+                    </li> -->
+                    <!-- <li class="nav-item dropdown iq-responsive-menu border-end d-block d-xl-none">
                        <div class="btn btn-sm bg-body" id="navbarDropdown-search-11" role="button" data-bs-toggle="dropdown"
                           aria-expanded="false">
                           <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +129,7 @@
                              </div>
                           </li>
                        </ul>
-                    </li> 
+                    </li>  -->
                     <li class="nav-item dropdown" id="itemdropdown1">
    <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button"
       data-bs-toggle="dropdown" aria-expanded="false">

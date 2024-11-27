@@ -259,7 +259,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="folder_id" class="form-label">Select Folder</label>
-                        <select name="subfolder_id" id="folder_id" class="form-select">
+                        <select name="subfolder_id" id="folder_id" class="form-select" required>
                                                 <option value="">Select Folder</option>
                                                 
                                               
@@ -277,7 +277,7 @@
                                 <option value="{{ $folder->id }}">{{ $folder->name }}</option>
                             @endforeach
                             @if(isset($subfolder) && $subfolder->id)
-                                <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option>
+                                <!-- <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option> -->
                             @endif
                         @else
                                 

@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/file-manager/file/{file}', [FileManagerController::class, 'deleteFile'])->name('file-manager.delete-file');
     Route::delete('/file-manager/folder/{folder}', [FileManagerController::class, 'deleteFolder'])->name('file-manager.delete-folder');
     Route::resource('packages', PackageController::class);
-    Route::get('/quota-exceeded', [PackageController::class, 'quotaExceeded'])->name('quota.exceeded');
+    Route::get('/choose-package', [PackageController::class, 'quotaExceeded'])->name('quota.exceeded');
         // Edit User Route
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 

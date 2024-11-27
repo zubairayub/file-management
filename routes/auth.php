@@ -59,5 +59,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/', [AuthenticatedSessionController::class, 'create'])
-->name('login');
+Route::get('/', function () {
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return app(AuthenticatedSessionController::class)->create();
+})->name('login');

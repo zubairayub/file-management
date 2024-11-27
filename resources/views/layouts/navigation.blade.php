@@ -1,5 +1,5 @@
 <div class="sidebar-header d-flex align-items-center justify-content-start">
-             <a href="/" class="navbar-brand">
+             <div href="#" class="navbar-brand">
                  
                  <!--Logo start-->
                  <div class="logo-main">
@@ -12,7 +12,7 @@
                  </div>
                  <!--logo End-->
                  <h4 class="logo-title" >Prompt Filings</h4>
-             </a>
+</div>
              <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                  <i class="icon">
                      <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,10 +30,11 @@
                         </div>
                     </div>
                     <div class="sidebar-profile-detail">
-                        <h6 class="sidebar-profile-name">{{ ucfirst(auth()->user()->role ?? 'Guest') }}</h6>
+                        <h6 class="sidebar-profile-name">{{ ucfirst(auth()->user()->name ?? 'Guest') . ' ' . (auth()->user()->last_name ? ucfirst(auth()->user()->last_name) : '') }}
+                        </h6>
                        
                        
-                        <span class="sidebar-profile-username">{{ ucfirst(auth()->user()->name ?? 'Guest') }}</span>
+                        <span class="sidebar-profile-username">{{ ucfirst(auth()->user()->package?->package_name ?? 'No package assigned') }}</span>
                     </div> 
                 </div>
             </div>        <hr class="hr-horizontal">
