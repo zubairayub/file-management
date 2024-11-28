@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Folder;
 use Carbon\Carbon;
 use App\Models\SubFolder;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -108,7 +110,8 @@ class RegisteredUserController extends Controller
             }
 
         event(new Registered($user));
-
+        // Send welcome email
+        Mail::to($user->email)->send(new WelcomeMail($user));
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
