@@ -97,6 +97,12 @@ Route::get('/file/preview/{file_id}', function ($file_id) {
     return Storage::disk('private')->response($file->path);
 })->name('file.preview');
 
+Route::get('/clear-cache', function () {
+    \Artisan::call('config:clear');
+    \Artisan::call('route:clear');
+    \Artisan::call('view:clear');
+    return 'Cache cleared!';
+});
 
 
 
