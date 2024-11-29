@@ -101,6 +101,8 @@ Route::get('/clear-cache', function () {
     \Artisan::call('config:clear');
     \Artisan::call('route:clear');
     \Artisan::call('view:clear');
+     // Run composer dump-autoload to regenerate autoload files
+     $output = shell_exec('composer dump-autoload');
     return 'Cache cleared!';
 });
 
