@@ -86,9 +86,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/download/file/{file_id}', [FileManagerController::class, 'downloadFile'])->name('file.download');
 
-Route::post('/payment', [PaymentController::class, 'createTransaction'])->name('payment.create');
-Route::get('/payment-form', function () {
-    return view('payment_form');
-})->name('payment.form');
+
+
 
 require __DIR__.'/auth.php';
