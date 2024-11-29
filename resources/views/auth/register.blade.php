@@ -45,7 +45,7 @@
 
 
         <!-- Prefix -->
-        <div class="col-lg-6">
+        <div class="col-lg-2">
             <div class="form-group">
                 <label for="prefix" class="form-label">Prefix</label>
                 <select id="prefix" name="prefix" class="form-control" required>
@@ -60,7 +60,7 @@
         </div>
 
         <!-- First Name -->
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <div class="form-group">
                 <label for="first_name" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="first_name" name="name" :value="old('name')" required>
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Last Name -->
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <div class="form-group">
                 <label for="last_name" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" :value="old('last_name')" required>
@@ -86,6 +86,17 @@
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
         </div>
+
+
+        <!-- Phone Number -->
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="phone_number" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" :value="old('phone_number')" required>
+                <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+            </div>
+        </div>
+
         
         <!-- Password -->
         <div class="col-lg-6">
@@ -97,16 +108,6 @@
         </div>
 
         
-
-        <!-- Phone Number -->
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="phone_number" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" id="phone_number" name="phone_number" :value="old('phone_number')" required>
-                <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
-            </div>
-        </div>
-
         <!-- Package ID (default to 1) -->
         <div class="col-lg-6">
             <div class="form-group">
@@ -119,7 +120,7 @@
         <!-- Terms & Conditions -->
         <div class="col-lg-12 d-flex justify-content-center">
             <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="customCheck1" required>
+                <input type="checkbox" class="form-check-input bg-primary" id="customCheck1" required>
                 <label class="form-check-label" for="customCheck1">I agree with the terms of use</label>
             </div>
         </div>
