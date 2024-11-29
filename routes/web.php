@@ -9,6 +9,7 @@ use App\Http\Controllers\Bussinesformation;
 use App\Http\Controllers\BoiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PackageController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
@@ -85,7 +86,9 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/download/file/{file_id}', [FileManagerController::class, 'downloadFile'])->name('file.download');
 
-
-
+Route::post('/payment', [PaymentController::class, 'createTransaction'])->name('payment.create');
+Route::get('/payment-form', function () {
+    return view('payment_form');
+})->name('payment.form');
 
 require __DIR__.'/auth.php';

@@ -18,4 +18,9 @@ class Package extends Model
         'quota',
         'price',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

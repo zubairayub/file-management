@@ -28,6 +28,12 @@ return [
         'key' => env('RESEND_KEY'),
     ],
 
+    // **Move the providers array outside of the previous settings**
+    'providers' => [
+        // Other service providers
+        App\Providers\AuthorizeNetServiceProvider::class,
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

@@ -61,5 +61,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Package::class, 'package_id'); // Ensure 'package_id' matches the column name in the users table
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     
 }
