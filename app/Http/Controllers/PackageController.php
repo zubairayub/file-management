@@ -11,16 +11,18 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::all(); // Retrieve all packages
-        return view('admin.packages.index', compact('packages')); // Return to a view (adjust accordingly)
+        $quotaExceeded = checkQuota(); // Call the checkQuota method
+        return view('admin.packages.index', compact('packages','quotaExceeded')); // Return to a view (adjust accordingly)
     }
 
     public function quotaExceeded()
     {
         // Fetch the packages (assuming you have a Package model)
         $packages = Package::all();  // You can adjust this query based on your needs
+        $quotaExceeded = checkQuota(); // Call the checkQuota method
 
         // Return the view and pass the packages to it
-        return view('user.quota-exceeded', compact('packages'));
+        return view('user.quota-exceeded', compact('packages','quotaExceeded'));
     }
 
     // Method to show the form to create a new package

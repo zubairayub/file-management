@@ -12,11 +12,11 @@
            
         </div>
         
-        <!-- Quota Exceeded Message -->
+        @if($quotaExceeded)
         <div class="alert alert-warning mt-4" role="alert">
             <strong>Quota exceeded!</strong> Please upgrade your plan to continue using the service.
-           
         </div>
+    @endif
 
         <!-- Package List Section -->
         <div class="mt-4">
