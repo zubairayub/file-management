@@ -17,10 +17,19 @@ class Package extends Model
         'package_name',
         'quota',
         'price',
+        'services',
+        'features',
+        'validity',
+        'desc',
     ];
 
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
+    public function getServicesAttribute($value)
+    {
+        return json_decode($value, true); // Assuming 'services' is stored as JSON
+    }
 }
+

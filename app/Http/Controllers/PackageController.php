@@ -31,18 +31,53 @@ class PackageController extends Controller
         return view('admin.packages.create');
     }
 
-    // Method to store a newly created package
-    public function store(Request $request)
-    {
+
+public function store(Request $request)
+{
+    try {
+        // Validate request data
         $validated = $request->validate([
             'package_name' => 'required|string|max:255',
-            'quota' => 'required|integer',
-            'price' => 'required|numeric',
+            'quota' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'services' => 'nullable|array',
+            'services.*' => 'string|max:255',
+            'features' => 'required|string',
+            'desc' => 'nullable|string|max:500',
+            'validity' => 'required|in:one-time,monthly',
         ]);
 
-        Package::create($validated); // Store the new package
-        return redirect()->route('packages.index'); // Redirect to the packages list
+        // Process services and features
+        $validated['services'] = $request->input('services', []); // Default to empty array if null
+        $validated['features'] = explode("\n", trim($validated['features'])); // Split features by new line
+
+        // Create package
+        Package::create([
+            'package_name' => $validated['package_name'],
+            'quota' => $validated['quota'],
+            'price' => $validated['price'],
+            'services' => json_encode($validated['services']), // Store services as JSON
+            'features' => json_encode($validated['features']), // Store features as JSON
+            'desc' => $validated['desc'] ?? null,
+            'validity' => $validated['validity'],
+        ]);
+
+        // Redirect with success message
+        return redirect()->route('packages.index')
+            ->with('success', 'Package created successfully!');
+    } catch (ValidationException $e) {
+        // Redirect back with validation errors and old input
+        return redirect()->back()->withErrors($e->errors())->withInput();
+    } catch (\Exception $e) {
+        // Log the error
+        \Log::error('Error creating package: ' . $e->getMessage());
+
+        // Redirect back with error message
+        return back()->withErrors(['error' => 'Failed to create package. Please try again.'])
+                     ->withInput(); // Retain input data
     }
+}
+
 
     // Method to show a single package
     public function show($id)
@@ -58,18 +93,49 @@ class PackageController extends Controller
         return view('admin.packages.edit', compact('package'));
     }
 
-    // Method to update an existing package
     public function update(Request $request, $id)
     {
+        // Define the validation rules
         $validated = $request->validate([
             'package_name' => 'required|string|max:255',
-            'quota' => 'required|integer',
-            'price' => 'required|numeric',
+            'quota' => 'required|numeric|min:1', // Ensure quota is numeric and at least 1
+            'price' => 'required|numeric|min:0.01', // Ensure price is numeric and greater than zero
+            'services' => 'nullable|array', // Validate services as an optional array
+            'services.*' => 'string|distinct', // Ensure services are unique and strings
+            'features' => 'required|string', // Ensure features are required and a string
+            'desc' => 'nullable|string|max:1000', // Description is optional with a max length
+            'validity' => 'required|in:one-time,monthly', // Validity should be either one-time or monthly
         ]);
-
-        $package = Package::findOrFail($id);
-        $package->update($validated); // Update the package
-        return redirect()->route('packages.index'); // Redirect to the packages list
+        // Process services and features
+        $validated['services'] = $request->input('services', []); // Default to empty array if null
+        $validated['features'] = explode("\n", trim($validated['features'])); // Split features by new line
+        // Begin the update process
+        try {
+            $package = Package::findOrFail($id); // Find the package or fail with 404
+    
+            // Update the package with validated data
+            $package->update([
+                'package_name' => $validated['package_name'],
+                'quota' => $validated['quota'],
+                'price' => $validated['price'],
+                'services' => json_encode($validated['services']), // Store services as JSON
+                'features' => json_encode($validated['features']), // Store features as JSON
+                'desc' => $validated['desc'],
+                'validity' => $validated['validity'],
+            ]);
+    
+            // Optionally, log the update for security audit
+            // Log::info('Package updated', ['package_id' => $package->id, 'user_id' => auth()->id()]);
+    
+            return redirect()->route('packages.index')->with('success', 'Package updated successfully!');
+        } catch (ValidationException $e) {
+            // Handle validation error and return with errors
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            // Handle any unexpected error and log it
+            Log::error('Package update failed', ['error' => $e->getMessage()]);
+            return back()->with('error', 'An unexpected error occurred. Please try again later.');
+        }
     }
 
     // Method to delete a package

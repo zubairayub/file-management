@@ -22,52 +22,77 @@
         <div class="mt-4">
             <h4>Choose Your Plan</h4>
             <div class="row">
-                @foreach($packages as $package)
-                    <div class="col-md-4 col-sm-6 mb-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $package->package_name }}</h5>
-                                @php
-                                if (!function_exists('formatBytes')) {
-                                    function formatBytes($kb, $precision = 2) {
-                                    // Define the units starting from KB
-                                    $units = ['KB', 'MB', 'GB', 'TB', 'PB'];
-                                    
-                                    // Make sure the value is not less than 0
-                                    $kb = max($kb, 0);
+            @foreach($packages as $package)
+            <div class="col-md-4 col-sm-6 mb-4">
+    <div class="card shadow-lg border-0 rounded-3 overflow-hidden h-100">
+        <div class="card-header text-center bg-gradient-primary text-white py-4">
+            <h5 class="card-title mb-0 fs-5 fw-bold">{{ $package->package_name }}</h5>
+        </div>
+        <div class="card-body">
+            @php
+                // Assuming quota is in KB, format it appropriately
+                if (!function_exists('formatBytes')) {
+                function formatBytes($kb, $precision = 2) {
+                    $units = ['KB', 'MB', 'GB', 'TB', 'PB'];
+                    $kb = max($kb, 0);
+                    $pow = floor(log($kb) / log(1024)); 
+                    $pow = min($pow, count($units) - 1);
+                    $kb /= pow(1024, $pow);
+                    return round($kb, $precision) . ' ' . $units[$pow];
+                }
+            }
+                $formattedQuota = formatBytes($package->quota);
+                // Check if 'services' is a string before decoding
+                $services = is_string($package->services) ? json_decode($package->services, true) : $package->services;
 
-                                    // Calculate the power (which determines the unit to use)
-                                    $pow = floor(log($kb) / log(1024));  // log base 1024
+                // Check if 'features' is a string before decoding
+                $features = is_string($package->features) ? json_decode($package->features, true) : $package->features;
 
-                                    // Ensure the unit does not exceed the array length
-                                    $pow = min($pow, count($units) - 1);
+            @endphp
 
-                                    // Convert the value to the appropriate unit
-                                    $kb /= pow(1024, $pow);
+            <div class="d-flex justify-content-between mb-3">
+                <p class="mb-0 text-muted"><strong>Quota:</strong> {{ $formattedQuota }}</p>
+                <p class="mb-0 text-muted"><strong>Price:</strong> ${{ $package->price }} / month</p>
+            </div>
 
-                                    // Return the formatted value with the selected precision
-                                    return round($kb, $precision) . ' ' . $units[$pow];
-                                }
-                                }
-                                    // Assuming $package->quota is in bytes
-                                    $formattedQuota = formatBytes($package->quota);
-                                @endphp
+            <!-- Services List -->
+            @if(is_array($services) && count($services) > 0)
+                <ul class="list-unstyled mb-3">
+                    <li class="fw-bold text-dark">Included Services:</li>
+                    @foreach($services as $service)
+                        <li><i class="fas fa-check-circle text-success me-2"></i> {{ $service }}</li>
+                    @endforeach
+                </ul>
+            @endif
 
-                                <p class="card-text">Quota: {{ $formattedQuota }}</p>
+            <!-- Features List -->
+            @if(is_array($features) && count($features) > 0)
+                <ul class="list-unstyled mb-3">
+                    <li class="fw-bold text-dark">Features:</li>
+                    @foreach($features as $feature)
+                        <li><i class="fas fa-arrow-right text-info me-2"></i> {{ $feature }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+        <div class="card-footer text-center">
+            <!-- Check if the user is using the current package -->
+            @if(auth()->user()->userPackages->contains('package_id', $package->id))
+                <button class="btn btn-secondary btn-lg w-100" disabled>Current Plan</button>
+            @else
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#upgradeModal" 
+                data-package-id="{{ $package->id }}" 
+                data-package-name="{{ $package->package_name }}"
+                data-package-price="{{ $package->price }}" 
+                class="btn btn-primary btn-lg w-100">Upgrade Now</a>
+            @endif
+        </div>
+    </div>
+</div>
 
-                                <p class="card-text">Price: ${{ $package->price }} / month</p>
-                                 <!-- Check if the user is using the current package -->
-                                @if(auth()->user()->package_id == $package->id)
-                                    <!-- If the user is already using this package -->
-                                    <button class="btn btn-secondary" disabled>Current Plan</button>
-                                @else
-                                    <!-- If the user is not using this package -->
-                                    <a href="{{  $package->id }}" class="btn btn-primary">Upgrade Now</a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+@endforeach
+
+
                 <!---here--->
             </div>
         </div>
@@ -75,7 +100,51 @@
     </div>
 </div>
 
+<!-- Modal for Payment -->
+<div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="upgradeModalLabel">Complete Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4 id="packageNameDisplay" class="text-center mb-4">Package: </h4>
+                
+                <form action="{{ route('payment.create') }}" method="POST">
+                    @csrf
+                    <!-- Hidden Field for Package ID -->
+                    <input type="hidden" id="package_id" name="package_id" value="{{ $package->id }}">
+                    <input type="hidden" id="package_name" name="package_name" value="{{ $package->package_name }}">
+                    <input type="hidden" id="package_type" name="package_type" value="{{ $package->validity }}">
 
+                    <div class="mb-3">
+                        <label for="card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="expiry_date" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="card_code" class="form-label">Card Code (CVV)</label>
+                        <input type="text" class="form-control" id="card_code" name="card_code" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <!-- Set the amount field to be readonly and set the value dynamically -->
+                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section('styles')
 <style>
@@ -83,7 +152,63 @@
     max-width: 350px;  /* Adjust max width of cards */
     margin: 0 auto;    /* Centers the cards if needed */
 }
+.modal-content {
+    border-radius: 8px;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.form-control {
+    border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid #ced4da;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
 </style>
 @endsection
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const upgradeButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+
+        upgradeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const packageId = this.getAttribute('data-package-id');
+                const packageName = this.getAttribute('data-package-name');
+                const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+
+                // Update the modal with the correct package information
+                document.getElementById('package_id').value = packageId;
+                document.getElementById('packageNameDisplay').innerText = `Package: ${packageName}`;
+                
+                // Set the amount to the package price and make it readonly
+                const amountField = document.getElementById('amount');
+                amountField.value = packagePrice; // Set the price dynamically
+                amountField.setAttribute('readonly', true); // Prevent editing
+            });
+        });
+    });
+</script>
 
 </x-app-layout>

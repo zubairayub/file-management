@@ -66,5 +66,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+    public function userPackages()
+    {
+        return $this->hasMany(UserPackage::class); // Or the appropriate relationship method
+    }
     
 }

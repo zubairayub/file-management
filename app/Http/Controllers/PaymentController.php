@@ -6,6 +6,7 @@ use App\Models\Order;
 use net\authorize\api\contract\v1\TransactionRequestType;
 use net\authorize\api\contract\v1\OrderType;
 use net\authorize\api\contract\v1\PaymentType;
+use App\Models\UserPackage;
 use net\authorize\api\contract\v1\CreateTransactionRequest;
 use net\authorize\api\contract\v1\MerchantAuthenticationType;
 use net\authorize\api\contract\v1\CreditCardType;
@@ -55,8 +56,8 @@ class PaymentController extends Controller
                  // Save order details to the database
                  $order = Order::create([
                     'user_id' => $request->user()->id,
-                    //'package_id' => $request->input('package_id'),
-                    'package_id' => 3,
+                    'package_id' => $request->input('package_id'),
+                    //'package_id' => 3,
                     'order_number' => uniqid('ORD-'),
                     'amount' => $request->input('amount'),
                     'payment_status' => 'completed',
@@ -64,31 +65,69 @@ class PaymentController extends Controller
                     'transaction_id' => $transactionResponse->getTransId(),
                     'auth_code' => $transactionResponse->getAuthCode(),
                 ]);
+                
+                // Step 2: Insert into the user_packages table
+                $expiryDate = null; // Initialize expiry date
 
-                return response()->json([
-                    'success' => 'Transaction successful',
-                    'transaction_id' => $transactionResponse->getTransId(),
-                    'auth_code' => $transactionResponse->getAuthCode(),
-                    'description' => $transactionResponse->getMessages()[0]->getDescription(),
+                // Check if the package is monthly or one-time
+                if ($request->input('package_type') === 'monthly') {
+                    $expiryDate = now()->addMonth(); // Set expiry date for monthly packages
+                } else {
+                    $expiryDate = now(); // For one-time packages, set expiry date to the current date or set as null (no expiry)
+                }
+
+                UserPackage::create([
+                    'user_id' => $request->user()->id, // User ID from the request
+                    'package_id' => $request->input('package_id'), // Package ID from the request
+                    'package_type' => $request->input('package_type'), // Package type, could be 'one_time' or 'monthly'
+                    'expiry_date' => $expiryDate, // Set expiry date dynamically
+                ]);
+                $paymentSuccess = true;
+                $packageName = $request->input('package_name'); // Get package name
+                $paymentAmount = $request->input('amount'); // Get payment amount
+            
+                // Store the success flag and other data in the session
+                session()->flash('payment_success', $paymentSuccess);
+                session()->flash('package_name', $packageName);
+                session()->flash('payment_amount', $paymentAmount);
+
+                // return response()->json([
+                //     'success' => 'Transaction successful',
+                //     'transaction_id' => $transactionResponse->getTransId(),
+                //     'auth_code' => $transactionResponse->getAuthCode(),
+                //     'description' => $transactionResponse->getMessages()[0]->getDescription(),
+                // ]);
+                // You can pass these details to the view
+                return view('Models.paymentsuccess', [
+                    'packageName' => $packageName,
+                    'paymentAmount' => $paymentAmount,
                 ]);
             } else {
                 // Transaction was not successful
+               // If the transaction failed, get error details
                 $errors = $transactionResponse->getErrors();
-                return response()->json([
-                    'error' => 'Transaction declined',
-                    'response_code' => $transactionResponse->getResponseCode(),
-                    'error_code' => $errors ? $errors[0]->getErrorCode() : 'Unknown',
-                    'error_message' => $errors ? $errors[0]->getErrorText() : 'No error message returned',
+
+                // Return the error message to the view
+                return view('Models.paymentfailed', [
+                    'errorCode' => $errors ? $errors[0]->getErrorCode() : 'Unknown',
+                    'errorMessage' => $errors ? $errors[0]->getErrorText() : 'No error message returned',
                 ]);
             }
         } else {
             // General failure
             $errorMessages = $response->getMessages()->getMessage();
-            return response()->json([
-                'error' => 'Transaction failed',
-                'error_code' => $errorMessages[0]->getCode(),
-                'error_message' => $errorMessages[0]->getText(),
+            // return response()->json([
+            //     'error' => 'Transaction failed',
+            //     'error_code' => $errorMessages[0]->getCode(),
+            //     'error_message' => $errorMessages[0]->getText(),
+            // ]);
+            // Return the error message to the view
+            return view('Models.paymentfailed', [
+                'errorCode' => $errorMessages[0]->getCode(),
+                'errorMessage' => $errorMessages[0]->getText(),
             ]);
+
+
         }
         
     }
