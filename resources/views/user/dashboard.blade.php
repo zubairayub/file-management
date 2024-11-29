@@ -7,30 +7,72 @@
             <h3 class="mb-0 d-flex align-items-center">Documents Management</h3>
             <div class="col-lg-8 foldericons">
     <div class="row row-cols-lg-4 row-cols-md-4 row-cols-1">
-        @foreach($folders as $folder)
-            <div class="col">
-                <div class="card card-folder" onclick="window.location='{{ route('folder.showSubFolders', ['folderId' => $folder->id, 'subfolderId' => '']) }}'">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
-                                <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.4" d="M16.6756 2H7.33333C3.92889 2 2 3.92889 2 7.33333V16.6667C2 20.0711 3.92889 22 7.33333 22H16.6756C20.08 22 22 20.0711 22 16.6667V7.33333C22 3.92889 20.08 2 16.6756 2Z" fill="currentColor"></path>
-                                    <path d="M7.36866 9.3689C6.91533 9.3689 6.54199 9.74223 6.54199 10.2045V17.0756C6.54199 17.5289 6.91533 17.9022 7.36866 17.9022C7.83088 17.9022 8.20421 17.5289 8.20421 17.0756V10.2045C8.20421 9.74223 7.83088 9.3689 7.36866 9.3689Z" fill="currentColor"></path>
-                                    <path d="M12.0352 6.08887C11.5818 6.08887 11.2085 6.4622 11.2085 6.92442V17.0755C11.2085 17.5289 11.5818 17.9022 12.0352 17.9022C12.4974 17.9022 12.8707 17.5289 12.8707 17.0755V6.92442C12.8707 6.4622 12.4974 6.08887 12.0352 6.08887Z" fill="currentColor"></path>
-                                    <path d="M16.6398 12.9956C16.1775 12.9956 15.8042 13.3689 15.8042 13.8312V17.0756C15.8042 17.5289 16.1775 17.9023 16.6309 17.9023C17.0931 17.9023 17.4664 17.5289 17.4664 17.0756V13.8312C17.4664 13.3689 17.0931 12.9956 16.6398 12.9956Z" fill="currentColor"></path>
-                                </svg>
-                            </a>
-                        </div>
-                        <div class="mt-4">
-                            <h5>{{ strtoupper($folder->name) }}</h5>
-                          
-                          
+    @php
+    // Initialize an array to store all folder names that the user has access to
+    $folderNames = [];
 
-                        </div>
-                    </div>
-                </div>
+    // Loop through the purchased packages for the logged-in user
+    foreach(auth()->user()->userPackages as $userPackage) {
+        $package = $userPackage->package; // Get the related package
+        $services = $package->services; // Get the services field
+
+        // Check if services is a JSON string and decode if necessary
+        if (is_string($services)) {
+            $services = json_decode($services, true); // Decode the services field (JSON)
+        }
+
+        // Ensure services is an array before merging
+        if (is_array($services)) {
+            // Merge the folder names into the folderNames array
+            $folderNames = array_merge($folderNames, $services);
+        }
+    }
+
+    // Remove duplicate folder names using array_unique
+    $folderNames = array_unique($folderNames);
+@endphp
+
+@foreach($folders as $folder)
+    @php
+        // Check if the user has access to the current folder
+        $hasAccess = in_array($folder->name, $folderNames);
+    @endphp
+
+    <div class="col">
+    <div class="card card-folder" onclick="window.location='{{ $hasAccess ? route('folder.showSubFolders', ['folderId' => $folder->id, 'subfolderId' => '']) : '#' }}'">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
+                    <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.4" d="M16.6756 2H7.33333C3.92889 2 2 3.92889 2 7.33333V16.6667C2 20.0711 3.92889 22 7.33333 22H16.6756C20.08 22 22 20.0711 22 16.6667V7.33333C22 3.92889 20.08 2 16.6756 2Z" fill="currentColor"></path>
+                        <path d="M7.36866 9.3689C6.91533 9.3689 6.54199 9.74223 6.54199 10.2045V17.0756C6.54199 17.5289 6.91533 17.9022 7.36866 17.9022C7.83088 17.9022 8.20421 17.5289 8.20421 17.0756V10.2045C8.20421 9.74223 7.83088 9.3689 7.36866 9.3689Z" fill="currentColor"></path>
+                        <path d="M12.0352 6.08887C11.5818 6.08887 11.2085 6.4622 11.2085 6.92442V17.0755C11.2085 17.5289 11.5818 17.9022 12.0352 17.9022C12.4974 17.9022 12.8707 17.5289 12.8707 17.0755V6.92442C12.8707 6.4622 12.4974 6.08887 12.0352 6.08887Z" fill="currentColor"></path>
+                        <path d="M16.6398 12.9956C16.1775 12.9956 15.8042 13.3689 15.8042 13.8312V17.0756C15.8042 17.5289 16.1775 17.9023 16.6309 17.9023C17.0931 17.9023 17.4664 17.5289 17.4664 17.0756V13.8312C17.4664 13.3689 17.0931 12.9956 16.6398 12.9956Z" fill="currentColor"></path>
+                    </svg>
+                </a>
+                
+                @if(!$hasAccess)
+                <svg fill="#000000" height="24px" width="24px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+  <g id="XMLID_509_">
+    <path id="XMLID_510_" d="M65,330h200c8.284,0,15-6.716,15-15V145c0-8.284-6.716-15-15-15h-15V85c0-46.869-38.131-85-85-85S80,38.131,80,85v45H65c-8.284,0-15,6.716-15,15v170C50,323.284,56.716,330,65,330z M180,234.986V255c0,8.284-6.716,15-15,15s-15-6.716-15-15v-20.014c-6.068-4.565-10-11.824-10-19.986c0-13.785,11.215-25,25-25s25,11.215,25,25C190,223.162,186.068,230.421,180,234.986z M110,85c0-30.327,24.673-55,55-55s55,24.673,55,55v45H110V85z"/>
+  </g>
+</svg>
+
+
+                @endif
             </div>
-        @endforeach
+            <div class="mt-4">
+                <h5>{{ strtoupper($folder->name) }}</h5>
+                @if(!$hasAccess)
+                    <button class="btn btn-warning mt-2" onclick="window.location='{{ route('quota.exceeded')  }}'">Buy Now</button>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+@endforeach
+
     </div>
     <div class="col-lg-12">
                      <div class="card">
