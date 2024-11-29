@@ -943,7 +943,19 @@
             </div>
         </div>
         </div>
-        
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://promptfilings.com/wp-content/themes/astra/assets/js/pdf-lib.min.js"></script>
+<script src="https://promptfilings.com/wp-content/themes/astra/assets/js/eintoggle.js"></script> 
+ <script defer>var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+return new bootstrap.Tooltip(tooltipTriggerEl)});</script>		
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
     <script>
             document.getElementById('legalname').addEventListener('input', function() {
             var legalName = this.value.trim();  // Trim spaces from input
@@ -1906,5 +1918,62 @@
                         
     
     </script>    
+
+<style>@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+    .bg-primary,.btn-primary{
+        background: #009aff!important;
+        border-color:#009aff;
+        color:#FFFFFF!important
+    }
+    .btn-secondary{
+        background: #00276e!important;
+        border-color:#00276e;
+        color:#FFFFFF!important
+    }
+    .btn-secondary:hover{
+        background: #009aff!important;
+        border-color:#009aff;
+        color:#FFFFFF
+    }
+    .clientlogin{
+        display:flex;align-items:center;justify-content:center;width: 100%;height: 100vh; position: relative;}
+    .formbox{
+    flex-flow:column;
+    display:flex;align-items:center;justify-content:center;width: 30%;text-align:center;
+    }
+    .formbox input{margin:10px 0; width:100%}
+    .footerform{
+        position:fixed;width:100%;text-align:center;background:#00276e;color:#FFFFFF;font-size:11px;bottom:0;left:0
+    }
+    @media(max-width:991px){
+        .formbox{width: 90%!important
+    }
+    
+    .clientlogin:before{
+        content:'';
+        background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
+        background-size: cover!important;
+        background-position: center center!important;
+    }
+    }
+    .clientlogin:before{
+        content:'';
+        background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
+        background-size: 120%;
+        background-position: bottom right;
+        position: fixed;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: .2
+    }
+    .card-body label{font-size:14px; margin:10px 0}
+        
+        </style>
     </x-app-layout>
     
