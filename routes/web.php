@@ -9,6 +9,7 @@ use App\Http\Controllers\Bussinesformation;
 use App\Http\Controllers\BoiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PackageController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
@@ -86,9 +87,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/download/file/{file_id}', [FileManagerController::class, 'downloadFile'])->name('file.download');
 
 
-Route::get('/file/preview/{file_id}', function ($file_id) {
-    $file = \App\Models\File::findOrFail($file_id);
-    return Storage::disk('private')->response($file->path);
-})->name('file.preview');
+
 
 require __DIR__.'/auth.php';
