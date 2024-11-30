@@ -157,7 +157,7 @@ class FileManagerController extends Controller
                  }
              
                  // Return the file as a download response
-                 return response()->download($filePath);
+                 return response()->download($filePath,$file->name);
              }
              
              
@@ -315,9 +315,10 @@ class FileManagerController extends Controller
                         if ($remainingQuota < $fileSizeInKB) {
                             // Retrieve all available packages for upgrade
                             $packages = Package::all(); // Fetch all packages
+                            $quotaExceeded = checkQuota(); // Call the checkQuota method
                     
                             // Return the view with the error message and packages
-                            return view('user.quota-exceeded', compact('packages'));
+                            return view('user.quota-exceeded', compact('packages','quotaExceeded'));
                         }
 
                     // Initialize variables for file storage and subfolder details
@@ -368,9 +369,10 @@ class FileManagerController extends Controller
                     $user = Auth::user(); // Get the current logged-in user
                     $user->quota_used += $fileSizeInKB; // Add the file size in KB to the quota_used
                     $user->save(); // Save the updated quota_used
+                    $quotaExceeded = checkQuota(); // Call the checkQuota method
 
                     // Return the view with the appropriate data
-                    return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files', 'subfolderCount' , 'isSubfolder' , 'subfolderIdmain' , 'folderIdmain'));
+                    return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files', 'subfolderCount' , 'isSubfolder' , 'subfolderIdmain' , 'folderIdmain','quotaExceeded'));
                 }
 
 

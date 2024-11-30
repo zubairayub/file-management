@@ -7,6 +7,7 @@ use net\authorize\api\contract\v1\TransactionRequestType;
 use net\authorize\api\contract\v1\OrderType;
 use net\authorize\api\contract\v1\PaymentType;
 use App\Models\UserPackage;
+use App\Models\User;
 use net\authorize\api\contract\v1\CreateTransactionRequest;
 use net\authorize\api\contract\v1\MerchantAuthenticationType;
 use net\authorize\api\contract\v1\CreditCardType;
@@ -66,6 +67,12 @@ class PaymentController extends Controller
                     'auth_code' => $transactionResponse->getAuthCode(),
                 ]);
                 
+                        // Find the user
+                $user = User::findOrFail($request->user()->id);
+
+                // Update the package_id
+                $user->package_id = $request->input('package_id');
+                $user->save();
                 // Step 2: Insert into the user_packages table
                 $expiryDate = null; // Initialize expiry date
 

@@ -12,6 +12,7 @@ class PackageController extends Controller
     {
         $packages = Package::all(); // Retrieve all packages
         $quotaExceeded = checkQuota(); // Call the checkQuota method
+        
         return view('admin.packages.index', compact('packages','quotaExceeded')); // Return to a view (adjust accordingly)
     }
 
