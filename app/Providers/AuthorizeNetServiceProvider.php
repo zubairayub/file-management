@@ -1,6 +1,6 @@
 <?php
 // app/Providers/AuthorizeNetServiceProvider.php
-
+ 
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
