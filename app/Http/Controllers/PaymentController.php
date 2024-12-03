@@ -130,16 +130,16 @@ $response = $controller->executeWithApiResponse(ANetEnvironment::SANDBOX);
         } else {
             // General failure
             $errorMessages = $response->getMessages()->getMessage();
-            // return response()->json([
-            //     'error' => 'Transaction failed',
-            //     'error_code' => $errorMessages[0]->getCode(),
-            //     'error_message' => $errorMessages[0]->getText(),
-            // ]);
-            // Return the error message to the view
-            return view('Models.paymentfailed', [
-                'errorCode' => $errorMessages[0]->getCode(),
-                'errorMessage' => $errorMessages[0]->getText(),
+            return response()->json([
+                'error' => 'Transaction failed',
+                'error_code' => $errorMessages[0]->getCode(),
+                'error_message' => $errorMessages[0]->getText(),
             ]);
+            // Return the error message to the view
+            // return view('Models.paymentfailed', [
+            //     'errorCode' => $errorMessages[0]->getCode(),
+            //     'errorMessage' => $errorMessages[0]->getText(),
+            // ]);
 
 
         }
