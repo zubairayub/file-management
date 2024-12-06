@@ -293,18 +293,19 @@
                             $mergedFolders = $subfolders->merge($nestedSubfolders);
                         @endphp
 
-                        @if(!empty($mergedFolders) && is_iterable($mergedFolders))
+                        @if(!empty($mergedFolders) && is_iterable($mergedFolders) && count($mergedFolders) > 0)
                             @foreach($mergedFolders as $folder)
                                 <option value="{{ $folder->id }}">{{ $folder->name }}</option>
                             @endforeach
-                            @if(isset($subfolder) && $subfolder->id)
-                                <!-- <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option> -->
-                            @endif
                         @else
-                                
+                            
+                            @if(isset($subfolder) && $subfolder->id)
+                                <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option>
+                            
+                            @else 
                             <option value="">No folders available</option>
                         @endif
-
+                        @endif
 
                         </select>
                     </div>

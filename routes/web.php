@@ -71,13 +71,18 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('packages', PackageController::class);
     Route::get('/choose-package', [PackageController::class, 'quotaExceeded'])->name('quota.exceeded');
         // Edit User Route
-    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::get('users/{user}/edit', [AdminController::class, 'edit'])->name('users.edit');
 
     // Update User Route
-    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::put('/users/{id}', [AdminController::class, 'update']);
+
 
     // Delete User Route
-    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::delete('users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+    Route::get('/user/{id}/details', [AdminController::class, 'show'])->name('users.details');
+    Route::post('/user/toggle-status/{userId}', [AdminController::class, 'toggleStatus']);
+
+
 
     
 });

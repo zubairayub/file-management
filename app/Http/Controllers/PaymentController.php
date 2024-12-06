@@ -19,127 +19,127 @@ class PaymentController extends Controller
     public function createTransaction(Request $request)
     {
         $apiLoginId = config('authorize.api_login_id');
-$transactionKey = config('authorize.transaction_key');
+        $transactionKey = config('authorize.transaction_key');
 
-// Prepare Credit Card Information
-$creditCard = new CreditCardType();
-$creditCard->setCardNumber($request->input('card_number'));
-$creditCard->setExpirationDate($request->input('expiry_date'));
-$creditCard->setCardCode($request->input('card_code'));
+        // Prepare Credit Card Information
+        $creditCard = new CreditCardType();
+        $creditCard->setCardNumber($request->input('card_number'));
+        $creditCard->setExpirationDate($request->input('expiry_date'));
+        $creditCard->setCardCode($request->input('card_code'));
 
-// Create Payment Object
-$payment = new PaymentType();
-$payment->setCreditCard($creditCard);
+        // Create Payment Object
+        $payment = new PaymentType();
+        $payment->setCreditCard($creditCard);
 
-// Create Order Object
-$order = new OrderType();
-$order->setInvoiceNumber(rand(1, 1000));
-$order->setDescription('Sample Payment Transaction');
+        // Create Order Object
+        $order = new OrderType();
+        $order->setInvoiceNumber(rand(1, 1000));
+        $order->setDescription('Sample Payment Transaction');
 
-// Create Transaction Request
-$transactionRequest = new TransactionRequestType();
-$transactionRequest->setTransactionType('authCaptureTransaction');
-$transactionRequest->setAmount($request->input('amount'));
-$transactionRequest->setPayment($payment);
-$transactionRequest->setOrder($order);
+        // Create Transaction Request
+        $transactionRequest = new TransactionRequestType();
+        $transactionRequest->setTransactionType('authCaptureTransaction');
+        $transactionRequest->setAmount($request->input('amount'));
+        $transactionRequest->setPayment($payment);
+        $transactionRequest->setOrder($order);
 
-// Merchant Authentication
-$merchantAuthentication = new MerchantAuthenticationType();
-$merchantAuthentication->setName($apiLoginId);
-$merchantAuthentication->setTransactionKey($transactionKey);
+        // Merchant Authentication
+        $merchantAuthentication = new MerchantAuthenticationType();
+        $merchantAuthentication->setName($apiLoginId);
+        $merchantAuthentication->setTransactionKey($transactionKey);
 
-// Create the Transaction Request
-$createTransactionRequest = new CreateTransactionRequest();
-$createTransactionRequest->setMerchantAuthentication($merchantAuthentication);
-$createTransactionRequest->setTransactionRequest($transactionRequest);
+        // Create the Transaction Request
+        $createTransactionRequest = new CreateTransactionRequest();
+        $createTransactionRequest->setMerchantAuthentication($merchantAuthentication);
+        $createTransactionRequest->setTransactionRequest($transactionRequest);
 
-// Execute the API Request
-$controller = new CreateTransactionController($createTransactionRequest);
-$response = $controller->executeWithApiResponse(ANetEnvironment::SANDBOX);
+        // Execute the API Request
+        $controller = new CreateTransactionController($createTransactionRequest);
+        $response = $controller->executeWithApiResponse(ANetEnvironment::SANDBOX);
 
-        if ($response && $response->getMessages()->getResultCode() === 'Ok') {
-            $transactionResponse = $response->getTransactionResponse();
-            if ($transactionResponse && $transactionResponse->getResponseCode() == '1') {
+                if ($response && $response->getMessages()->getResultCode() === 'Ok') {
+                    $transactionResponse = $response->getTransactionResponse();
+                    if ($transactionResponse && $transactionResponse->getResponseCode() == '1') {
 
-                 // Save order details to the database
-                 $order = Order::create([
-                    'user_id' => $request->user()->id,
-                    'package_id' => $request->input('package_id'),
-                    //'package_id' => 3,
-                    'order_number' => uniqid('ORD-'),
-                    'amount' => $request->input('amount'),
-                    'payment_status' => 'completed',
-                    'payment_method' => 'credit_card',
-                    'transaction_id' => $transactionResponse->getTransId(),
-                    'auth_code' => $transactionResponse->getAuthCode(),
-                ]);
-                
-                        // Find the user
-                $user = User::findOrFail($request->user()->id);
+                        // Save order details to the database
+                        $order = Order::create([
+                            'user_id' => $request->user()->id,
+                            'package_id' => $request->input('package_id'),
+                            //'package_id' => 3,
+                            'order_number' => uniqid('ORD-'),
+                            'amount' => $request->input('amount'),
+                            'payment_status' => 'completed',
+                            'payment_method' => 'credit_card',
+                            'transaction_id' => $transactionResponse->getTransId(),
+                            'auth_code' => $transactionResponse->getAuthCode(),
+                        ]);
+                        
+                                // Find the user
+                        $user = User::findOrFail($request->user()->id);
 
-                // Update the package_id
-                $user->package_id = $request->input('package_id');
-                $user->save();
-                // Step 2: Insert into the user_packages table
-                $expiryDate = null; // Initialize expiry date
+                        // Update the package_id
+                        $user->package_id = $request->input('package_id');
+                        $user->save();
+                        // Step 2: Insert into the user_packages table
+                        $expiryDate = null; // Initialize expiry date
 
-                // Check if the package is monthly or one-time
-                if ($request->input('package_type') === 'monthly') {
-                    $expiryDate = now()->addMonth(); // Set expiry date for monthly packages
+                        // Check if the package is monthly or one-time
+                        if ($request->input('package_type') === 'monthly') {
+                            $expiryDate = now()->addMonth(); // Set expiry date for monthly packages
+                        } else {
+                            $expiryDate = now(); // For one-time packages, set expiry date to the current date or set as null (no expiry)
+                        }
+
+                        UserPackage::create([
+                            'user_id' => $request->user()->id, // User ID from the request
+                            'package_id' => $request->input('package_id'), // Package ID from the request
+                            'package_type' => $request->input('package_type'), // Package type, could be 'one_time' or 'monthly'
+                            'expiry_date' => $expiryDate, // Set expiry date dynamically
+                        ]);
+                        $paymentSuccess = true;
+                        $packageName = $request->input('package_name'); // Get package name
+                        $paymentAmount = $request->input('amount'); // Get payment amount
+                    
+                        // Store the success flag and other data in the session
+                        session()->flash('payment_success', $paymentSuccess);
+                        session()->flash('package_name', $packageName);
+                        session()->flash('payment_amount', $paymentAmount);
+
+                        // return response()->json([
+                        //     'success' => 'Transaction successful',
+                        //     'transaction_id' => $transactionResponse->getTransId(),
+                        //     'auth_code' => $transactionResponse->getAuthCode(),
+                        //     'description' => $transactionResponse->getMessages()[0]->getDescription(),
+                        // ]);
+                        // You can pass these details to the view
+                        return view('Models.paymentsuccess', [
+                            'packageName' => $packageName,
+                            'paymentAmount' => $paymentAmount,
+                        ]);
+                    } else {
+                        // Transaction was not successful
+                    // If the transaction failed, get error details
+                        $errors = $transactionResponse->getErrors();
+
+                        // Return the error message to the view
+                        return view('Models.paymentfailed', [
+                            'errorCode' => $errors ? $errors[0]->getErrorCode() : 'Unknown',
+                            'errorMessage' => $errors ? $errors[0]->getErrorText() : 'No error message returned',
+                        ]);
+                    }
                 } else {
-                    $expiryDate = now(); // For one-time packages, set expiry date to the current date or set as null (no expiry)
-                }
-
-                UserPackage::create([
-                    'user_id' => $request->user()->id, // User ID from the request
-                    'package_id' => $request->input('package_id'), // Package ID from the request
-                    'package_type' => $request->input('package_type'), // Package type, could be 'one_time' or 'monthly'
-                    'expiry_date' => $expiryDate, // Set expiry date dynamically
-                ]);
-                $paymentSuccess = true;
-                $packageName = $request->input('package_name'); // Get package name
-                $paymentAmount = $request->input('amount'); // Get payment amount
-            
-                // Store the success flag and other data in the session
-                session()->flash('payment_success', $paymentSuccess);
-                session()->flash('package_name', $packageName);
-                session()->flash('payment_amount', $paymentAmount);
-
-                // return response()->json([
-                //     'success' => 'Transaction successful',
-                //     'transaction_id' => $transactionResponse->getTransId(),
-                //     'auth_code' => $transactionResponse->getAuthCode(),
-                //     'description' => $transactionResponse->getMessages()[0]->getDescription(),
-                // ]);
-                // You can pass these details to the view
-                return view('Models.paymentsuccess', [
-                    'packageName' => $packageName,
-                    'paymentAmount' => $paymentAmount,
-                ]);
-            } else {
-                // Transaction was not successful
-               // If the transaction failed, get error details
-                $errors = $transactionResponse->getErrors();
-
-                // Return the error message to the view
-                return view('Models.paymentfailed', [
-                    'errorCode' => $errors ? $errors[0]->getErrorCode() : 'Unknown',
-                    'errorMessage' => $errors ? $errors[0]->getErrorText() : 'No error message returned',
-                ]);
-            }
-        } else {
-            // General failure
-            $errorMessages = $response->getMessages()->getMessage();
-            return response()->json([
-                'error' => 'Transaction failed',
-                'error_code' => $errorMessages[0]->getCode(),
-                'error_message' => $errorMessages[0]->getText(),
-            ]);
-            // Return the error message to the view
-            // return view('Models.paymentfailed', [
-            //     'errorCode' => $errorMessages[0]->getCode(),
-            //     'errorMessage' => $errorMessages[0]->getText(),
-            // ]);
+                    // General failure
+                    $errorMessages = $response->getMessages()->getMessage();
+                    return response()->json([
+                        'error' => 'Transaction failed',
+                        'error_code' => $errorMessages[0]->getCode(),
+                        'error_message' => $errorMessages[0]->getText(),
+                    ]);
+                    // Return the error message to the view
+                    // return view('Models.paymentfailed', [
+                    //     'errorCode' => $errorMessages[0]->getCode(),
+                    //     'errorMessage' => $errorMessages[0]->getText(),
+                    // ]);
 
 
         }
