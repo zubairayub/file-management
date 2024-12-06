@@ -74,14 +74,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('users/{user}/edit', [AdminController::class, 'edit'])->name('users.edit');
 
     // Update User Route
-    Route::put('/users/{id}', [AdminController::class, 'update']);
-
+    Route::put('users/{user}', [AdminController::class, 'update'])->name('users.update');
 
     // Delete User Route
     Route::delete('users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
     Route::get('/user/{id}/details', [AdminController::class, 'show'])->name('users.details');
     Route::post('/user/toggle-status/{userId}', [AdminController::class, 'toggleStatus']);
-
 
 
     

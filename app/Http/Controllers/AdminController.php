@@ -49,28 +49,47 @@ class AdminController extends Controller
     }
 
 
-    public function update(Request $request)
-{
-    // Check if the status exists in the request
-    if (!$request->has('status')) {
-        
-        return response()->json(['error' => 'Status is missing'], 400);
-    }
-
-    // Debugging: Output the value of status
-    echo $request->input('status');
-    exit;
-
-    // Update the user status
-    $user->status = $request->input('status');
-    $user->save();  // Save the updated status to the database
-
-    // Return a JSON response indicating success
-    return response()->json(['success' => true]);
-}
-
+    public function update(Request $request, User $user)
+    {
+        // Check if the logged-in user is an admin
+        if (auth()->user()->role !== 'admin') {
+            // Redirect the user if they are not an admin
+            return redirect()->route('home')->with('error', 'You are not authorized to update this user.');
+        }
     
-
+        // Validate the incoming request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'role' => 'required|in:admin,customer', // Assuming role can be admin or user
+            'status' => 'required|in:active,inactive', // Validate status
+            'packages' => 'array', // Validate packages as an array
+            'packages.*' => 'exists:packages,id', // Validate if each package exists in the packages table
+        ]);
+    
+        // Update the user with validated data
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'role' => $request->input('role'),
+            'status' => $request->input('status'), // Update status field
+        ]);
+    
+            // Detach old user packages and attach new ones
+        $user->userPackages()->delete(); // This deletes all existing packages for this user
+        foreach ($request->input('packages', []) as $packageId) {
+            $user->userPackages()->create([
+                'package_id' => $packageId, // Assuming 'package_id' is the foreign key
+                'user_id' => $user->id,
+                'package_type' => 'monthly', // Example: 'monthly', you may want to adjust this
+                'expiry_date' => now()->addMonth(), // Example expiry date, adjust accordingly
+            ]);
+        }
+        
+    
+        // Redirect back with success message
+        return redirect()->route('admin.dashboard')->with('success', 'User updated successfully.');
+    }
     
     
 
@@ -94,22 +113,22 @@ class AdminController extends Controller
         return view('user.details', compact('user'));
     }
 
-
     public function toggleStatus($userId)
-{
-    $user = User::find($userId);
+    {
+        $user = User::find($userId);
 
-    if ($user) {
-        // Toggle the status
-        $user->status = ($user->status === 'active') ? 'inactive' : 'active';
-        $user->save();
+        if ($user) {
+            // Toggle the status
+            $user->status = ($user->status === 'active') ? 'inactive' : 'active';
+            $user->save();
 
-        // Return response
-        return response()->json(['status' => $user->status]);
+            // Return response
+            return response()->json(['status' => $user->status]);
+        }
+
+        return response()->json(['error' => 'User not found'], 404);
     }
 
-    return response()->json(['error' => 'User not found'], 404);
-}
 
 }
 
