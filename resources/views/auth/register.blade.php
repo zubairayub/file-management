@@ -2,12 +2,12 @@
    
     <section class="login-content">
     <div class="row m-0 align-items-center bg-white vh-100">
-    <div class="col-md-6 d-md-block d-none bg-primary p-0 vh-100 overflow-hidden">
+    <div class="col-md-5 d-md-block d-none bg-primary p-0 vh-100 overflow-hidden">
     <img src="https://images.pexels.com/photos/3791130/pexels-photo-3791130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
          class="img-fluid gradient-main animated-scaleX" alt="images" loading="lazy" 
          style="height: 100%; width: auto; object-fit: cover;">
 </div>
-                  <div class="col-md-6">
+                  <div class="col-md-7">
                      <div class="row justify-content-center">
                         <div class="col-md-10">
                            <div class="card card-transparent auth-card shadow-none d-flex justify-content-center mb-0">
@@ -60,7 +60,7 @@
         </div>
 
         <!-- First Name -->
-        <div class="col-lg-5">
+        <div class="col-lg-10">
             <div class="form-group">
                 <label for="first_name" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="first_name" name="name" :value="old('name')" required>
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Last Name -->
-        <div class="col-lg-5">
+        <div class="col-lg-6">
             <div class="form-group">
                 <label for="last_name" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" :value="old('last_name')" required>
