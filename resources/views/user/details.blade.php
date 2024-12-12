@@ -35,6 +35,13 @@
                 </td>
             </tr>
             <tr>
+                <th>Total Paid</th>
+                <td>
+                ${{ number_format($user->orders()->sum('amount'), 2) ?: 'No Payments Made' }}
+                </td>
+            </tr>
+           
+            <tr>
                 <th>Quota Used</th>
                 <td>{{ $user->quota_used }}</td>
             </tr>

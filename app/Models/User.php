@@ -56,7 +56,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Folder::class); // Assuming you have a Folder model
     }
-    
+
+   
     public function package()
     {
         return $this->belongsTo(Package::class, 'package_id'); // Ensure 'package_id' matches the column name in the users table

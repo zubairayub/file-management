@@ -39,6 +39,7 @@
                                         <th scope="col" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Email ID: activate to sort column ascending">Email ID</th>
                                         <th scope="col" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending">Role</th>
                                         <th scope="col" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending">Package</th>
+                                        <th scope="col" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending">Total Paid</th>
                                         <th scope="col" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending">Storage</th>
                                         
                                         <th scope="col" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Purchases: activate to sort column ascending">Registered</th>
@@ -70,6 +71,11 @@
            
             {{ $user->package ? $user->package->package_name : 'No Package Assigned' }}
         </td>
+        <td class="text-dark">
+            ${{ number_format($user->orders()->sum('amount'), 2) ?: 'No Payments Made' }}
+        </td>
+
+
         <td class="text-dark ">
            
             @if($user->package)

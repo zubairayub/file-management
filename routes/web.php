@@ -80,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
     Route::get('/user/{id}/details', [AdminController::class, 'show'])->name('users.details');
     Route::post('/user/toggle-status/{userId}', [AdminController::class, 'toggleStatus']);
+    Route::get('/admin/user-folders/{userId?}/{folderId?}/{subfolderId?}', [AdminController::class, 'adminShowUserFolders'])->name('admin.showUserFolders');
+    Route::post('/admin/{userId}/createSubFolder/{parentFolderId}', [AdminController::class, 'adminCreateSubFolderForUser'])->name('admin.createSubFolderForUser');
+
 
 
     

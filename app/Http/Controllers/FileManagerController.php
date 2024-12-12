@@ -196,7 +196,7 @@ class FileManagerController extends Controller
                                 
                                 
                                 // Helper function to construct the full path based on parent hierarchy
-                                $fullPath = $this->getFullPath($parentFolder) . '/' . $request->name;
+                                $fullPath = getFullPath($parentFolder) . '/' . $request->name;
                             
                                 // Create the directory in storage if it doesn't already exist
                                 Storage::makeDirectory($fullPath);
@@ -217,19 +217,7 @@ class FileManagerController extends Controller
                                                  ->with('success', 'Subfolder created successfully!');
                             }
                             
-                            // Helper function to get full path recursively
-                            private function getFullPath($folder)
-                            {
-                                if ($folder->parent_folder_id) {
-                                    // Recursively build the path from parent folders
-                                    $parentFolder = Folder::findOrFail($folder->parent_folder_id);
-                                    return $this->getFullPath($parentFolder) . '/' . $folder->name;
-                                } else {
-                                    // Base folder path for user
-                                    $user = User::findOrFail(Auth::id());
-                                    return 'files/' . $user->id . '_' . str_replace(' ', '_', $user->name) . '/' . $folder->name;
-                                }
-                            }
+                           
                             
 
 
