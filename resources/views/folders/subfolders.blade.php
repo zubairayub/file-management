@@ -62,102 +62,103 @@
 
            
     </div>
-             <div class="col-lg-8 foldericons">
+
+    <div class="col-lg-8 foldericons">
              
              <div class="container">
-    {{-- If we are displaying a specific subfolder --}}
-    @isset($subfolder)
-        <div class="row">
-            <div class="col-12">
-                <h2>Subfolder: {{ strtoupper($subfolder->name) }}</h2>
-                
+                    {{-- If we are displaying a specific subfolder --}}
+                    @isset($subfolder)
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>Subfolder: {{ strtoupper($subfolder->name) }}</h2>
+                                
 
-                {{-- Check if files exist and display them --}}
-                @if($files && $files->isNotEmpty())
-                    <div>
-                        <h4>Files:</h4>
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-                        @foreach($files as $file)
-    <div class="col">
-        <div class="card iq-file-manager">
-            <div class="card-body card-thumbnail">
-                @php
-                    $fileUrl = route('file.preview', ['file_id' => $file->id]);
-                    $fileExtension = strtolower(pathinfo($file->path, PATHINFO_EXTENSION));
-                    $modalId = 'previewModal-' . $file->id;
-                @endphp
+                                {{-- Check if files exist and display them --}}
+                                @if($files && $files->isNotEmpty())
+                                    <div>
+                                        <h4>Files:</h4>
+                                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+                                        @foreach($files as $file)
+                                        <div class="col">
+                                            <div class="card iq-file-manager">
+                                                <div class="card-body card-thumbnail">
+                                                    @php
+                                                        $fileUrl = route('file.preview', ['file_id' => $file->id]);
+                                                        $fileExtension = strtolower(pathinfo($file->path, PATHINFO_EXTENSION));
+                                                        $modalId = 'previewModal-' . $file->id;
+                                                    @endphp
 
-                <a href="#" data-bs-toggle="modal" data-bs-target="#{{ $modalId }}">
-    @switch($fileExtension)
-        @case('jpg')
-        @case('jpeg')
-        @case('png')
-        @case('gif')
-            <img src="{{ $fileUrl }}" class="img-fluid rounded" alt="Image Preview" style="max-height: 150px;">
-            @break
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#{{ $modalId }}">
+                                                        @switch($fileExtension)
+                                                            @case('jpg')
+                                                            @case('jpeg')
+                                                            @case('png')
+                                                            @case('gif')
+                                                                <img src="{{ $fileUrl }}" class="img-fluid rounded" alt="Image Preview" style="max-height: 150px;">
+                                                                @break
 
-        @case('pdf')
-        <div class="pdf-preview-container">
-        <embed src="{{ $fileUrl }}" width="100%" height="200px" type="application/pdf">
-        <p>View PDF</p>
-    </div>
-            @break
+                                                            @case('pdf')
+                                                            <div class="pdf-preview-container">
+                                                            <embed src="{{ $fileUrl }}" width="100%" height="200px" type="application/pdf">
+                                                            <p>View PDF</p>
+                                                        </div>
+                                                                @break
 
-        @default
-            <img src="{{ asset('img/file.png') }}" class="img-fluid" alt="File Icon">
-    @endswitch
-</a>
+                                                            @default
+                                                                <img src="{{ asset('img/file.png') }}" class="img-fluid" alt="File Icon">
+                                                        @endswitch
+                                                    </a>
 
-                <div class="mt-2">
-                    <p class="small mb-2">Created on {{ $file->created_at->format('M d, Y') }}</p>
-                    <a href="{{ route('file.download', ['file_id' => $file->id]) }}">Download</a>
-                </div>
-            </div>
+                                                    <div class="mt-2">
+                                                        <p class="small mb-2">Created on {{ $file->created_at->format('M d, Y') }}</p>
+                                                        <a href="{{ route('file.download', ['file_id' => $file->id]) }}">Download</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="{{ $modalId }}" tabindex="-1" aria-labelledby="previewModalLabel-{{ $file->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="previewModalLabel-{{ $file->id }}">File Preview</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @switch($fileExtension)
+                                                            @case('jpg')
+                                                            @case('jpeg')
+                                                            @case('png')
+                                                            @case('gif')
+                                                                <img src="{{ $fileUrl }}" class="img-fluid" alt="Image Preview">
+                                                                @break
+
+                                                            @case('pdf')
+                                                                <embed src="{{ $fileUrl }}" width="100%" height="600px" type="application/pdf">
+                                                                @break
+
+                                                            @default
+                                                                <p>Preview not available for this file type.</p>
+                                                        @endswitch
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <a href="{{ route('file.download', ['file_id' => $file->id]) }}" class="btn btn-primary">Download</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+
+
+
+
+
+
+                 </div>
+
         </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="{{ $modalId }}" tabindex="-1" aria-labelledby="previewModalLabel-{{ $file->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="previewModalLabel-{{ $file->id }}">File Preview</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @switch($fileExtension)
-                        @case('jpg')
-                        @case('jpeg')
-                        @case('png')
-                        @case('gif')
-                            <img src="{{ $fileUrl }}" class="img-fluid" alt="Image Preview">
-                            @break
-
-                        @case('pdf')
-                            <embed src="{{ $fileUrl }}" width="100%" height="600px" type="application/pdf">
-                            @break
-
-                        @default
-                            <p>Preview not available for this file type.</p>
-                    @endswitch
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="{{ route('file.download', ['file_id' => $file->id]) }}" class="btn btn-primary">Download</a>
-                </div>
-            </div>
-        </div>
-    </div>
-@endforeach
-
-
-
-
-
-
-</div>
-
-                    </div>
                 @else
                     <div>No files in this subfolder.</div>
                 @endif

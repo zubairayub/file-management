@@ -213,18 +213,10 @@ class AdminController extends Controller
         // Check if the user has access to the parent folder (optional based on your logic)
         // If the user does not have the folder or subfolder, you can abort with a message
       
-        if (!$user->folders->contains($parentFolderId) && $request->by_id != 1) {
-            
-            echo $request->by_id;
-            echo "hello";
-            exit;
-            abort(404, 'The selected folder does not belong to this user.');
-           
-        }
-
+       
         // Check if it's a subfolder or a main folder
         if ($request->is_subfolder) {
-           if($request->by_id){
+           if($request->by_id == 1){
                 // If it's a subfolder, find the parent subfolder
                 $parentFolder = SubFolder::where('id', $parentFolderId)
                 ->where('user_id', $userId)
@@ -246,15 +238,21 @@ class AdminController extends Controller
             }
          
         } else {
+           
             // If it's a main folder, just use the provided folder ID
+           
             $parentFolder = Folder::findOrFail($parentFolderId);
             $parent = null;
+            
         }
        
     
         // Construct the full path for the new subfolder
-        if($request->by_id){
+        if($request->by_id == 1){
+            echo $parentFolderId;
+            exit;
             $fullPath = getFullPath($parent,$userId,true) . '/' . $request->name;
+           
         }
         else{
             $fullPath = getFullPath($parentFolder,$userId) . '/' . $request->name;
