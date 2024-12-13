@@ -144,9 +144,12 @@ class FileManagerController extends Controller
                  $file = File::find($file_id);
              
                  // Check if the file exists and if the logged-in user is the owner
-                 if (!$file || $file->user_id != auth()->id()) {
-                     abort(403); // Forbidden if the user does not own the file
+                 if (auth()->user()->role !== 'admin') {
+                    if (!$file || $file->user_id != auth()->id()) {
+                        abort(403); // Forbidden if the user does not own the file
+                    }
                  }
+                 
              
                  // Construct the file path using the information from the database
                  $filePath = storage_path('app/private/' . $file->path); // Adjust this path based on your storage setup

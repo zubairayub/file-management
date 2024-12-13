@@ -1,6 +1,9 @@
 <x-app-layout>
     <div class="container mt-4">
         <h3 class="mb-4">Subfolders for {{ $folder->name }}</h3>
+        @php
+        $current_folder_id = $folder->id;
+        @endphp
 
         <!-- Display Subfolders for the selected Folder -->
         <div class="row">
@@ -97,72 +100,76 @@
 
     <!-- Modal -->
     <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Upload Form -->
-                <form method="POST" action="{{ route('file-manager.upload-file') }}" enctype="multipart/form-data" id="uploadForm">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="file" class="form-label">Choose File</label>
-                        <input type="file" name="file" id="file" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="hidden" name="user_id" id="user_id" class="form-control" value="{{ $subfolder->user->id ?? $folder->user->id }}">
-                    </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Upload Form -->
+                    <form method="POST" action="{{ route('file-manager.upload-file') }}" enctype="multipart/form-data" id="uploadForm">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Choose File</label>
+                            <input type="file" name="file" id="file" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" name="user_id" id="user_id" class="form-control" value="{{ $subfolder->user->id ?? $folder->user->id }}">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="folder_id" class="form-label">Select Folder</label>
-                        <select name="subfolder_id" id="folder_id" class="form-select" required>
-                                                <option value="">Select Folder</option>
+                        <div class="mb-3">
+                            <label for="folder_id" class="form-label">Select Folder</label>
+                            <select name="subfolder_id" id="folder_id" class="form-select" required>
+                                                    <option value="">Select Folder</option>
+                                                    
                                                 
-                                              
 
-                        @php
-                            // Ensure $subfolders and $nestedSubfolders are always set as collections
-                            $subfolders = isset($subfolders) ? $subfolders : collect();
-                            $nestedSubfolders = isset($nestedSubfolders) ? $nestedSubfolders : collect();
-                            // Merge both collections (subfolders and nestedSubfolders) into one collection
-                            $mergedFolders = $subfolders->merge($nestedSubfolders);
-                        @endphp
+                            @php
+                                // Ensure $subfolders and $nestedSubfolders are always set as collections
+                                $subfolders = isset($subfolders) ? $subfolders : collect();
+                                $nestedSubfolders = isset($nestedSubfolders) ? $nestedSubfolders : collect();
+                                // Merge both collections (subfolders and nestedSubfolders) into one collection
+                                $mergedFolders = $subfolders->merge($nestedSubfolders);
+                            @endphp
 
-                        @if(!empty($mergedFolders) && is_iterable($mergedFolders) && count($mergedFolders) > 0)
-                            @foreach($mergedFolders as $folder)
-                                <option value="{{ $folder->id }}">{{ $folder->name }}</option>
-                            @endforeach
-                        @else
-                            
-                            @if(isset($subfolder) && $subfolder->id)
-                                <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option>
-                            
-                            @else 
-                            <option value="">No folders available</option>
-                        @endif
-                        @endif
+                            @if(!empty($mergedFolders) && is_iterable($mergedFolders) && count($mergedFolders) > 0)
+                                @foreach($mergedFolders as $folder)
+                                    <option value="{{ $folder->id }}">{{ $folder->name }}</option>
+                                @endforeach
+                            @else
+                                
+                                @if(isset($subfolder) && $subfolder->id)
+                                    <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option>
+                                
+                                @else 
+                                <option value="">No folders available</option>
+                            @endif
+                            @endif
 
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Upload File</button>
-                </form>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload File</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
         <!-- Create a New Subfolder under the Current Folder -->
         <div class="mt-4">
             <h5>Create a New Subfolder</h5>
-            <form action="{{ route('admin.createSubFolderForUser', ['userId' => $user->id, 'parentFolderId' => $folder->id]) }}" method="POST">
+            <form action="{{ route('admin.createSubFolderForUser', ['userId' => $user->id, 'parentFolderId' => $current_folder_id]) }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Subfolder Name:</label>
                     <input type="text" id="name" name="name" class="form-control" required>
                 </div>
+                <div class="form-check mb-3" hidden>
+            <input type="checkbox" id="by_id" name="by_id" value="2" class="form-check-input" checked>
+            <label for="by_id" class="form-check-label">By ID</label>
+        </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-success">Create Subfolder</button>
                 </div>

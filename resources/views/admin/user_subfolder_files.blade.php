@@ -1,10 +1,10 @@
 <x-app-layout>
     <div class="container mt-4">
         <!-- Title -->
-        <h3 class="mb-4">Files and Subfolders for {{ $subfolder->name }}</h3>
+        <!-- <h3 class="mb-4">Files and Subfolders for {{ $subfolder->name }}</h3> -->
 
         <!-- Files Section -->
-        <div class="row mb-4">
+        <!-- <div class="row mb-4">
             <div class="col-12">
                 <h5 class="fw-bold">Files:</h5>
                 @if($files->isEmpty())
@@ -19,7 +19,112 @@
                     </ul>
                 @endif
             </div>
+        </div> -->
+        
+        
+
+        <div class="container">
+    {{-- If we are displaying a specific subfolder --}}
+    @isset($subfolder)
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-uppercase mb-4">Subfolder: {{ $subfolder->name }}</h2>
+
+                {{-- Check if files exist and display them --}}
+                @if($files && $files->isNotEmpty())
+                    <div>
+                        <h4 class="mb-3">Files:</h4>
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                            @foreach($files as $file)
+                                <div class="col">
+                                    <div class="card iq-file-manager">
+                                        <div class="card-body card-thumbnail">
+                                            @php
+                                                $fileUrl = route('file.preview', ['file_id' => $file->id]);
+                                                $fileExtension = strtolower(pathinfo($file->path, PATHINFO_EXTENSION));
+                                                $modalId = 'previewModal-' . $file->id;
+                                            @endphp
+
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#{{ $modalId }}">
+                                                @switch($fileExtension)
+                                                    @case('jpg')
+                                                    @case('jpeg')
+                                                    @case('png')
+                                                    @case('gif')
+                                                        <img src="{{ $fileUrl }}" class="img-fluid rounded" alt="Image Preview" style="max-height: 150px; object-fit: cover;">
+                                                        @break
+
+                                                    @case('pdf')
+                                                        <div class="pdf-preview-container">
+                                                            <embed src="{{ $fileUrl }}" width="100%" height="200px" type="application/pdf">
+                                                            <p>View PDF</p>
+                                                        </div>
+                                                        @break
+
+                                                    @default
+                                                        <img src="{{ asset('img/file.png') }}" class="img-fluid" alt="File Icon">
+                                                @endswitch
+                                            </a>
+
+                                            <div class="mt-2">
+                                                <p class="card-text text-truncate" title="{{ $file->name }}">{{ $file->name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @else
+                    <p>No files available in this subfolder.</p>
+                @endif
+            </div>
         </div>
+    @else
+        <p>No subfolder selected.</p>
+    @endisset
+</div>
+
+{{-- File Preview Modals --}}
+@foreach($files as $file)
+    @php
+        $modalId = 'previewModal-' . $file->id;
+    @endphp
+    <div class="modal fade" id="{{ $modalId }}" tabindex="-1" aria-labelledby="{{ $modalId }}Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="{{ $modalId }}Label">{{ $file->name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @switch($fileExtension)
+                        @case('jpg')
+                        @case('jpeg')
+                        @case('png')
+                        @case('gif')
+                            <img src="{{ $fileUrl }}" class="img-fluid" alt="Image Preview">
+                            @break
+
+                        @case('pdf')
+                            <embed src="{{ $fileUrl }}" width="100%" height="400px" type="application/pdf">
+                            @break
+
+                        @default
+                            <p>File cannot be previewed.</p>
+                    @endswitch
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ route('file.download', ['file_id' => $file->id]) }}" class="btn btn-primary" download>Download</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
+
+
 
         <!-- Sub-Subfolders Section -->
         <div class="row">
