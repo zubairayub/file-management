@@ -15,12 +15,12 @@
                     </h5>
 
                     <!-- Display total sub-subfolders and files count -->
-                    <p class="text-muted">
+                    <!-- <p class="text-muted">
                         Total Sub-Subfolders: {{ $subfolder->subfolders()->count() }} | Total Files: {{ $subfolder->files()->count() }}
                     </p>
 
                     <!-- Sub-Subfolder Creation Form -->
-                    <form action="{{ route('admin.createSubFolderForUser', ['userId' => $user->id, 'parentFolderId' => $subfolder->id]) }}" method="POST" class="mt-3">
+                    <!-- <form action="{{ route('admin.createSubFolderForUser', ['userId' => $user->id, 'parentFolderId' => $subfolder->id]) }}" method="POST" class="mt-3">
                         @csrf
                         <div class="mb-3">
                             <input type="text" id="name" name="name" class="form-control" placeholder="Sub-Subfolder Name" required>
@@ -39,10 +39,10 @@
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Create Sub-Subfolder</button>
                         </div>
-                    </form>
+                    </form> -->     
                 <!-- </div>  -->
 
-                <div class="card-body">
+<div class="card-body">
     <h5 class="card-title">
         <a href="{{ route('admin.showUserFolders', ['userId' => $user->id, 'folderId' => $folder->id, 'subfolderId' => $subfolder->id]) }}" class="text-decoration-none text-dark">
             <i class="bi bi-folder"></i> {{ $subfolder->name }}
@@ -75,6 +75,7 @@
             <button type="submit" class="btn btn-primary">Create Sub-Subfolder</button>
         </div>
     </form>
+    <div class="mt-4">
     <button class="btn btn-primary ms-1" data-bs-toggle="modal" data-bs-target="#uploadModal" type="button" 
         data-folder-id="{{ isset($subfolder) ? $subfolder->id : $folder->id }}">
         <span class="d-flex justify-content-center">
@@ -85,6 +86,7 @@
         <span class="ms-3 mb-0">Upload Files</span>
         </span>
     </button>
+</div>
    
 </div>
 
