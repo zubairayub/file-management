@@ -3866,9 +3866,14 @@
                                                     </div>
                                                     
                                                             <div class="col-lg-12 mt-3">
-                                                                <button type="submit" class="btn btn-success"
-                                                                    id="boiformvalidate">Pay Now to Submit
-                                                                    Application</button>
+                                                                <!-- <button type="submit" class="btn btn-success"
+                                                                    >Pay Now to Submit
+                                                                    Application</button> -->
+                                                                    <a href="javascript:void(0)" data-bs-toggle="modal" id="boiformvalidate" data-bs-target="#upgradeModal" 
+                                                                    data-package-id="9" 
+                                                                    data-package-name="BOI REPORTING"
+                                                                    data-package-price="154" 
+                                                                    class="btn btn-primary btn-lg w-100">Upgrade Now</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -5816,5 +5821,75 @@ document.getElementById("residentialimageidentificationform").addEventListener("
       // Initialize the state on page load
       toggleCompanyApplicantFields();
     </script>
+
+
+
+<!-- Modal for Payment -->
+<div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="upgradeModalLabel">Complete Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4 id="packageNameDisplay" class="text-center mb-4">Package: </h4>
+                
+                <form action="{{ route('payment.create') }}" method="POST">
+                    @csrf
+                    <!-- Hidden Field for Package ID -->
+                    <input type="hidden" id="package_id" name="package_id" value="9">
+                    <input type="hidden" id="package_name" name="package_name" value="BOI REPORTING">
+                    <input type="hidden" id="package_type" name="package_type" value="one-time">
+
+                    <div class="mb-3">
+                        <label for="card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="expiry_date" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="card_code" class="form-label">Card Code (CVV)</label>
+                        <input type="text" class="form-control" id="card_code" name="card_code" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <!-- Set the amount field to be readonly and set the value dynamically -->
+                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const upgradeButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+
+        upgradeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const packageId = this.getAttribute('data-package-id');
+                const packageName = this.getAttribute('data-package-name');
+                const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+
+                // Update the modal with the correct package information
+                document.getElementById('package_id').value = packageId;
+                document.getElementById('packageNameDisplay').innerText = `Package: ${packageName}`;
+                
+                // Set the amount to the package price and make it readonly
+                const amountField = document.getElementById('amount');
+                amountField.value = packagePrice; // Set the price dynamically
+                amountField.setAttribute('readonly', true); // Prevent editing
+            });
+        });
+    });
+</script>
 
 </x-app-layout>
