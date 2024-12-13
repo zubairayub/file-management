@@ -72,7 +72,7 @@
         </div>
 
         <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Create Sub-Subfolder</button>
+            <button type="submit" class="btn btn-primary">Create folder</button>
         </div>
     </form>
     <div class="mt-4">
