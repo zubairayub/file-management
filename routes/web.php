@@ -71,13 +71,19 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('packages', PackageController::class);
     Route::get('/choose-package', [PackageController::class, 'quotaExceeded'])->name('quota.exceeded');
         // Edit User Route
-    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::get('users/{user}/edit', [AdminController::class, 'edit'])->name('users.edit');
 
     // Update User Route
-    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::put('users/{user}', [AdminController::class, 'update'])->name('users.update');
 
     // Delete User Route
-    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::delete('users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+    Route::get('/user/{id}/details', [AdminController::class, 'show'])->name('users.details');
+    Route::post('/user/toggle-status/{userId}', [AdminController::class, 'toggleStatus']);
+    Route::get('/admin/user-folders/{userId?}/{folderId?}/{subfolderId?}', [AdminController::class, 'adminShowUserFolders'])->name('admin.showUserFolders');
+    Route::post('/admin/{userId}/createSubFolder/{parentFolderId}', [AdminController::class, 'adminCreateSubFolderForUser'])->name('admin.createSubFolderForUser');
+
+
 
     
 });
@@ -97,6 +103,14 @@ Route::get('/file/preview/{file_id}', function ($file_id) {
     return Storage::disk('private')->response($file->path);
 })->name('file.preview');
 
+Route::get('/clear-cache', function () {
+    \Artisan::call('config:clear');
+    \Artisan::call('route:clear');
+    \Artisan::call('view:clear');
+     // Run composer dump-autoload to regenerate autoload files
+     $output = shell_exec('composer dump-autoload');
+    return 'Cache cleared!';
+});
 
 
 

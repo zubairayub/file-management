@@ -157,7 +157,7 @@ class FileManagerController extends Controller
                  }
              
                  // Return the file as a download response
-                 return response()->download($filePath);
+                 return response()->download($filePath,$file->name);
              }
              
              
@@ -196,7 +196,7 @@ class FileManagerController extends Controller
                                 
                                 
                                 // Helper function to construct the full path based on parent hierarchy
-                                $fullPath = $this->getFullPath($parentFolder) . '/' . $request->name;
+                                $fullPath = getFullPath($parentFolder) . '/' . $request->name;
                             
                                 // Create the directory in storage if it doesn't already exist
                                 Storage::makeDirectory($fullPath);
@@ -217,19 +217,7 @@ class FileManagerController extends Controller
                                                  ->with('success', 'Subfolder created successfully!');
                             }
                             
-                            // Helper function to get full path recursively
-                            private function getFullPath($folder)
-                            {
-                                if ($folder->parent_folder_id) {
-                                    // Recursively build the path from parent folders
-                                    $parentFolder = Folder::findOrFail($folder->parent_folder_id);
-                                    return $this->getFullPath($parentFolder) . '/' . $folder->name;
-                                } else {
-                                    // Base folder path for user
-                                    $user = User::findOrFail(Auth::id());
-                                    return 'files/' . $user->id . '_' . str_replace(' ', '_', $user->name) . '/' . $folder->name;
-                                }
-                            }
+                           
                             
 
 
@@ -279,24 +267,53 @@ class FileManagerController extends Controller
                 //      // Return view with folder and its immediate subfolders
                 //      return view('folders.subfolders', compact('subfolder', 'folder', 'files'));
                 // }
+                //working
                 public function uploadFile(Request $request)
                 {
                     // Validate the incoming request
                     $request->validate([
                         'file' => 'required|file|mimes:jpg,jpeg,png,PNG,pdf,docx,doc,xlsx,xls,txt|max:2048',
                         'subfolder_id' => 'nullable|exists:sub_folder,id',
+                        'user_id' => 'nullable|exists:users,id', // For admin to specify target user
                     ]);
+
+
+                    $user = Auth::user();
+
+                    // Check if the user is an admin
+                    $isAdmin = $user->role == 'admin'; 
+                    if ($isAdmin) {
+                    $targetUserId = $request->user_id; // Admin can specify a target user
+                    if (!$targetUserId) {
+                    return response()->json(['error' => 'Target user ID is required for admin uploads.'], 400);
+                    }
+                    // Fetch the target user
+                $targetUser = User::find($targetUserId);
+                if (!$targetUser) {
+                    return response()->json(['error' => 'Target user not found.'], 404);
+                }
+
+                // Set subfolder ID from target user’s subfolder (or specify custom behavior)
+                $subfolderId = $request->subfolder_id ?? $targetUser->default_subfolder_id; // Default to a specific subfolder of the target user
+                $package = Package::find($targetUser->package_id);
+                $user_ids = $targetUser;
+                       } else {
+                // Regular user uploads to their own subfolder
+                $subfolderId = $request->subfolder_id ?? $user->default_subfolder_id; // Assuming each user has a default subfolder
+                $package = Package::find($user->package_id);
+                $user_ids = $user;
+                         }
 
                     $isSubfolder = 1 ;
                     $subfolderIdmain = $request->subfolder_id;
 
                     $file = $request->file('file');
 
-                                        // Get the current user
-                        $user = Auth::user();
+                        // Get the current user
+                        // $user = Auth::user();
 
                         // Retrieve the user's package and allowed quota
-                        $package = Package::find($user->package_id); // Assuming user has a 'package_id' field
+                        $package = Package::find($user_ids->package_id); // Assuming user has a 'package_id' field
                         if (!$package) {
                             return response()->json(['error' => 'Invalid package, please upgrade your package.'], 400);
                         }
@@ -315,9 +332,10 @@ class FileManagerController extends Controller
                         if ($remainingQuota < $fileSizeInKB) {
                             // Retrieve all available packages for upgrade
                             $packages = Package::all(); // Fetch all packages
+                            $quotaExceeded = checkQuota(); // Call the checkQuota method
                     
                             // Return the view with the error message and packages
-                            return view('user.quota-exceeded', compact('packages'));
+                            return view('user.quota-exceeded', compact('packages','quotaExceeded'));
                         }
 
                     // Initialize variables for file storage and subfolder details
@@ -351,7 +369,7 @@ class FileManagerController extends Controller
                     File::create([
                         'name' => $file->getClientOriginalName(),
                         'path' => $path,
-                        'user_id' => Auth::id(),
+                        'user_id' => $user_ids->id,
                         'folder_id' => $folder ? $folder->id : null,
                         'subfolder_id' => $subfolder ? $subfolder->id : null,
                     ]);
@@ -365,13 +383,102 @@ class FileManagerController extends Controller
                     }
 
                     // Update the user's quota_used with the size of the uploaded file (in KB)
-                    $user = Auth::user(); // Get the current logged-in user
+                    $user = $user_ids; // Get the current logged-in user
                     $user->quota_used += $fileSizeInKB; // Add the file size in KB to the quota_used
                     $user->save(); // Save the updated quota_used
+                    $quotaExceeded = checkQuota(); // Call the checkQuota method
 
                     // Return the view with the appropriate data
-                    return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files', 'subfolderCount' , 'isSubfolder' , 'subfolderIdmain' , 'folderIdmain'));
+                    return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files', 'subfolderCount' , 'isSubfolder' , 'subfolderIdmain' , 'folderIdmain','quotaExceeded'));
                 }
+                
+
+                // public function uploadFile(Request $request)
+                //     {
+                //         // Validate the incoming request
+                //         $request->validate([
+                //             'file' => 'required|file|mimes:jpg,jpeg,png,PNG,pdf,docx,doc,xlsx,xls,txt|max:2048',
+                //             'subfolder_id' => 'nullable|exists:sub_folder,id',
+                //             'user_id' => 'nullable|exists:users,id', // For admin to specify target user
+                //         ]);
+
+                //         // Get the current user
+                //         $user = Auth::user();
+
+                //         // Check if the user is an admin
+                //         $isAdmin = $user->role == 'admin'; // Or use whatever method/column identifies admin users
+
+                //         // If the user is an admin, allow them to upload to another user's subfolder
+                //         if ($isAdmin) {
+                //             $targetUserId = $request->user_id; // Admin can specify a target user
+                //             if (!$targetUserId) {
+                //                 return response()->json(['error' => 'Target user ID is required for admin uploads.'], 400);
+                //             }
+
+                //             // Fetch the target user
+                //             $targetUser = User::find($targetUserId);
+                //             if (!$targetUser) {
+                //                 return response()->json(['error' => 'Target user not found.'], 404);
+                //             }
+
+                //             // Set subfolder ID from target user’s subfolder (or specify custom behavior)
+                //             $subfolderId = $request->subfolder_id ?? $targetUser->default_subfolder_id; // Default to a specific subfolder of the target user
+                //             $package = Package::find($targetUser->package_id);
+                //         } else {
+                //             // Regular user uploads to their own subfolder
+                //             $subfolderId = $request->subfolder_id ?? $user->default_subfolder_id; // Assuming each user has a default subfolder
+                //             $package = Package::find($user->package_id);
+                //         }
+
+                //         // Retrieve the subfolder
+                //         $subfolder = SubFolder::find($subfolderId);
+                //         if (!$subfolder) {
+                //             return response()->json(['error' => 'Subfolder not found.'], 404);
+                //         }
+
+                //         // Retrieve the user's package and allowed quota
+                    
+                //         if (!$package) {
+                //             return response()->json(['error' => 'Invalid package, please upgrade your package.'], 400);
+                //         }
+
+                //         // Get the allowed quota from the user's package
+                //         $allowedQuota = $package->quota;
+                        
+                //         // Get the file and its size
+                //         $file = $request->file('file');
+                //         $fileSizeInBytes = $file->getSize();
+                //         $fileSizeInKB = round($fileSizeInBytes / 1024, 2); // Convert to KB
+
+                //         // Check if the user has enough remaining quota to upload the file
+                        
+                //                             $remainingQuota = $allowedQuota - $user->quota_used;
+
+                //                             if ($remainingQuota < $fileSizeInKB) {
+                //                                 // Retrieve all available packages for upgrade
+                //                                 $packages = Package::all(); // Fetch all packages
+                //                                 $quotaExceeded = checkQuota(); // Call the checkQuota method
+                                        
+                //                                 // Return the view with the error message and packages
+                //                                 return view('user.quota-exceeded', compact('packages','quotaExceeded'));
+                //                             }
+
+                //         // Store the file
+                //         $filePath = $subfolder->path . '/' . $file->getClientOriginalName();
+                //         $file->move(public_path($subfolder->path), $file->getClientOriginalName());
+
+                //         // Optionally, update the quota used by the user
+                //         $user->quota_used += $fileSizeInKB;
+                //         $user->save();
+
+                //         return response()->json(['success' => 'File uploaded successfully.']);
+                //     }
+
+
+
+
+
+
 
 
             

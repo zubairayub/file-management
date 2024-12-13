@@ -279,6 +279,10 @@
                         <input type="file" name="file" id="file" class="form-control" required>
                     </div>
                     <div class="mb-3">
+                        <input type="hidden" name="user_id" id="user_id" class="form-control" value="{{ $subfolder->user->id ?? $folder->user->id }}">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="folder_id" class="form-label">Select Folder</label>
                         <select name="subfolder_id" id="folder_id" class="form-select" required>
                                                 <option value="">Select Folder</option>
@@ -293,18 +297,19 @@
                             $mergedFolders = $subfolders->merge($nestedSubfolders);
                         @endphp
 
-                        @if(!empty($mergedFolders) && is_iterable($mergedFolders))
+                        @if(!empty($mergedFolders) && is_iterable($mergedFolders) && count($mergedFolders) > 0)
                             @foreach($mergedFolders as $folder)
                                 <option value="{{ $folder->id }}">{{ $folder->name }}</option>
                             @endforeach
-                            @if(isset($subfolder) && $subfolder->id)
-                                <!-- <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option> -->
-                            @endif
                         @else
-                                
+                            
+                            @if(isset($subfolder) && $subfolder->id)
+                                <option value="{{ $subfolder->id }}">{{ $subfolder->name }}</option>
+                            
+                            @else 
                             <option value="">No folders available</option>
                         @endif
-
+                        @endif
 
                         </select>
                     </div>
