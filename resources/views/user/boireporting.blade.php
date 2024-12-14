@@ -16,7 +16,8 @@
                                     </div>
                                     </div>
                                     </div> 
-                                <form id="boiForm" class="row g-3 formsubmission needs-validation" novalidate enctype="application/x-www-form-urlencoded" action="/wp-content/themes/astra/assets/authnet/payment-boi-process.php">
+                                <form id="boiForm" class="row g-3 formsubmission needs-validation" novalidate enctype="application/x-www-form-urlencoded">
+                                <!-- action="/wp-content/themes/astra/assets/authnet/payment-boi-process.php"-->
                                     <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                         <div class="card h-100">
                                             <div class="card-header d-flex">
@@ -2462,7 +2463,7 @@
                                                             <label for="imageidentificationform" class="mid">33. Identifying document image &nbsp; <span  style="color:red">*</span></label>
                                                             <div class="d-flex align-items-center justify-content-center">
                                                                 <input type="file" id="imageidentificationform" class="form-control" name="Identifying document image" accept="image/*">
-                                                                <button type="button" class="ms-5 btn identificationbtnremove btn-danger">Remove Image</button>
+                                                                <button type="button" class="ms-5 btn identificationbtnremove btn-danger">Remove</button>
                                                             </div></div>
                                                     </div>
                                                 </div>
@@ -3702,7 +3703,7 @@
                                                             <label for="residentialimageidentificationform" class="mid">51. Identifying document image &nbsp; <span  style="color:red">*</span> </label>
                                                             <div class="d-flex align-items-center justify-content-center">
                                                             <input type="file" id="residentialimageidentificationform" class="form-control" name="Identifying document image" accept="image/*">
-                                                            <button type="button" class="ms-5 btn btn-danger residentialimagebtn">Remove Image</button>
+                                                            <button type="button" class="ms-5 btn btn-danger residentialimagebtn">Remove </button>
                                                         </div></div>
                                                         </div>
                                                         </div>
@@ -3731,7 +3732,7 @@
                                                         </div>
 
 
-                                                    <div class="alert alert-primary mt-5">
+                                                    <div class="alert alert-primary mt-5 d-none">
                                                             <h4>You'll Pay: <span id="totalpricing"
                                                                     name="totalpricing">$154.315</span></h4>
                                                             <div class="d-none">
@@ -3853,34 +3854,32 @@
   
                                                             <tr>
                                                                 <th>
-                                                                    <p class="mb-3">Grand Total Fee: </p>
+                                                                    <h2 class="mb-3">You will Pay: </h2>
                                                                 </th>
                                                                 <th>
-                                                                    <p class="mb-3"><span
-                                                                            id="totalpricing2">$154.315</span></p>
+                                                                    <h2 class="mb-3"><span
+                                                                            id="totalpricing2">$154.315</span></h2>
                                                                 </th>
                                                             </tr>
                                                             </tbody>
                                                         </table>
                                                         <div class="col-12"><small class="my-5 text-left d-block">Important Note: If any incorrect information is provided during the application process, you will need to restart and resubmit the entire application. It is essential to review all details carefully before submission to avoid any delays or complications.</small></div>
                                                     </div>
-                                                    
-                                                            <div class="col-lg-12 mt-3">
-                                                                <!-- <button type="submit" class="btn btn-success"
-                                                                    >Pay Now to Submit
-                                                                    Application</button> -->
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal" id="boiformvalidate" data-bs-target="#upgradeModal" 
+                                                    <div class="col-lg-12 mt-3 mb-2">
+                                                          <button type="button" class="btn btn-primary" id="reviewapplicationn">Review Your Application</button>  
+                                                                <button type="submit" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#upgradeModal" 
                                                                     data-package-id="9" 
                                                                     data-package-name="BOI REPORTING"
-                                                                    data-package-price="154" 
-                                                                    class="btn btn-primary btn-lg w-100">Upgrade Now</a>
+                                                                    data-package-price="154.315" 
+                                                                    id="boiformvalidate">Pay Now to Submit
+                                                                    Application</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    <div class="col-md-12 mt-3"><small>The information provided by PromptFilings.com for BOI (Beneficial Ownership Information) Reporting is intended for general informational purposes only and should not be construed as legal, financial, or tax advice. While we strive to ensure the accuracy and reliability of the information presented, PromptFilings.com cannot guarantee the completeness or timeliness of the content. Users are encouraged to consult with professional legal or financial advisors regarding their specific BOI reporting obligations and compliance requirements. PromptFilings.com assumes no liability for any errors, omissions, or actions taken based on the information provided.</small></div> 
+                                    <div class="col-md-12 mt-3"><small style="font-size:13px">The information provided by PromptFilings.com for BOI (Beneficial Ownership Information) Reporting is intended for general informational purposes only and should not be construed as legal, financial, or tax advice. While we strive to ensure the accuracy and reliability of the information presented, PromptFilings.com cannot guarantee the completeness or timeliness of the content. Users are encouraged to consult with professional legal or financial advisors regarding their specific BOI reporting obligations and compliance requirements. PromptFilings.com assumes no liability for any errors, omissions, or actions taken based on the information provided.</small></div> 
                                 </form>
                             </div>
                         </div>
@@ -3891,12 +3890,58 @@
                             src="" type="application/pdf" width="100%"
                             height="600">
                         </iframe>
+                        <img src="" id="residentialimageidentificationimg" alt="image">
+                        <img src="" id="imageidentificationimg" alt="image">
                     </div>
                 </div>
             </main>
         </div>
     </div>
   </div>
+  <div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="upgradeModalLabel">Complete Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4 id="packageNameDisplay" class="text-center mb-4">Package: </h4>
+                
+                <form action="{{ route('payment.create') }}" method="POST">
+                    @csrf
+                    <!-- Hidden Field for Package ID -->
+                    <input type="hidden" id="package_id" name="package_id" value="9">
+                    <input type="hidden" id="package_name" name="package_name" value="BOI REPORTING">
+                    <input type="hidden" id="package_type" name="package_type" value="one-time">
+
+                    <div class="mb-3">
+                        <label for="card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="expiry_date" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="card_code" class="form-label">Card Code (CVV)</label>
+                        <input type="text" class="form-control" id="card_code" name="card_code" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <!-- Set the amount field to be readonly and set the value dynamically -->
+                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
   <div class="exemptentitypopup p-4" style="display: none;">
     <div class="popupcontent">
     <h3>Exemption Entity Confirmation</h3>
@@ -3930,13 +3975,15 @@
   .table thead th{color:#FFFFFF!important;font-size:18px!important}
   .table td{color:#121212!important;font-size:14px!important}
   .was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
+  .accordion-collapse{background-color: #00800011;}
+  .accordion-button{border-radius: 4px!important;}
   </style> 
 <div id="reviewModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h2>Review Your Details</h2>
+    <h2>Review Application Details</h2>
     <div id="modalContent"></div> <!-- Form data will be injected here -->
-    <button id="confirmBtn">Confirm</button>
+    <button id="confirmBtn" class="btn btn-primary m-4 ">Close</button>
   </div>
 </div>
 <style>
@@ -3956,18 +4003,24 @@
 
 .modal-content {
   background-color: #fff;
-  margin: 5% auto;
-  padding: 20px;
+  margin: 1% auto;
+  padding: 0px!important;
   border: 1px solid #888;
-  width: 80%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 800px;
 }
-
+.modal-content h2{background-color: #f3f7f8; padding:20px;}
+#modalContent{padding:20px}
+#modalContent .modal-field {margin-bottom:10px; font-weight: 600; color:#121212}
+#modalContent .modal-field strong{color:#121212;font-weight: 400;}
 .close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  position: absolute;
+    right: 20px;
+    top: 0px;
 }
 
 .close:hover,
@@ -3981,31 +4034,37 @@
 <script>
 document.getElementById('reviewapplicationn').addEventListener('click', function(event) {
 
+// Get the form and modal elements
+const modal = document.getElementById('reviewModal');
+const modalContent = document.getElementById('modalContent');
 
-    // Show the modal when the review button is clicked
-    const modal = document.getElementById('reviewModal');
-    const modalContent = document.getElementById('modalContent');
-    
-    // Get all form fields except those with the id="authpricing"
-    const formFields = document.querySelectorAll("#boiForm input:not(#confidetails input):not(#authpricing), #boiForm select:not([disabled]):not(#authpricing), #boiForm textarea:not(#confidetails textarea):not(#authpricing)");
+// Get all form fields except those with the id="authpricing"
+const formFields = document.querySelectorAll("#boiForm input:not(#confidetails input):not(#authpricing), #boiForm select:not([disabled]):not(#authpricing), #boiForm textarea:not(#confidetails textarea):not(#authpricing)");
 
+var formein = document.getElementById("boiForm");
+
+// Check if the form is valid
+if (formein.checkValidity() === false) {
+    event.stopPropagation(); // Prevent further actions if form is not valid
+    alert('Please make sure to fill in all required fields.');
+    formein.classList.add('was-validated');
+
+    // Handle radio button validation
+    var radios = formein.querySelectorAll('input[type="radio"]');
+    var radioValid = false;
+    radios.forEach(function (radio) {
+        if (radio.checked) {
+            radioValid = true;
+        }
+    });
+
+    // Don't show modal if form is not valid
+    return; // Exit the function early to prevent the modal from being displayed
+} else {
+
+    // If form is valid, generate the modal content
     let modalHtml = ""; // To hold the HTML content for the modal
 
-    var formein = document.getElementById("boiForm");
-    if (formein.checkValidity() === false) {
-         event.stopPropagation(); 
-        alert('Please make sure to fill in all required fields.');
-        formein.classList.add('was-validated');
-        // Handle radio button validation
-        var radios = formein.querySelectorAll('input[type="radio"]');
-        var radioValid = false;
-        radios.forEach(function (radio) {
-            if (radio.checked) {
-                radioValid = true;
-            }
-        });
-    } else {
-    
     formFields.forEach(field => {
         let label = field.getAttribute("name") || field.getAttribute("id");
         let value = "";
@@ -4039,13 +4098,15 @@ document.getElementById('reviewapplicationn').addEventListener('click', function
             `;
         }
     });
-    }
+
     // Inject the HTML into the modal
     modalContent.innerHTML = modalHtml;
 
     // Display the modal
     modal.style.display = "block";
+}
 });
+
 
 // Close the modal when the user clicks on <span> (x)
 document.querySelector('.close').addEventListener('click', function() {
@@ -4157,63 +4218,58 @@ document.getElementById("boiformvalidate").addEventListener("click", function(ev
 });
 
 
-// Step 3: Process Payment
 document.querySelector(".formsubmission").addEventListener("submit", function (e) {
     e.preventDefault(); // Prevent the default form submission
 
     var formData = new FormData(this);
 
-    fetch('/wp-content/themes/astra/assets/authnet/payment-boi-process.php', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-          loadingscreen.style.display = 'flex';
-          var blobUrl = document.getElementById('pdfPreviewein').getAttribute('src');
+    // Save file inputs to localStorage
+    var residentialFile = document.querySelector('#residentialimageidentificationform').files[0];
+    var identificationFile = document.querySelector('#imageidentificationform').files[0];
 
-          // Fetch PDF content as Blob
-          fetch(blobUrl)
-              .then(function(response) {
-                  return response.blob();
-              })
-              .then(function(blob) {
-                  // Convert Blob to data URL
-                  var reader = new FileReader();
-                  reader.readAsDataURL(blob);
-                  reader.onloadend = function() {
-                      var pdfDataUrl = reader.result;
-
-                      // Perform AJAX request to send the PDF via email
-                      var xhr = new XMLHttpRequest();
-                      xhr.open('POST', custom_script_vars.ajax_url, true);
-                      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-                      // Send the data in the format required by the server
-                      var params = 'action=boiemail_pdf&pdfDataUrl=' + encodeURIComponent(pdfDataUrl);
-                      xhr.send(params);
-                  };
-              })
-              .catch(function(error) {
-                  console.error('Error fetching PDF content:', error);
-              });
-            // Step 4: Payment Successful, Send Email and Redirect
-            window.location.href = data.redirectUrl; // Redirect to success page
-        } else {
-            document.getElementById('message-div').textContent = data.statusMsg;
-            if (data.errorDetails) {
-                document.getElementById('message-div').textContent += ' Error details: ' + data.errorDetails;
-            }
-            document.getElementById('message-div').style.display = 'block'; // Show the error message
+    // Function to update the image source
+    function updateImageSrc(imageElementId, file) {
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                // Save the image to localStorage
+                localStorage.setItem(imageElementId + 'Image', reader.result);
+                // Get the image element
+                var imgElement = document.querySelector(`#${imageElementId}`);
+                
+                // If the img element's src is empty or doesn't exist, replace it with the new image
+                if (!imgElement.src || imgElement.src === "") {
+                    imgElement.src = reader.result;
+                } else {
+                    // Replace the existing image if there is one
+                    imgElement.src = reader.result;
+                }
+            };
+            reader.readAsDataURL(file);
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('message-div').textContent = "An error occurred while processing the payment. Please try again.";
-        document.getElementById('message-div').style.display = 'block'; // Show the error message
-    });
+    }
+
+    // Update images for residential and identification files
+    updateImageSrc('residentialimageidentificationimg', residentialFile);
+    updateImageSrc('imageidentificationimg', identificationFile);
+
+    // Start processing the PDF generation
+    var blobUrl = document.getElementById('pdfPreviewein').getAttribute('src');
+
+    // Fetch PDF content as Blob
+    fetch(blobUrl)
+        .then(function (response) {
+            return response.blob();
+        })
+        .catch(function (error) {
+            console.error('Error fetching PDF content:', error);
+        })
+        .finally(function () {
+            // You can add code here to hide the loading screen if required
+//            if (loadingScreen) loadingScreen.style.display = 'none'; // Hide loading screen
+        });
 });
+
 
 
 const { PDFDocument, rgb, StandardFonts } = PDFLib;
@@ -4303,7 +4359,7 @@ async function generatePDF() {
   
   // Check if PDF document is loaded
   if (!pdfDoc) {
-    const url = '/wp-content/themes/astra/assets/forms/boi-reporting.pdf';
+    const url = 'img/boi-reporting.pdf';
     const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
     pdfDoc = await PDFDocument.load(existingPdfBytes);
   }
@@ -5066,7 +5122,7 @@ if (exemptentityCheckbox) {
 //const fontBytes = await fetch('path_to_checkbox_font.ttf').then(res => res.arrayBuffer());
 //const checkboxFont = await pdfDoc.embedFont(pdfBytes);
 
-const iconImageBytes = await fetch('/wp-content/themes/astra/assets/img/check2.png').then(res => res.arrayBuffer());
+const iconImageBytes = await fetch('img/check2.png').then(res => res.arrayBuffer());
 const iconImage = await pdfDoc.embedPng(iconImageBytes);
 //const iconImage2 = await pdfDoc.embedPng(iconImageBytes);
 
@@ -5263,12 +5319,7 @@ async function downloadPdf() {
 }
 */
 
-
-                        const loadingscreen = document.querySelector('.loading');
-                        loadingscreen.style.display = 'flex';
-                        setTimeout(() => {
-                    loadingscreen.style.display = 'none';
-                    }, 3000); // 3000 milliseconds = 3 seconds
+ 
                  
                  
                  
@@ -5723,7 +5774,7 @@ document.getElementById("residentialimageidentificationform").addEventListener("
                                                               <label for="residentialimageidentificationform${currentCountboi}" class="mid">51. Identifying document image &nbsp; <span  style="color:red">*</span> </label>
                                                               <div class="d-flex align-items-center justify-content-center">
                                                               <input type="file" id="residentialimageidentificationform${currentCountboi}" class="form-control" name="51. Identifying document image ${currentCountboi}" >
-                                                              <button type="button" class="ms-5 btn btn-danger residentialimagebtn">Remove Image</button>
+                                                              <button type="button" class="ms-5 btn btn-danger residentialimagebtn">Remove</button>
                                                           </div></div>
                                                           <div class="mt-5 col-lg-12">
                                                             <button class="remove-boi btn btn-danger">Remove Beneficial Owner Information ${currentCountboi}</button>
@@ -5820,57 +5871,11 @@ document.getElementById("residentialimageidentificationform").addEventListener("
     
       // Initialize the state on page load
       toggleCompanyApplicantFields();
-    </script>
 
 
 
-<!-- Modal for Payment -->
-<div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="upgradeModalLabel">Complete Payment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h4 id="packageNameDisplay" class="text-center mb-4">Package: </h4>
-                
-                <form action="{{ route('payment.create') }}" method="POST">
-                    @csrf
-                    <!-- Hidden Field for Package ID -->
-                    <input type="hidden" id="package_id" name="package_id" value="9">
-                    <input type="hidden" id="package_name" name="package_name" value="BOI REPORTING">
-                    <input type="hidden" id="package_type" name="package_type" value="one-time">
 
-                    <div class="mb-3">
-                        <label for="card_number" class="form-label">Card Number</label>
-                        <input type="text" class="form-control" id="card_number" name="card_number" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="expiry_date" class="form-label">Expiry Date</label>
-                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="card_code" class="form-label">Card Code (CVV)</label>
-                        <input type="text" class="form-control" id="card_code" name="card_code" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="amount" class="form-label">Amount</label>
-                        <!-- Set the amount field to be readonly and set the value dynamically -->
-                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Pay</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
         const upgradeButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
 
         upgradeButtons.forEach(button => {
@@ -5890,6 +5895,6 @@ document.getElementById("residentialimageidentificationform").addEventListener("
             });
         });
     });
-</script>
+    </script>
 
 </x-app-layout>
