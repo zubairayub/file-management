@@ -5261,6 +5261,8 @@ document.getElementById("residentialimageidentificationform").addEventListener("
   // Update PDF preview
   const pdfBytes = await pdfDoc.save();
   const pdfPreview = document.getElementById('pdfPreviewein');
+
+  //SAVE PDF 
   pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
 
   // Enable download button
