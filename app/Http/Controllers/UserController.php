@@ -44,4 +44,8 @@ class UserController extends Controller
                     // Pass the required data to the view
                     return view('user.dashboard', compact('folders', 'files', 'totalStorage', 'quotaUsed'));
             }
+
+
+
+            
 }

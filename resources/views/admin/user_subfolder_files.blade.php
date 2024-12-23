@@ -28,7 +28,7 @@
     @isset($subfolder)
         <div class="row">
             <div class="col-12">
-                <h2 class="text-uppercase mb-4">Subfolder: {{ $subfolder->name }}</h2>
+                <h2 class="text-uppercase mb-4">Folder: {{ $subfolder->name }}</h2>
 
                 {{-- Check if files exist and display them --}}
                 @if($files && $files->isNotEmpty())
@@ -76,12 +76,12 @@
                         </div>
                     </div>
                 @else
-                    <p>No files available in this subfolder.</p>
+                    <p>No files available in this Folder.</p>
                 @endif
             </div>
         </div>
     @else
-        <p>No subfolder selected.</p>
+        <p>No Folder selected.</p>
     @endisset
 </div>
 
@@ -130,7 +130,7 @@
         <div class="row">
             @if($subfolders->isEmpty())
                 <div class="col-12">
-                    <p class="text-muted">No subfolders found.</p>
+                    <p class="text-muted">No Folders found.</p>
                 </div>
             @else
             @foreach($subfolders as $nestedSubfolder)
@@ -146,19 +146,19 @@
 
                 <!-- Display total sub-subfolders and files count -->
                 <p class="text-muted">
-                    Total Sub-Subfolders: {{ $nestedSubfolder->subfolders()->count() }} | Total Files: {{ $nestedSubfolder->files()->count() }}
+                    Total Folders: {{ $nestedSubfolder->subfolders()->count() }} | Total Files: {{ $nestedSubfolder->files()->count() }}
                 </p>
 
                 <!-- Sub-Subfolder Creation Form -->
                 <form action="{{ route('admin.createSubFolderForUser', ['userId' => $user->id, 'parentFolderId' => $nestedSubfolder->id]) }}" method="POST" class="mt-3">
                     @csrf
                     <div class="mb-3">
-                        <label for="name_{{ $nestedSubfolder->id }}" class="form-label">Sub-Subfolder Name:</label>
+                        <label for="name_{{ $nestedSubfolder->id }}" class="form-label">Folder Name:</label>
                         <input type="text" id="name_{{ $nestedSubfolder->id }}" name="name" class="form-control" placeholder="Enter name" required>
                     </div>
                     <div class="mb-3 form-check" hidden>
                         <input type="checkbox" id="is_subfolder_{{ $nestedSubfolder->id }}" name="is_subfolder" class="form-check-input" checked>
-                        <label for="is_subfolder_{{ $nestedSubfolder->id }}" class="form-check-label">Check if this is a subfolder</label>
+                        <label for="is_subfolder_{{ $nestedSubfolder->id }}" class="form-check-label">Check if this is a Folder</label>
                     </div>
                     <div class="form-check mb-3" hidden>
                         <input type="checkbox" id="by_id" name="by_id" value="1" class="form-check-input" checked>
@@ -245,23 +245,23 @@
     </div>
         <!-- Create a New Subfolder under the Current Folder -->
         <div class="mt-4">
-            <h5>Create a New Subfolder</h5>
+            <h5>Create a New Folder</h5>
             <form action="{{ route('admin.createSubFolderForUser', ['userId' => $user->id, 'parentFolderId' => $subfolder->id]) }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="name" class="form-label">Subfolder Name:</label>
+                    <label for="name" class="form-label">Folder Name:</label>
                     <input type="text" id="name" name="name" class="form-control" required>
                 </div>
                 <div class="mb-3 form-check" hidden>
                                         <input type="checkbox" id="" name="is_subfolder" class="form-check-input" checked>
-                                        <label for="" class="form-check-label">Check if this is a subfolder</label>
+                                        <label for="" class="form-check-label">Check if this is a Folder</label>
                                     </div>
                 <div class="form-check mb-3" hidden>
                                     <input type="checkbox" id="by_id" name="by_id" value="1" class="form-check-input" checked>
                                     <label for="by_id" class="form-check-label">By ID</label>
                                     </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-success">Create Subfolder</button>
+                    <button type="submit" class="btn btn-success">Create Folder</button>
                 </div>
             </form>
         </div>

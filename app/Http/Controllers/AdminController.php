@@ -18,7 +18,7 @@ class AdminController extends Controller
         // Check if the logged-in user is an admin
         if (auth()->user()->role !== 'admin') {
             // Redirect the user if they are not an admin
-            return redirect()->route('home')->with('error', 'You are not authorized to view this page.');
+            return redirect()->route('login')->with('error', 'You are not authorized to view this page.');
         }
          // Get all users along with their total packages, total folders, and total files
             // Get all users along with their total packages, total folders, and total files

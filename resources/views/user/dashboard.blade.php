@@ -44,8 +44,8 @@
             <div class="d-flex justify-content-between">
                 <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
                 <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
 
                 </a>
                 
@@ -70,6 +70,88 @@
 </div>
 
 @endforeach
+
+
+<div class="col">
+    <div class="card card-folder" onclick="window.location='{{ route('showbusiness') }}'">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                </a>
+               
+            </div>
+            <div class="mt-4">
+                <h5>Business Formation</h5>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="col">
+    <div class="card card-folder" onclick="window.location='{{ route('showein') }}'">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                </a>
+               
+            </div>
+            <div class="mt-4">
+                <h5>EIN Application</h5>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <div class="card card-folder" onclick="window.location='{{ route('showitin') }}'">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                </a>
+               
+            </div>
+            <div class="mt-4">
+                <h5>ITIN Application</h5>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col">
+    <div class="card card-folder" onclick="window.location='{{ route('showboi') }}'">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                </a>
+               
+            </div>
+            <div class="mt-4">
+                <h5>BOI Reporting</h5>
+                
+            </div>
+        </div>
+    </div>
+</div>
 
     </div>
     <div class="col-lg-12">
@@ -118,21 +200,32 @@
                                         <small class="text-muted">{{ $file->created_at->format('d M, H:i') }}</small>
                                     </td>
                                     <td>
-                                        <small class="text-primary">   @php
-                                $fileSize = Storage::size($file->path); // Get file size in bytes
-                                if ($fileSize < 1024) {
-                                    $size = number_format($fileSize, 2) . ' B'; // Bytes
-                                } elseif ($fileSize < 1048576) {
-                                    $size = number_format($fileSize / 1024, 2) . ' KB'; // Kilobytes
-                                } elseif ($fileSize < 1073741824) {
-                                    $size = number_format($fileSize / 1024 / 1024, 2) . ' MB'; // Megabytes
-                                } elseif ($fileSize < 1099511627776) {
-                                    $size = number_format($fileSize / 1024 / 1024 / 1024, 2) . ' GB'; // Gigabytes
-                                } else {
-                                    $size = number_format($fileSize / 1024 / 1024 / 1024 / 1024, 2) . ' TB'; // Terabytes
-                                }
-                            @endphp
-                            {{ $size }}</small>
+                                    <small class="text-primary">
+    @php
+        try {
+            // Attempt to retrieve the file size
+            $fileSize = Storage::size($file->path); // Get file size in bytes
+
+            if ($fileSize < 1024) {
+                $size = number_format($fileSize, 2) . ' B'; // Bytes
+            } elseif ($fileSize < 1048576) {
+                $size = number_format($fileSize / 1024, 2) . ' KB'; // Kilobytes
+            } elseif ($fileSize < 1073741824) {
+                $size = number_format($fileSize / 1024 / 1024, 2) . ' MB'; // Megabytes
+            } elseif ($fileSize < 1099511627776) {
+                $size = number_format($fileSize / 1024 / 1024 / 1024, 2) . ' GB'; // Gigabytes
+            } else {
+                $size = number_format($fileSize / 1024 / 1024 / 1024 / 1024, 2) . ' TB'; // Terabytes
+            }
+        } catch (\Exception $e) {
+            // Handle the exception
+            $size = 'Unable to retrieve file size';
+            \Log::error('Error retrieving file size: ' . $e->getMessage()); // Log the error
+        }
+    @endphp
+    {{ $size }}
+</small>
+
                                     </td>
                                     <td>
                                         <a href="{{ route('file.download', $file->id) }}" class="d-flex align-items-center text-danger">
@@ -195,47 +288,48 @@
 </div>
 </div>
 <div class="row">
-    <div class="col-lg-4">
-        <div class="card">
-           <div class="card-body">
-              <div class="text-center">
-                 <div class="m-auto d-inline-block p-4 bg-primary-subtle rounded-pill">
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="text-center">
+                <div class="m-auto d-inline-block p-4 bg-primary-subtle rounded-pill">
                     <svg class="icon-44" width="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M21.9964 8.37513H17.7618C15.7911 8.37859 14.1947 9.93514 14.1911 11.8566C14.1884 13.7823 15.7867 15.3458 17.7618 15.3484H22V15.6543C22 19.0136 19.9636 21 16.5173 21H7.48356C4.03644 21 2 19.0136 2 15.6543V8.33786C2 4.97862 4.03644 3 7.48356 3H16.5138C19.96 3 21.9964 4.97862 21.9964 8.33786V8.37513ZM6.73956 8.36733H12.3796H12.3831H12.3902C12.8124 8.36559 13.1538 8.03019 13.152 7.61765C13.1502 7.20598 12.8053 6.87318 12.3831 6.87491H6.73956C6.32 6.87664 5.97956 7.20858 5.97778 7.61852C5.976 8.03019 6.31733 8.36559 6.73956 8.36733Z" fill="currentColor"></path>
                         <path opacity="0.4" d="M16.0374 12.2966C16.2465 13.2478 17.0805 13.917 18.0326 13.8996H21.2825C21.6787 13.8996 22 13.5715 22 13.166V10.6344C21.9991 10.2297 21.6787 9.90077 21.2825 9.8999H17.9561C16.8731 9.90338 15.9983 10.8024 16 11.9102C16 12.0398 16.0128 12.1695 16.0374 12.2966Z" fill="currentColor"></path>
                         <circle cx="18" cy="11.8999" r="1" fill="currentColor"></circle>
-                     </svg>
-                 </div>
-              </div>
-              <div>
-                 <p class="pt-3">This Year Revenue</p>
-                 <h4 class="mb-3 counter text-success " style="visibility: visible;">$753.00</h4>
-                 <p class="mb-0 text-success pt-2">+10%</p>
-              </div>
-           </div>
-        </div>
-     </div>
-     <div class="col-lg-4">
-        <div class="card">
-           <div class="card-body">
-              <div class="text-center">
-                 <div class="m-auto d-inline-block p-4 bg-primary-subtle rounded-pill">
-                    <svg class="icon-44" width="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                       <path opacity="0.4" d="M16.6756 2H7.33333C3.92889 2 2 3.92889 2 7.33333V16.6667C2 20.0711 3.92889 22 7.33333 22H16.6756C20.08 22 22 20.0711 22 16.6667V7.33333C22 3.92889 20.08 2 16.6756 2Z" fill="currentColor"></path>
-                       <path d="M7.36866 9.3689C6.91533 9.3689 6.54199 9.74223 6.54199 10.2045V17.0756C6.54199 17.5289 6.91533 17.9022 7.36866 17.9022C7.83088 17.9022 8.20421 17.5289 8.20421 17.0756V10.2045C8.20421 9.74223 7.83088 9.3689 7.36866 9.3689Z" fill="currentColor"></path>
-                       <path d="M12.0352 6.08887C11.5818 6.08887 11.2085 6.4622 11.2085 6.92442V17.0755C11.2085 17.5289 11.5818 17.9022 12.0352 17.9022C12.4974 17.9022 12.8707 17.5289 12.8707 17.0755V6.92442C12.8707 6.4622 12.4974 6.08887 12.0352 6.08887Z" fill="currentColor"></path>
-                       <path d="M16.6398 12.9956C16.1775 12.9956 15.8042 13.3689 15.8042 13.8312V17.0756C15.8042 17.5289 16.1775 17.9023 16.6309 17.9023C17.0931 17.9023 17.4664 17.5289 17.4664 17.0756V13.8312C17.4664 13.3689 17.0931 12.9956 16.6398 12.9956Z" fill="currentColor"></path>
                     </svg>
-                 </div>
-              </div>
-              <div>
-                 <p class="pt-3">This Year Expenses</p>
-                 <h4 class="mb-3 counter text-danger " style="visibility: visible;">$544.00</h4>
-                 <p class="mb-0 text-danger pt-2">-10%</p>
-              </div>
-           </div>
+                </div>
+            </div>
+            <div>
+                <p class="pt-3">This Year Revenue</p>
+                <h4 class="mb-3 counter text-primary" style="visibility: visible;">No Data Yet</h4>
+                <p class="mb-0 text-secondary pt-2">Start adding transactions to see insights!</p>
+            </div>
         </div>
-     </div>  
+    </div>
+</div>
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="text-center">
+                <div class="m-auto d-inline-block p-4 bg-primary-subtle rounded-pill">
+                    <svg class="icon-44" width="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.4" d="M16.6756 2H7.33333C3.92889 2 2 3.92889 2 7.33333V16.6667C2 20.0711 3.92889 22 7.33333 22H16.6756C20.08 22 22 20.0711 22 16.6667V7.33333C22 3.92889 20.08 2 16.6756 2Z" fill="currentColor"></path>
+                        <path d="M7.36866 9.3689C6.91533 9.3689 6.54199 9.74223 6.54199 10.2045V17.0756C6.54199 17.5289 6.91533 17.9022 7.36866 17.9022C7.83088 17.9022 8.20421 17.5289 8.20421 17.0756V10.2045C8.20421 9.74223 7.83088 9.3689 7.36866 9.3689Z" fill="currentColor"></path>
+                        <path d="M12.0352 6.08887C11.5818 6.08887 11.2085 6.4622 11.2085 6.92442V17.0755C11.2085 17.5289 11.5818 17.9022 12.0352 17.9022C12.4974 17.9022 12.8707 17.5289 12.8707 17.0755V6.92442C12.8707 6.4622 12.4974 6.08887 12.0352 6.08887Z" fill="currentColor"></path>
+                        <path d="M16.6398 12.9956C16.1775 12.9956 15.8042 13.3689 15.8042 13.8312V17.0756C15.8042 17.5289 16.1775 17.9023 16.6309 17.9023C17.0931 17.9023 17.4664 17.5289 17.4664 17.0756V13.8312C17.4664 13.3689 17.0931 12.9956 16.6398 12.9956Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+            </div>
+            <div>
+                <p class="pt-3">This Year Expenses</p>
+                <h4 class="mb-3 counter text-primary" style="visibility: visible;">No Data Yet</h4>
+                <p class="mb-0 text-secondary pt-2">Add expenses to track your spending!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
      
 
     <div class="col-lg-4">

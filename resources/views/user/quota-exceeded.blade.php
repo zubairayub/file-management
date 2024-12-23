@@ -104,42 +104,84 @@
 <div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <!-- Modal Header -->
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="upgradeModalLabel">Complete Payment</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
+            <!-- Modal Body -->
             <div class="modal-body">
-                <h4 id="packageNameDisplay" class="text-center mb-4">Package: </h4>
-                
+                <!-- Package Details -->
+                <h4 id="packageNameDisplay" class="text-center mb-4 text-info">
+                    Package: <span id="dynamicPackageName">{{ $package->package_name }}</span>
+                </h4>
+
+                <!-- Payment Form -->
                 <form action="{{ route('payment.create') }}" method="POST">
                     @csrf
-                    <!-- Hidden Field for Package ID -->
+                    <!-- Hidden Fields -->
                     <input type="hidden" id="package_id" name="package_id" value="{{ $package->id }}">
                     <input type="hidden" id="package_name" name="package_name" value="{{ $package->package_name }}">
                     <input type="hidden" id="package_type" name="package_type" value="{{ $package->validity }}">
 
-                    <div class="mb-3">
-                        <label for="card_number" class="form-label">Card Number</label>
-                        <input type="text" class="form-control" id="card_number" name="card_number" required>
-                    </div>
+                    <!-- Card Details -->
+                    <fieldset class="border p-3 mb-4">
+                        <legend class="text-primary fw-bold px-2">Payment Details</legend>
 
-                    <div class="mb-3">
-                        <label for="expiry_date" class="form-label">Expiry Date</label>
-                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
-                    </div>
+                        <div class="mb-3">
+                            <label for="card_number" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="card_code" class="form-label">Card Code (CVV)</label>
-                        <input type="text" class="form-control" id="card_code" name="card_code" required>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="expiry_date" class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="card_code" class="form-label">Card Code (CVV)</label>
+                                <input type="text" class="form-control" id="card_code" name="card_code" placeholder="123" required>
+                            </div>
+                        </div>
+                    </fieldset>
 
+                    <!-- Billing Information -->
+                    <fieldset class="border p-3 mb-4">
+                        <legend class="text-primary fw-bold px-2">Billing Information</legend>
+
+                        <div class="mb-3">
+                            <label for="billing_address" class="form-label">Billing Address</label>
+                            <input type="text" class="form-control" id="billing_address" name="billing_address" placeholder="123 Main Street" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="billing_city" class="form-label">City</label>
+                                <input type="text" class="form-control" id="billing_city" name="billing_city" placeholder="City" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="billing_zip" class="form-label">ZIP/Postal Code</label>
+                                <input type="text" class="form-control" id="billing_zip" name="billing_zip" placeholder="ZIP Code" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="billing_country" class="form-label">Country</label>
+                            <input type="text" class="form-control" id="billing_country" name="billing_country" placeholder="Country" required>
+                        </div>
+                    </fieldset>
+
+                    <!-- Amount -->
                     <div class="mb-3">
                         <label for="amount" class="form-label">Amount</label>
-                        <!-- Set the amount field to be readonly and set the value dynamically -->
-                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                        <input type="number" class="form-control" id="amount" name="amount" value="{{ $package->price }}" readonly>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Pay</button>
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Pay Now</button>
+                    </div>
                 </form>
             </div>
         </div>

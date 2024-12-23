@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mt-4">
-        <h3 class="mb-4">Subfolders for {{ $folder->name }}</h3>
+        <h3 class="mb-4">Folder for {{ $folder->name }}</h3>
         @php
         $current_folder_id = $folder->id;
         @endphp
@@ -54,7 +54,7 @@
 
     <!-- Display total sub-subfolders and files count -->
     <p class="text-muted">
-        Total Sub-Subfolders: {{ $subfolder->subfolders()->count() }} | Total Files: {{ $subfolder->files()->count() }}
+        Total Folders: {{ $subfolder->subfolders()->count() }} | Total Files: {{ $subfolder->files()->count() }}
     </p>
 
     <!-- Sub-Subfolder Creation Form -->
@@ -159,11 +159,11 @@
 
         <!-- Create a New Subfolder under the Current Folder -->
         <div class="mt-4">
-            <h5>Create a New Subfolder</h5>
+            <h5>Create a New Folder</h5>
             <form action="{{ route('admin.createSubFolderForUser', ['userId' => $user->id, 'parentFolderId' => $current_folder_id]) }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="name" class="form-label">Subfolder Name:</label>
+                    <label for="name" class="form-label">Folder Name:</label>
                     <input type="text" id="name" name="name" class="form-control" required>
                 </div>
                 <div class="form-check mb-3" hidden>
@@ -171,7 +171,7 @@
             <label for="by_id" class="form-check-label">By ID</label>
         </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-success">Create Subfolder</button>
+                    <button type="submit" class="btn btn-success">Create Folder</button>
                 </div>
             </form>
         </div>

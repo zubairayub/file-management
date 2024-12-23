@@ -70,7 +70,7 @@
                     @isset($subfolder)
                         <div class="row">
                             <div class="col-12">
-                                <h2>Subfolder: {{ strtoupper($subfolder->name) }}</h2>
+                                <h2>Folder: {{ strtoupper($subfolder->name) }}</h2>
                                 
 
                                 {{-- Check if files exist and display them --}}
@@ -160,13 +160,13 @@
 
         </div>
                 @else
-                    <div>No files in this subfolder.</div>
+                    <div>No files in this Folder.</div>
                 @endif
 
 
                 {{-- Display nested subfolders --}}
                 @if($nestedSubfolders->isNotEmpty())
-    <h4>Nested Subfolders:</h4>
+    <h4>Nested Folders:</h4>
     <div class="row row-cols-lg-4 row-cols-md-4 row-cols-1">
         @foreach($nestedSubfolders as $nestedSubfolder)
             <div class="col">
@@ -193,7 +193,7 @@
         @endforeach
     </div>
 @else
-    <p>No nested subfolders in this subfolder.</p>
+    <p>No nested Folders in this Folder.</p>
 @endif
 
             </div>

@@ -7,6 +7,7 @@ use net\authorize\api\contract\v1\TransactionRequestType;
 use net\authorize\api\contract\v1\OrderType;
 use net\authorize\api\contract\v1\PaymentType;
 use App\Models\UserPackage;
+use App\Models\UserField;
 use App\Models\User;
 use net\authorize\api\contract\v1\CreateTransactionRequest;
 use net\authorize\api\contract\v1\MerchantAuthenticationType;
@@ -73,6 +74,19 @@ class PaymentController extends Controller
                             'transaction_id' => $transactionResponse->getTransId(),
                             'auth_code' => $transactionResponse->getAuthCode(),
                         ]);
+
+                        $userField = UserField::updateOrCreate(
+                            [
+                                'user_id' => $request->user()->id, // Match on user_id and field_name
+                            ],
+                            [
+                                
+                                'billing_address' => $request->billing_address,
+                                'billing_city' => $request->billing_city,
+                                'billing_country' => $request->billing_country,
+                                'billing_zip_code' => $request->billing_zip,
+                            ]
+                        );
                         
                                 // Find the user
                         $user = User::findOrFail($request->user()->id);

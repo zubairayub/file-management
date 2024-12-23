@@ -7,7 +7,9 @@ use App\Http\Controllers\ItinController;
 use App\Http\Controllers\einapplication;
 use App\Http\Controllers\Bussinesformation;
 use App\Http\Controllers\BoiController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PackageController;
@@ -82,6 +84,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/toggle-status/{userId}', [AdminController::class, 'toggleStatus']);
     Route::get('/admin/user-folders/{userId?}/{folderId?}/{subfolderId?}', [AdminController::class, 'adminShowUserFolders'])->name('admin.showUserFolders');
     Route::post('/admin/{userId}/createSubFolder/{parentFolderId}', [AdminController::class, 'adminCreateSubFolderForUser'])->name('admin.createSubFolderForUser');
+    Route::get('/update-password', [PasswordController::class, 'showUpdateForm'])->name('password.update.form');
+    Route::post('/update-password', [PasswordController::class, 'update'])->name('userpassword.update');
+   
+  
+
+    Route::get('/reset-password/{token}', [PasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [PasswordController::class, 'reset'])->name('password.update.reset');
 
 
 
@@ -99,9 +108,32 @@ Route::get('/payment-form', function () {
 })->name('payment.form');
 
 Route::get('/file/preview/{file_id}', function ($file_id) {
-    $file = \App\Models\File::findOrFail($file_id);
-    return Storage::disk('private')->response($file->path);
+    try {
+        // Retrieve the file record from the database
+        $file = \App\Models\File::findOrFail($file_id);
+
+        // Check if the file exists in the specified disk
+        if (!Storage::disk('private')->exists($file->path)) {
+            throw new \Exception("File not found at location: {$file->path}");
+        }
+
+        // Return the file as a response
+        return Storage::disk('private')->response($file->path);
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        // File record not found in the database
+        \Log::error("File not found in the database: {$e->getMessage()}");
+        return response()->view('errors.file_error', [
+            'message' => 'The requested file does not exist in our records.',
+        ], 404);
+    } catch (\Exception $e) {
+        // General error handling
+        \Log::error("File preview error: {$e->getMessage()}");
+        return response()->view('errors.file_error', [
+            'message' => 'Unable to preview the file. Please try again later.',
+        ], 500);
+    }
 })->name('file.preview');
+
 
 Route::get('/clear-cache', function () {
     \Artisan::call('config:clear');
@@ -112,6 +144,7 @@ Route::get('/clear-cache', function () {
     return 'Cache cleared!';
 });
 
+Route::post('/upload-pdf', [PDFController::class, 'uploadPDF'])->name('upload-pdf');
 
 
 require __DIR__.'/auth.php';

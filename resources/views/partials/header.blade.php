@@ -161,6 +161,10 @@
          <a class="dropdown-item" href="{{ route('quota.exceeded') }}">Upgrade Quota</a>
       </li>
       <li>
+         <!-- Quota Exceeded -->
+         <a class="dropdown-item" href="{{ route('password.update.form') }}">Update password</a>
+      </li>
+      <li>
          <!-- Authentication -->
          <form method="POST" action="{{ route('logout') }}">
             @csrf
