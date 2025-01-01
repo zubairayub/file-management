@@ -1,52 +1,6 @@
 <x-app-layout>
-    <div class="loading" id="loading"><img decoding="async" src="https://promptfilings.com/wp-content/themes/astra/assets/img/loading.gif
-      " alt="Application submitted" width="128"></div>
-    
-        <div  id="appdashboard">
-        <!-- Banner -->
-        <div class="topbar  w-full bg-primary text-white text-center p-2" style="z-index: 1000;">
-            <strong>Exclusive Offer</strong> Get 10% off now, Apply for your ITIN or EIN with <a href="/"
-            class="text-white">Prompt Filings</a>.
-        </div>
-    
-        <!-- Dashboard -->
-        <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
-            <!-- Main content -->
-            <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-            <!-- Header -->
-            <header class="bg-surface-primary border-bottom pt-6">
-                <div class="container-fluid">
-                <div class="mb-npx pb-4">
-                    <div class="row align-items-center">
-                    <div class="col-sm-12 col-md-6 col-12 mb-4 mb-sm-0">
-                        <!-- Title -->
-                        <h5 class="mb-0 ls-tight"><small><a href="/" class="mb-3 d-block"><img decoding="async" src="https://promptfilings.com/wp-content/uploads/2024/03/logo-h-1.png" width="100" alt="Promptfilings"></a> Welcome to Promptfilings, <span id="userdetail"></span></small></h5>
-                    </div>
-                    <!-- Actions -->
-                    <div class="col-sm-12 col-md-6 col-12 text-sm-end">
-                      <a class="dashtab btn-sm btn btn-primary" href="/client">
-                      <i class="bi bi-house"></i> Dashboard
-                      </a>
-                      <a class="itintab btn-sm btn btn-primary" href="/client/itin">
-                      <i class="bi bi-card-text"></i> ITIN Application
-                      </a>
-                      <a class="eintab btn-sm btn btn-primary" href="/client/ein">
-                      <i class="bi bi-card-list"></i> EIN Application
-                      </a> 
-                      <a class="eintab btn-sm btn btn-primary" href="/client/business-formation">
-                        <i class="bi bi-card-list"></i> Business Formation
-                        </a> 
-                      <a href="#" class="btn-sm btn btn-primary" id="logout">
-                      <i class="bi bi-box-arrow-left"></i> Logout
-                      </a>
-              </div>
-                    </div>
-                    </div>
-                </div>
-            </header>
-            <!-- Main -->
-            <main class="py-6 bg-surface-secondary">
-                <div class="container-fluid py-5">
+        <d  id="appdashboard">       
+        <!-- Dashboard --> 
                     <div class="card shadow border-0 mb-7" id="eintabsection" >
                         <div class="content">
                             <div class="py-4 px-3 px-md-4">
@@ -62,7 +16,7 @@
                                         </div>
                                         </div>
     <!--action="https://promptfilings.com/wp-content/themes/astra/assets/authnet/payment-ein-process.php"--> 
-                                          <form id="einForm" class="row g-3 formsubmission needs-validation" novalidate="" enctype="application/x-www-form-urlencoded" method="POST" >
+                                          <form id="einForm" class="row g-3 formsubmission needs-validation" novalidate="" enctype="application/x-www-form-urlencoded">
                                             <div class="col-md-12 col-xl-12 mb-3 mb-md-4"> 
                                              <div class="card h-100">
                                                 <div class="card-header d-flex">
@@ -272,6 +226,8 @@
                                          <input type="text" id="ssnitineinumber" class="form-control" name="ssnitineinumber" required>
                                         </div>
                                         </div></div></div>
+                                            </div>
+                                        <div class="col-md-12 col-xl-12 mb-3 mb-md-4"> 
                                         <div class="card h-100 mt-5">
                                           <div class="card-header d-flex">
                                           <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">LLC Details</h5>
@@ -317,7 +273,8 @@
                                                         class="radio" required> No</label>
                                            </div>
                                            </div>
-                                           </div></div></div>
+                                           </div></div></div></div>
+                                           <div class="col-md-12 col-xl-12 mb-3 mb-md-4"> 
                                            <div class="card h-100 mt-5">
                                             <div class="card-header d-flex">
                                             <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Entity Details</h5>
@@ -510,7 +467,8 @@
                                               </div>
                                             </div>
                                              </div>
-    </div></div></div>
+    </div></div></div></div>
+    <div class="col-md-12 col-xl-12 mb-3 mb-md-4"> 
     <div class="card h-100 mt-5">
     <div class="card-header d-flex">
     <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Reason for applying</h5>
@@ -754,13 +712,14 @@
                                                       <label class="form-check-label">If “Yes,” write previous EIN here</label>
                                                       <input type="text" id="everappliedeintxt" class="form-control" name="everappliedeintxt" placeholder="Enter Date (month, day, year)">
                                                       </div>
-                                                   </div></div></div>
+                                                   </div></div></div></div>
+                                                   <div class="col-md-12 col-xl-12 mb-3 mb-md-4"> 
                                                    <div class="card h-100 mt-5">
                                                     <div class="card-header d-flex">
                                                     <h5 class="h6 font-weight-semi-bold text-uppercase mb-0"><i class="bi bi-info-circle me-2 text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="Complete this section only if you want to authorize the named individual to answer questions about the completion of Form SS-4 and receive the entity’s newly assigned EIN. You must complete the signature area for the authorization to be valid. The designee’s authority terminates at the time the EIN is assigned and released to the designee. EINs are released to authorized third-party designees by the method they used to obtain the EIN (online, telephone, or fax); however, the EIN notice will be mailed to the taxpayer."></i>  Third Party Designee</h5>
                                                   </div>
                                                   <div class="card-body">
-                                                  <div class="media-body row">
+                                                  <div class="media-body row pb-5">
                                                     <div class="col-lg-12"><label>Complete this section only if you want to authorize the named individual to receive the entity's EIN and answer questions about the completion of this form.</label></div>
                                                    <div class="col-lg-12">
                                                     <label for="designeename" class="mid">Designee's name</label>
@@ -791,158 +750,179 @@
                                          <label for="applicantfaxnumber" class="mid">Applicant's fax number</label>
                                          <input type="text" id="applicantfaxnumber" class="form-control" name="applicantfaxnumber" required>
                                         </div>
-                                        </div></div></div>
-                                        <div class="card h-100 mt-5 ordersummarybox" style="display: none;">
-                                                <div class="card-header d-flex">
-                                                    <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Order Summary -
-                                                        Fee Information</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="media-body row" id="ordersummary">
-                                                        <div class="col-lg-8 pt-5 pb-5">
-                                                            <table cellpadding="5" cellspacing="0" width="100%">
-                                                                <tr>
-                                                                    <td>
-                                                                        <p class="mb-3">PromptFiling Service Fee: </p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="mb-3"><span
-                                                                                id="pfservicefee">$69.00</span></p>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>
-                                                                        <p class="mb-3">Grand Total Fee: </p>
-                                                                    </th>
-                                                                    <th>
-                                                                        <p class="mb-3"><span
-                                                                                id="totalpricing2">$0.00</span></p>
-                                                                    </th>
-                                                                </tr>
-                                                            </table>
-                                                            <div class="col-12"><small class="mb-5 container  mt-5 text-center">Important Note: If any  incorrect information is provided during the application process, you will need to restart and resubmit the entire application. It is essential to review all details carefully before submission to avoid any delays or complications.</small></div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="alert alert-primary">
-                                                                <h4>You'll Pay: <span id="totalpricing" name="totalpricing">$0.00</span></h4>
-                                                                <div class="d-none"><input type="text" id="authpricing" name="authpricing" value="0" readonly></div>
-                                                            </div>
-                                                            <div class="col-md-12 m-0 p-5 row bg-white ">
-                                                                <div id="message-div" class="col-md-12 mt-4 mb-4"
-                                                                    style="display: none; color: red; font-weight: bold;">
-                                                                </div>
-                                                                <div class="my-2 col-md-12 p-0">
-                                                                    <label for="card_name">Name on card:</label>
-                                                                    <input type="text" class="form-control" id="card_name"
-                                                                        placeholder="John Doe" name="card_name"
-                                                                        maxlength="16" required>
-                                                                </div>
-                                                                <div class="my-2 col-md-12 p-0">
-                                                                    <label for="card_address">Address</label>
-                                                                    <input type="text" class="form-control" id="card_address"
-                                                                        placeholder="Address" name="card_address"
-                                                                        required>
-                                                                </div>
-    
-                                                                <div class="my-2 col-md-12 p-0">
-                                                                    <label for="card_city">City</label>
-                                                                    <input type="text" class="form-control" id="card_city"
-                                                                        placeholder="City" name="card_city"
-                                                                        required>
-                                                                </div>
-    
-                                                                <div class="my-2 col-md-12 p-0">
-                                                                    <label for="card_state">State</label>
-                                                                    <input type="text" class="form-control" id="card_state"
-                                                                        placeholder="State" name="card_state"
-                                                                        required>
-                                                                </div>
-    
-                                                                <div class="my-2 col-md-12 p-0">
-                                                                    <label for="card_zip">Zipcode</label>
-                                                                    <input type="text" class="form-control" id="card_zip"
-                                                                        placeholder="Zipcode" name="card_zip"
-                                                                        required>
-                                                                </div>
-                                                                <div class="my-2 col-md-12 p-0">
-                                                                    <label for="cardno">Card No:</label>
-                                                                    <input type="text" class="form-control" id="card_number"
-                                                                        placeholder="1111 1111 1111 1111" name="card_number"
-                                                                        maxlength="16" required>
-                                                                </div>
-    
-                                                                <div class="my-2 col-md-4 p-0">
-                                                                    <label for="card_exp_month">Expiry Month:</label>
-                                                                    <input type="text" class="form-control" id="card_exp_month"
-                                                                        placeholder="MM" name="card_exp_month" maxlength="2"
-                                                                        required>
-                                                                </div>
-                                                                <div class="my-2 col-md-4 p-0">
-                                                                    <label for="card_exp_year">Expiry Year:</label>
-                                                                    <input type="text" class="form-control" id="card_exp_year"
-                                                                        placeholder="YYYY" name="card_exp_year"
-                                                                        maxlength="4" required>
-                                                                </div>
-                                                                <div class="my-2 col-md-4 p-0">
-                                                                    <label for="card_cvc">CVC Code:</label>
-                                                                    <input type="text" class="form-control" id="card_cvc"
-                                                                        placeholder="CVC Code" name="card_cvc"
-                                                                        maxlength="3">
-                                                                </div>
-                                                                <div class="my-2 col-md-12 p-0"><img
-                                                                        src="https://promptfilings.com/wp-content/themes/astra/assets/authnet/authorizemerchant.jpg"
-                                                                        alt="Authorize.net Merchant">
-                                                                </div>
-                                                                <div class="col-lg-12 mt-5 d-flex align-items-center">
-                                                                    <input type="checkbox" id="terms" name="terms"
-                                                                        class="form-check-input me-2" required="">
-                                                                    <label for="terms">I have read the <a
-                                                                            href="https://promptfilings.com/terms-of-service/"
-                                                                            target="_blank" class="mx-3">terms of
-                                                                            services</a> and <a
-                                                                            href="https://promptfilings.com/privacy-policy/"
-                                                                            target="_blank" class="mx-3">privacy
-                                                                            policy</a></label>
-                                                                </div>
-                                                                <div class="col-lg-12 mt-5 " id="spinner"
-                                                                    style="display:none;">
-                                                                    <img src="https://promptfilings.com/wp-content/themes/astra/assets/img/loading.gif"
-                                                                        alt="Payment Process..." style="border:0!important"
-                                                                        width="48">
-                                                                </div>
-                                                                <div class="col-lg-12 mt-3">
-                                                                    <button type="submit" class="btn btn-primary"
-                                                                        id="einformvalidate">Pay Now to Submit
-                                                                        Application</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                        </div> 
+                                        <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
+                                        <div class="card h-100">
+                                             <div class="card-body">
+                                            <div class="media-body row" id="ordersummary"> 
+                                                    <div class="col-lg-12"> 
+                                                        <table cellpadding="5" cellspacing="0" width="100%" class="border  table pricingtable">
+                                                        <thead class="thead-dark">
+                                                        <tr>
+                                                                <th>Service:</th>
+                                                                <th><span id="pfservicefee">Fee</span></th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <p class="mb-3">PromptFiling Services: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span id="pfservicefee">$69.00</span></p>
+                                                                </td>
+                                                            </tr>
+  
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">State Filing: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="statefeeprice">$0.00</span></p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">Expedited Services: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="expeditedprice">$0.00</span></p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">EIN Tax ID Fee: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="eintaxidprice">$0.00</span></p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">PF Resident Agent Fee (per year):
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="pfresidentfee">$0.00</span></p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">S CORP Election Fee: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="scorpelectionprice">$0.00</span></p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">Corporate/LLC KIT Fee: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span id="llckitprice">$0.00</span>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">Plain Copy Fee: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="plaincopyprice">$0.00</span></p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">Certified Copy Fee: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="certifiedprice">$0.00</span></p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display:none">
+                                                                <td>
+                                                                    <p class="mb-3">Certificate of Existence Fee: </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="certificateexistenceprice">$0.00</span>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+  
+                                                            <tr>
+                                                                <td>
+                                                                    <p class="mb-3">Pay with Credit/Debit Card (a non-refundable portal processing fee applies)
+  </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="mb-3"><span
+                                                                            id="certificateexistenceprice">3.5% plus 10c</span>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+  
+                                                            <tr>
+                                                                <th>
+                                                                    <h2 class="mb-3">You will Pay: </h2>
+                                                                </th>
+                                                                <th>
+                                                                    <h2 class="mb-3"><span
+                                                                            id="totalpricing2">$73.49</span></h2>
+                                                                </th>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                </div>
-                                            </div>
-                        <div class="col-md-12 mt-3"><small>Disclaimer: Please note that while we strive to provide accurate information, this sample application for an Employer Identification Number (EIN) is for illustrative purposes only and should not be construed as legal advice. The process and requirements for obtaining an EIN may vary depending on your specific circumstances and jurisdiction. It is recommended to consult with a qualified professional or refer to the official guidelines provided by the relevant tax authorities for accurate and personalized assistance with your EIN application. <a href="https://www.irs.gov/pub/irs-pdf/iss4.pdf" target="_blank"></a>https://www.irs.gov/pub/irs-pdf/iss4.pdf</small></div>
-                        <div class="popupboxein">
-                            <h4>Verify Business Entity Formation Application Before Proceeding or Submit
-                                Now?</h4>
-                            <span><button type="button" class="btn btn-primary" id="llcemailPdfBtn">Submit
-                                    Application </button> <button type="button" class="btn btn-info"
-                                    id="closepop">Reset</button></span>
-                            <small class="mb-5 container mx-auto mt-5 text-center">Important Note: If any
-                                incorrect information is provided during the application process, you will
-                                need to restart and resubmit the entire application. It is essential to
-                                review all details carefully before submission to avoid any delays or
-                                complications.</small>
-                        </div>
-                        </div></form>
+                                                        <div class="col-12"><small class="mt-5 text-left d-block">Important Note: If any incorrect information is provided during the application process, you will need to restart and resubmit the entire application. It is essential to review all details carefully before submission to avoid any delays or complications.</small></div>
+                                                        <div class="col-lg-12 d-flex align-items-center">
+                                                                <input type="checkbox" id="terms" name="terms"
+                                                                    class="form-check-input me-2 " required="">
+                                                                <label for="terms">I have read the <a
+                                                                        href="https://promptfilings.com/terms-of-service/"
+                                                                        target="_blank">terms of
+                                                                        services</a> and <a
+                                                                        href="https://promptfilings.com/privacy-policy/"
+                                                                        target="_blank">privacy
+                                                                        policy</a></label>
+                                                            </div> 
+                                                    <div class="col-lg-12 mt-5 mb-5">
+                                                          <button type="button" class="btn btn-primary" id="reviewapplicationn">Review Your Application</button>  
+                                                                <button type="submit" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#upgradeModal" 
+                                                                    data-package-id="9" 
+                                                                    data-package-name="BOI REPORTING"
+                                                                    data-package-price="154.315" 
+                                                                    id="llcformvalidate">Pay Now to Submit
+                                                                    Application</button>
+                                                            </div>
+                                                            <div class="my-2 col-md-12 p-0"><img
+                                                                    src="https://promptfilings.com/wp-content/themes/astra/assets/authnet/authorizemerchant.jpg"
+                                                                    alt="Authorize.net Merchant">
+                                                            </div>
+                                              
+                                    </div>
+                                    </div></div></div>
+                                                    </div> 
+                                  
+                                            <div class="col-md-12 mt-3 p-5"><small style="font-size:13px">Disclaimer: Please note that while we strive to provide accurate information, this sample application for an Employer Identification Number (EIN) is for illustrative purposes only and should not be construed as legal advice. The process and requirements for obtaining an EIN may vary depending on your specific circumstances and jurisdiction. It is recommended to consult with a qualified professional or refer to the official guidelines provided by the relevant tax authorities for accurate and personalized assistance with your EIN application. <a href="https://www.irs.gov/pub/irs-pdf/iss4.pdf" target="_blank"></a>https://www.irs.gov/pub/irs-pdf/iss4.pdf</small></div>
+                                              </div></div></form>
+                                              </div></div></div>
+                        
                         <div class="formpreview column col-12 d-none" >
                              <iframe class="pdf-preview" id="pdfPreviewein" src="https://promptfilings.com/wp-content/themes/astra/assets/forms/ss4.pdf" type="application/pdf" width="100%" height="600">
                             </iframe>
-                          </div></div></div></div>
-                </div>
-            </main>
-            </div>
-        </div>
-        </div>
+                          </div>
+
+                          </div></div>
+                          
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
@@ -1144,7 +1124,7 @@ return new bootstrap.Tooltip(tooltipTriggerEl)});</script>
            
         // Check if PDF document is loaded
         if (!pdfDoc) {
-          const url = 'https://promptfilings.com/wp-content/themes/astra/assets/forms/ss4.pdf';
+          const url = 'img/ss4.pdf';
           const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
           pdfDoc = await PDFDocument.load(existingPdfBytes);
         }
@@ -1975,5 +1955,178 @@ return new bootstrap.Tooltip(tooltipTriggerEl)});</script>
     .card-body label{font-size:14px; margin:10px 0}
         
         </style>
+
+
+
+
+
+<style>.exemptentitypopup{
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+  }
+  .popupcontent{
+    max-width: 30%;
+      text-align: center;
+      background: #eaeaea;
+      padding: 35px;
+      border-radius: 2px;
+      box-shadow: 0 0 #000;
+  }
+  div.reportinngcompanynotinitial{display: none;}
+  @media(max-width:991px){
+  .popupcontent{
+    max-width: 100%;
+  }}
+  .table thead th{color:#FFFFFF!important;font-size:18px!important}
+  .table td{color:#121212!important;font-size:14px!important}
+  .was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
+  .accordion-collapse{background-color: #00800011;}
+  .accordion-button{border-radius: 4px!important;}
+  .modal{z-index: 1051!important;}
+  
+
+/* Modal styles */
+.modal {
+display: none; /* Hidden by default */
+position: fixed;
+z-index: 1; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4); /* Black w/opacity */
+padding-top: 60px;
+}
+
+.modal-content {
+background-color: #fff;
+margin: 1% auto;
+padding: 0px!important;
+border: 1px solid #888;
+width: 100%;
+max-width: 800px;
+}
+.modal-content h2{background-color: #f3f7f8; padding:20px;}
+#modalContent{padding:20px}
+#modalContent .modal-field {margin-bottom:10px; font-weight: 600; color:#121212}
+#modalContent .modal-field strong{color:#121212;font-weight: 400;}
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+position: absolute;
+right: 20px;
+top: 0px;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+
+.exemptentitypopup{
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+.popupcontent{
+  max-width: 30%;
+    text-align: center;
+    background: #eaeaea;
+    padding: 35px;
+    border-radius: 2px;
+    box-shadow: 0 0 #000;
+}
+div.reportinngcompanynotinitial{display: none;}
+.h-100{height: inherit!important;}
+@media(max-width:991px){
+.popupcontent{
+  max-width: 100%;
+}}
+.table thead th{color:#FFFFFF!important;font-size:18px!important}
+.table td{color:#121212!important;font-size:14px!important}
+.was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
+.accordion-collapse{background-color: #00800011;}
+.accordion-button{border-radius: 4px!important;}
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+.bg-primary,.btn-primary{
+    background: #009aff!important;
+    border-color:#009aff;
+    color:#FFFFFF!important
+}
+.btn-secondary{
+    background: #00276e!important;
+    border-color:#00276e;
+    color:#FFFFFF!important
+}
+.btn-secondary:hover{
+    background: #009aff!important;
+    border-color:#009aff;
+    color:#FFFFFF
+}
+.clientlogin{
+    display:flex;align-items:center;justify-content:center;width: 100%;height: 100vh; position: relative;}
+.formbox{
+flex-flow:column;
+display:flex;align-items:center;justify-content:center;width: 30%;text-align:center;
+}
+.formbox input{margin:10px 0; width:100%}
+.footerform{
+    position:fixed;width:100%;text-align:center;background:#00276e;color:#FFFFFF;font-size:11px;bottom:0;left:0
+}
+@media(max-width:991px){
+    .formbox{width: 90%!important
+}
+
+.clientlogin:before{
+    content:'';
+    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
+    background-size: cover!important;
+    background-position: center center!important;
+}
+}
+.clientlogin:before{
+    content:'';
+    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
+    background-size: 120%;
+    background-position: bottom right;
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: .2
+}
+.card-body label{font-size:13px; margin:10px 0}
+.card-header h5{color:var(--bs-primary)}
+.thead-dark tr th:first-child {border-radius:calc(0.75rem - 1px) 0 0 0}
+.thead-dark tr th:last-child {border-radius:0 calc(0.75rem - 1px) 0 0 }
+ .card .card-header{background-color: #00276e!important; padding-bottom: 15px!important;}
+.card .card-header h5{color: #ffffff!important;}
+.card .thead-dark th{background: #121212!important;}    
+.modal{z-index: 1051!important;}
+.radiobox label{margin-right: 20px}
+.mid{font-weight:600!important;color:#121212!important}
+</style>
     </x-app-layout>
     
