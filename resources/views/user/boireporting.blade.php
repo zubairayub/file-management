@@ -416,6 +416,7 @@
                                                     </div>  
                                                 </div>
                                             </div>
+</div>
                                             <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                         <div class="card h-100 mt-4 exemptentityoption">
                                             <div class="card-header d-flex">
@@ -455,6 +456,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                            </div>
                                         <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                         <div class="card h-100 mt-5 exemptentityoption">
                                             <div class="card-header d-flex">
@@ -748,6 +750,7 @@
                                                      </div>
                                                 </div>
                                             </div>
+                                        </div>
                                         </div>
                                         <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                         <div class="card h-100 mt-5 exemptentityoption">
@@ -2090,6 +2093,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </div>
                                         <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                         <div class="card h-100 mt-5 exemptentityoption">
                                             <div class="card-header d-flex">
@@ -2183,6 +2187,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </div>
+                                        <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                           <div class="card h-100 mt-5 exemptentityoption">
                                             <div class="card-header d-flex">
                                                 <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Part II. Company Applicant(s) Information</h5>
@@ -2258,13 +2264,11 @@
                                                     </div> 
                                                     </div>
   
-  
-  
-  
-  
                                                 </div>
                                             </div>
                                         </div>
+                                        </div>
+                                        <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                         <div class="card h-100 mt-5 exemptentityoption">
                                             <div class="card-header d-flex">
                                                 <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Address Type</h5>
@@ -2364,6 +2368,8 @@
                                                 </div>
                                                     </div>
                                                 </div>
+                                                </div>
+                                                <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                         <div class="card h-100 mt-5 exemptentityoption" >
                                             <div class="card-header d-flex">
                                                 <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Form of identification and issuing juridiction</h5>
@@ -2468,6 +2474,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                          </div>
+                                          <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                           <div class="card h-100 mt-5 exemptentityoption">
                                             <div class="card-header d-flex">
                                                 <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Part III. Beneficial Owner Information</h5>
@@ -3711,6 +3719,8 @@
                                                 </div>
                                                 </div>
                                                 </div>
+                                          </div>
+                                          <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                           <div class="card h-100 mt-5 ordersummarybox" >
                                             <div class="card-header d-flex">
                                                 <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Order Summary - Fee Information</h5>
@@ -3730,8 +3740,9 @@
                                                                     <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email">
                                                             </div>
                                                         </div>
+                                                    </div>
 
-
+                                                        <div class="col-lg-12 pt-5 pb-5">
                                                     <div class="alert alert-primary mt-5 d-none">
                                                             <h4>You'll Pay: <span id="totalpricing"
                                                                     name="totalpricing">$154.315</span></h4>
@@ -3863,9 +3874,20 @@
                                                             </tr>
                                                             </tbody>
                                                         </table>
-                                                        <div class="col-12"><small class="my-5 text-left d-block">Important Note: If any incorrect information is provided during the application process, you will need to restart and resubmit the entire application. It is essential to review all details carefully before submission to avoid any delays or complications.</small></div>
                                                     </div>
-                                                    <div class="col-lg-12 mt-3 mb-2">
+                                                        <div class="col-12"><small class="mt-5 text-left d-block">Important Note: If any incorrect information is provided during the application process, you will need to restart and resubmit the entire application. It is essential to review all details carefully before submission to avoid any delays or complications.</small></div>
+                                                        <div class="col-lg-12 d-flex align-items-center">
+                                                                <input type="checkbox" id="terms" name="terms"
+                                                                    class="form-check-input me-2 " required="">
+                                                                <label for="terms">I have read the <a
+                                                                        href="https://promptfilings.com/terms-of-service/"
+                                                                        target="_blank">terms of
+                                                                        services</a> and <a
+                                                                        href="https://promptfilings.com/privacy-policy/"
+                                                                        target="_blank">privacy
+                                                                        policy</a></label>
+                                                            </div> 
+                                                    <div class="col-lg-12 mt-5 mb-5">
                                                           <button type="button" class="btn btn-primary" id="reviewapplicationn">Review Your Application</button>  
                                                                 <button type="submit" class="btn btn-success" 
                                                                     data-package-id="9" 
@@ -3874,15 +3896,19 @@
                                                                     id="boiformvalidate">Pay Now to Submit
                                                                     Application</button>
                                                             </div>
+                                                            <div class="my-2 col-md-12 p-0"><img
+                                                                    src="https://promptfilings.com/wp-content/themes/astra/assets/authnet/authorizemerchant.jpg"
+                                                                    alt="Authorize.net Merchant">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <div class="col-md-12 mt-3"><small style="font-size:13px">The information provided by PromptFilings.com for BOI (Beneficial Ownership Information) Reporting is intended for general informational purposes only and should not be construed as legal, financial, or tax advice. While we strive to ensure the accuracy and reliability of the information presented, PromptFilings.com cannot guarantee the completeness or timeliness of the content. Users are encouraged to consult with professional legal or financial advisors regarding their specific BOI reporting obligations and compliance requirements. PromptFilings.com assumes no liability for any errors, omissions, or actions taken based on the information provided.</small></div> 
-                                </form>
-                            </div>
-                        </div>
+                                          </form>
+                                        </div></div>
+                                        <div class="col-md-12 mt-3 p-5"><small style="font-size:13px">The information provided by PromptFilings.com for BOI (Beneficial Ownership Information) Reporting is intended for general informational purposes only and should not be construed as legal, financial, or tax advice. While we strive to ensure the accuracy and reliability of the information presented, PromptFilings.com cannot guarantee the completeness or timeliness of the content. Users are encouraged to consult with professional legal or financial advisors regarding their specific BOI reporting obligations and compliance requirements. PromptFilings.com assumes no liability for any errors, omissions, or actions taken based on the information provided.</small></div> 
+                                        
+                         </div>
                     </div>
                      <div class="formpreview column col-12 d-none">
                         <h4>Pleaese Review Your BOI Reporting Application</h4>
@@ -3893,11 +3919,8 @@
                         <img src="" id="residentialimageidentificationimg" alt="image">
                         <img src="" id="imageidentificationimg" alt="image">
                     </div>
-                </div>
-            </main>
-        </div>
-    </div>
-  </div>
+               
+    
   <div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -3975,36 +3998,7 @@
     <p class="my-4">Select this box to clear and disable all fields related to the Reporting Company, Company Applicant, and Beneficial Owner.</p>
     <button type="button" class="btn btn-primary" id="exemptentitypopupbbtn">Okay</button>
   </div>
-  </div>
-  <style>.exemptentitypopup{
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-  }
-  .popupcontent{
-    max-width: 30%;
-      text-align: center;
-      background: #eaeaea;
-      padding: 35px;
-      border-radius: 2px;
-      box-shadow: 0 0 #000;
-  }
-  div.reportinngcompanynotinitial{display: none;}
-  @media(max-width:991px){
-  .popupcontent{
-    max-width: 100%;
-  }}
-  .table thead th{color:#FFFFFF!important;font-size:18px!important}
-  .table td{color:#121212!important;font-size:14px!important}
-  .was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
-  .accordion-collapse{background-color: #00800011;}
-  .accordion-button{border-radius: 4px!important;}
-  </style> 
+  </div> 
 <div id="reviewModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -4012,52 +4006,7 @@
     <div id="modalContent"></div> <!-- Form data will be injected here -->
     <button id="confirmBtn" class="btn btn-primary m-4 ">Close</button>
   </div>
-</div>
-<style>
-    /* Modal styles */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed;
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4); /* Black w/opacity */
-  padding-top: 60px;
-}
-
-.modal-content {
-  background-color: #fff;
-  margin: 1% auto;
-  padding: 0px!important;
-  border: 1px solid #888;
-  width: 100%;
-  max-width: 800px;
-}
-.modal-content h2{background-color: #f3f7f8; padding:20px;}
-#modalContent{padding:20px}
-#modalContent .modal-field {margin-bottom:10px; font-weight: 600; color:#121212}
-#modalContent .modal-field strong{color:#121212;font-weight: 400;}
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  position: absolute;
-    right: 20px;
-    top: 0px;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-</style>
+</div> 
 <script>
 document.getElementById('reviewapplicationn').addEventListener('click', function(event) {
 
@@ -4156,65 +4105,7 @@ document.getElementById('confirmBtn').addEventListener('click', function() {
     
     // You can add any additional logic here for form submission or processing
 });
-
 </script>
-<style>@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
-@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
-.bg-primary,.btn-primary{
-    background: #009aff!important;
-    border-color:#009aff;
-    color:#FFFFFF!important
-}
-.btn-secondary{
-    background: #00276e!important;
-    border-color:#00276e;
-    color:#FFFFFF!important
-}
-.btn-secondary:hover{
-    background: #009aff!important;
-    border-color:#009aff;
-    color:#FFFFFF
-}
-.clientlogin{
-    display:flex;align-items:center;justify-content:center;width: 100%;height: 100vh; position: relative;}
-.formbox{
-flex-flow:column;
-display:flex;align-items:center;justify-content:center;width: 30%;text-align:center;
-}
-.formbox input{margin:10px 0; width:100%}
-.footerform{
-    position:fixed;width:100%;text-align:center;background:#00276e;color:#FFFFFF;font-size:11px;bottom:0;left:0
-}
-@media(max-width:991px){
-    .formbox{width: 90%!important
-}
-
-.clientlogin:before{
-    content:'';
-    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
-    background-size: cover!important;
-    background-position: center center!important;
-}
-}
-.clientlogin:before{
-    content:'';
-    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
-    background-size: 120%;
-    background-position: bottom right;
-    position: fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: .2
-}
-.card-body label{font-size:14px; margin:10px 0}
-.card-header h5{color:var(--bs-primary)}
-    
-    </style>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
    <script defer>var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -5958,4 +5849,146 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     </script>
 
+<style>
+    /* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4); /* Black w/opacity */
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 1% auto;
+  padding: 0px!important;
+  border: 1px solid #888;
+  width: 100%;
+  max-width: 800px;
+}
+.modal-content h2{background-color: #f3f7f8; padding:20px;}
+#modalContent{padding:20px}
+#modalContent .modal-field {margin-bottom:10px; font-weight: 600; color:#121212}
+#modalContent .modal-field strong{color:#121212;font-weight: 400;}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+    right: 20px;
+    top: 0px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.card .card-header{background-color: #00276e!important; padding-bottom: 15px!important;}
+.card .card-header h5{color: #ffffff!important;}
+
+
+.exemptentitypopup{
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+.popupcontent{
+  max-width: 30%;
+    text-align: center;
+    background: #eaeaea;
+    padding: 35px;
+    border-radius: 2px;
+    box-shadow: 0 0 #000;
+}
+div.reportinngcompanynotinitial{display: none;}
+@media(max-width:991px){
+.popupcontent{
+  max-width: 100%;
+}}
+.table thead th{color:#FFFFFF!important;font-size:18px!important}
+.table td{color:#121212!important;font-size:14px!important}
+.was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
+.accordion-collapse{background-color: #00800011;}
+.accordion-button{border-radius: 4px!important;}
+
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+.bg-primary,.btn-primary{
+    background: #009aff!important;
+    border-color:#009aff;
+    color:#FFFFFF!important
+}
+.btn-secondary{
+    background: #00276e!important;
+    border-color:#00276e;
+    color:#FFFFFF!important
+}
+.btn-secondary:hover{
+    background: #009aff!important;
+    border-color:#009aff;
+    color:#FFFFFF
+}
+.clientlogin{
+    display:flex;align-items:center;justify-content:center;width: 100%;height: 100vh; position: relative;}
+.formbox{
+flex-flow:column;
+display:flex;align-items:center;justify-content:center;width: 30%;text-align:center;
+}
+.formbox input{margin:10px 0; width:100%}
+.footerform{
+    position:fixed;width:100%;text-align:center;background:#00276e;color:#FFFFFF;font-size:11px;bottom:0;left:0
+}
+@media(max-width:991px){
+    .formbox{width: 90%!important
+}
+
+.clientlogin:before{
+    content:'';
+    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
+    background-size: cover!important;
+    background-position: center center!important;
+}
+}
+.clientlogin:before{
+    content:'';
+    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
+    background-size: 120%;
+    background-position: bottom right;
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: .2
+}
+
+.card-body label{font-size:13px; margin:10px 0}
+.card-header h5{color:var(--bs-primary)}
+.thead-dark tr th:first-child {border-radius:calc(0.75rem - 1px) 0 0 0}
+.thead-dark tr th:last-child {border-radius:0 calc(0.75rem - 1px) 0 0 }
+ .card .card-header{background-color: #00276e!important; padding-bottom: 15px!important;}
+.card .card-header h5{color: #ffffff!important;}
+.card .thead-dark th{background: #121212!important;}    
+.modal{z-index: 1051!important;}
+.radiobox label{margin-right: 20px}
+.mid{font-weight:600!important;color:#121212!important}
+    </style>
 </x-app-layout>
