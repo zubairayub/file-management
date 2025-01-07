@@ -5205,13 +5205,42 @@ async function printPdfein() {
 }
 
 
+// async function uploadPDF(pdfBlob) {
+//     const formData = new FormData();
+//     formData.append('pdf', pdfBlob, 'generated-document.pdf');
+
+//     try {
+//         const response = await fetch('/upload-pdf', {
+//             method: 'POST',
+//             body: formData,
+//         });
+
+//         if (response.ok) {
+//             const result = await response.json();
+//             console.log('PDF uploaded successfully:', result);
+//             alert('PDF saved on server successfully!');
+//         } else {
+//             console.error('Failed to upload PDF:', response.statusText);
+//             alert('Failed to save PDF on server.');
+//         }
+//     } catch (error) {
+//         console.error('Error uploading PDF:', error);
+//         alert('Error saving PDF on server.');
+//     }
+// }
 async function uploadPDF(pdfBlob) {
     const formData = new FormData();
     formData.append('pdf', pdfBlob, 'generated-document.pdf');
 
+    // Get CSRF token from meta tag
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
     try {
         const response = await fetch('/upload-pdf', {
             method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken, // Add CSRF token to headers
+            },
             body: formData,
         });
 
@@ -5228,6 +5257,7 @@ async function uploadPDF(pdfBlob) {
         alert('Error saving PDF on server.');
     }
 }
+
 
 
 /*

@@ -15,7 +15,7 @@ class PDFController extends Controller
 
         // Store the file on the server
         $filePath = $request->file('pdf')->store('pdfs', 'public');
-
+       
         return response()->json([
             'message' => 'PDF uploaded successfully!',
             'file_path' => Storage::url($filePath),
