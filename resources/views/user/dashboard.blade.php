@@ -203,6 +203,7 @@
                                     <small class="text-primary">
     @php
         try {
+<<<<<<< Updated upstream
             // Attempt to retrieve the file size
             $fileSize = Storage::size($file->path); // Get file size in bytes
 
@@ -221,6 +222,31 @@
             // Handle the exception
             $size = 'Unable to retrieve file size';
             \Log::error('Error retrieving file size: ' . $e->getMessage()); // Log the error
+=======
+            // Check if file exists
+            if (Storage::exists($file->path)) {
+                // Get file size in bytes
+                $fileSize = Storage::size($file->path);
+
+                // Determine the size format
+                if ($fileSize < 1024) {
+                    $size = number_format($fileSize, 2) . ' B'; // Bytes
+                } elseif ($fileSize < 1048576) {
+                    $size = number_format($fileSize / 1024, 2) . ' KB'; // Kilobytes
+                } elseif ($fileSize < 1073741824) {
+                    $size = number_format($fileSize / 1024 / 1024, 2) . ' MB'; // Megabytes
+                } elseif ($fileSize < 1099511627776) {
+                    $size = number_format($fileSize / 1024 / 1024 / 1024, 2) . ' GB'; // Gigabytes
+                } else {
+                    $size = number_format($fileSize / 1024 / 1024 / 1024 / 1024, 2) . ' TB'; // Terabytes
+                }
+            } else {
+                $size = 'File not found';
+            }
+        } catch (Exception $e) {
+            // Handle exceptions and set a default message
+            $size = 'Error retrieving file size';
+>>>>>>> Stashed changes
         }
     @endphp
     {{ $size }}
