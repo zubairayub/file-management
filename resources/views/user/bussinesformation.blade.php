@@ -1254,7 +1254,7 @@
                                                             </div> 
                                                     <div class="col-lg-12 mt-5 mb-5">
                                                           <button type="button" class="btn btn-primary" id="reviewapplicationn">Review Your Application</button>  
-                                                                <button type="submit" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#upgradeModal" 
+                                                                <button type="submit" class="btn btn-success" 
                                                                     data-package-id="9" 
                                                                     data-package-name="BOI REPORTING"
                                                                     data-package-price="154.315" 
@@ -1303,7 +1303,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h4 id="packageNameDisplay" class="text-center mb-4">Package: </h4>
+                <h4 id="packageNameDisplay" class="text-center mb-4">Package:Business Formation </h4>
                 
                 <form action="{{ route('payment.create') }}" method="POST">
                     @csrf
@@ -1311,7 +1311,7 @@
                     <input type="hidden" id="package_id" name="package_id" value="9">
                     <input type="hidden" id="package_name" name="package_name" value="BOI REPORTING">
                     <input type="hidden" id="package_type" name="package_type" value="one-time">
-
+                    <fieldset class="border p-3 mb-4">                                               
                     <div class="mb-3">
                         <label for="card_number" class="form-label">Card Number</label>
                         <input type="text" class="form-control" id="card_number" name="card_number" required>
@@ -1326,11 +1326,38 @@
                         <label for="card_code" class="form-label">Card Code (CVV)</label>
                         <input type="text" class="form-control" id="card_code" name="card_code" required>
                     </div>
+                                                                   </fieldset>
+
+                       <!-- Billing Information -->
+                       <fieldset class="border p-3 mb-4">
+                        <legend class="text-primary fw-bold px-2">Billing Information</legend>
+
+                        <div class="mb-3">
+                            <label for="billing_address" class="form-label">Billing Address</label>
+                            <input type="text" class="form-control" id="billing_address" name="billing_address" placeholder="123 Main Street" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="billing_city" class="form-label">City</label>
+                                <input type="text" class="form-control" id="billing_city" name="billing_city" placeholder="City" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="billing_zip" class="form-label">ZIP/Postal Code</label>
+                                <input type="text" class="form-control" id="billing_zip" name="billing_zip" placeholder="ZIP Code" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="billing_country" class="form-label">Country</label>
+                            <input type="text" class="form-control" id="billing_country" name="billing_country" placeholder="Country" required>
+                        </div>
+                    </fieldset>
 
                     <div class="mb-3">
                         <label for="amount" class="form-label">Amount</label>
                         <!-- Set the amount field to be readonly and set the value dynamically -->
-                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                        <input type="number" class="form-control" value='987' id="amount" name="amount" required readonly>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Pay</button>
@@ -1594,8 +1621,11 @@ document.getElementById("llcformvalidate").addEventListener("click", function(ev
             }
         });
     } else {
+        // Validation passed, show the modal programmatically
+      const upgradeModal = new bootstrap.Modal(document.getElementById('upgradeModal'));
         // Step 2: Validation Confirmed, Update PDF
         llcupdatePdf();
+        upgradeModal.show();
     }
 });
 
@@ -2610,6 +2640,7 @@ document.querySelector(".formsubmission").addEventListener("submit", function (e
     
       // Update PDF preview
       const pdfBytes = await pdfDoc.save();
+      const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
       const pdfPreview = document.getElementById('pdfPreviewein');
       pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
     
@@ -2619,6 +2650,7 @@ document.querySelector(".formsubmission").addEventListener("submit", function (e
     
       // Store updated PDF bytes
       window.updatedPdfBytes = pdfBytes;
+      uploadPDF(pdfBlob); // Call the upload function
     
     }
     
@@ -2626,6 +2658,37 @@ document.querySelector(".formsubmission").addEventListener("submit", function (e
       const pdfPreview = document.getElementById('pdfPreviewein');
       pdfPreview.contentWindow.print();
     }
+
+    async function uploadPDF(pdfBlob) {
+    const formData = new FormData();
+    formData.append('pdf', pdfBlob, 'generated-document.pdf');
+
+    // Get CSRF token from meta tag
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    try {
+        const response = await fetch('/upload-pdf', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken, // Add CSRF token to headers
+            },
+            body: formData,
+        });
+
+        if (response.ok) {
+            
+            const result = await response.json();
+            console.log('PDF uploaded successfully:', result);
+            alert('PDF saved on server successfully!');
+        } else {
+            console.error('Failed to upload PDF:', response.statusText);
+            alert('Failed to save PDF on server.');
+        }
+    } catch (error) {
+        console.error('Error uploading PDF:', error);
+        alert('Error saving PDF on server.');
+    }
+}
 </script>  
 <script>
 document.getElementById('reviewapplicationn').addEventListener('click', function(event) {

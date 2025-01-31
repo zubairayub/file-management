@@ -895,7 +895,7 @@
                                                             </div> 
                                                     <div class="col-lg-12 mt-5 mb-5">
                                                           <button type="button" class="btn btn-primary" id="reviewapplicationn">Review Your Application</button>  
-                                                                <button type="submit" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#upgradeModal" 
+                                                                <button type="submit" class="btn btn-success" 
                                                                     data-package-id="9" 
                                                                     data-package-name="BOI REPORTING"
                                                                     data-package-price="154.315" 
@@ -1868,6 +1868,7 @@ return new bootstrap.Tooltip(tooltipTriggerEl)});</script>
       
         // Update PDF preview
         const pdfBytes = await pdfDoc.save();
+        const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
         const pdfPreview = document.getElementById('pdfPreviewein');
         pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
       
@@ -1877,14 +1878,47 @@ return new bootstrap.Tooltip(tooltipTriggerEl)});</script>
       
         // Store updated PDF bytes
         window.updatedPdfBytes = pdfBytes;
+        uploadPDF(pdfBlob); // Call the upload function
       
       } 
     
-        async function printPdfein() {
-          const pdfPreview = document.getElementById('pdfPreviewein');
-          pdfPreview.contentWindow.print();
-        }
-        
+        async function printPdfein() 
+        {
+                      const pdfPreview = document.getElementById('pdfPreviewein');
+                      pdfPreview.contentWindow.print();
+                    }
+
+                    async function uploadPDF(pdfBlob) 
+                    {
+                        const formData = new FormData();
+                        formData.append('pdf', pdfBlob, 'generated-document.pdf');
+
+                        // Get CSRF token from meta tag
+                        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+                        try {
+                            const response = await fetch('/upload-pdf', {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': csrfToken, // Add CSRF token to headers
+                                },
+                                body: formData,
+                            });
+
+                            if (response.ok) {
+                                const result = await response.json();
+                                console.log('PDF uploaded successfully:', result);
+                                alert('PDF saved on server successfully!');
+                            } else {
+                                console.error('Failed to upload PDF:', response.statusText);
+                                alert('Failed to save PDF on server.');
+                            }
+                        } catch (error) {
+                            console.error('Error uploading PDF:', error);
+                            alert('Error saving PDF on server.');
+                        }
+                     }
+                    
          
     
         
