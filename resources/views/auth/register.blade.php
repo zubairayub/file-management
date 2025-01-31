@@ -16,10 +16,10 @@
                                     <!--Logo start-->
                                     <div class="logo-main">
                                         <div class="logo-normal mb-2">
-                                            <img src="https://promptfilings.com/wp-content/uploads/2024/03/logo-h-1.png" alt="Logo" width="170">
+                                            <img src="/img/logo-h-1.png" alt="Logo" width="170">
                                         </div>
                                         <div class="logo-mini">
-                                            <img src="https://promptfilings.com/wp-content/uploads/2024/03/logo-h-1.png" alt="Logo" width="200">
+                                            <img src="/img/logo-h-1.png" alt="Logo" width="200">
                                         </div>
                                     </div>
                                     <!--logo End-->
@@ -60,7 +60,7 @@
         </div>
 
         <!-- First Name -->
-        <div class="col-lg-10">
+        <div class="col-lg-5">
             <div class="form-group">
                 <label for="first_name" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="first_name" name="name" :value="old('name')" required>
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Last Name -->
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <div class="form-group">
                 <label for="last_name" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" :value="old('last_name')" required>
@@ -119,8 +119,8 @@
 
         <!-- Terms & Conditions -->
         <div class="col-lg-12 d-flex justify-content-center">
-            <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input bg-primary" id="customCheck1" required>
+            <div class="form-check mb-3 d-flex align-items-center justify-content-center">
+                <input type="checkbox" class="form-check-input me-2" id="customCheck1" required>
                 <label class="form-check-label" for="customCheck1">I agree with the terms of use</label>
             </div>
         </div>
@@ -140,7 +140,7 @@
                         </div>
                      </div>
                      <div class="sign-bg sign-bg-right">
-                         <img src="https://promptfilings.com/wp-content/uploads/2024/04/symbol-300x300.png" style="position: fixed; right:-100px;opacity: .1;transform: rotate(-45deg);" width="300" alt="">
+                         <img src="/img/pf-symbol.png" style="position: fixed; right:-100px;opacity: .1;transform: rotate(-45deg);" width="300" alt="">
                      </div>
                   </div>
                </div>

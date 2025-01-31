@@ -153,7 +153,7 @@
       <div class="card">
         <div class="card-header">
             <div class="d-flex flex-wrap justify-content-between">
-                <h4 class="me-2 mt-2">Business Tax Prep</h4> 
+                <h4 class="">Business Tax Prep</h4> 
             </div>
         </div>
         <div class="card-body">
@@ -175,7 +175,7 @@
 <div class="card">
     <div class="card-header">
         <div class="d-flex flex-wrap justify-content-between">
-            <h4 class="me-2 mt-2">Personal Tax Prep</h4> 
+            <h4 class="">Personal Tax Prep</h4> 
         </div>
     </div>
     <div class="card-body">
@@ -257,10 +257,10 @@
             <div class="card">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="{{ asset('img/upgradestorage.webp') }}" class="img-fluid w-75" alt="18" loading="lazy">
+                                        <img src="{{ asset('img/upgradestorage.jpg') }}" class="img-fluid w-100 mb-3" alt="Package" loading="lazy">
                                         <h5 class="mb-3">Streamline your business with our expert Bookkeeping, Payroll, Tax, and Business Formation Services.</h5>
                                         <div class="d-flex justify-content-center ms-2">
-                                            <a href="{{ route('quota.exceeded') }}"><button type="button" class="btn btn-info">Buy it now</button></a>
+                                            <a href="{{ route('quota.exceeded') }}"><button type="button" class="btn btn-warning">Buy it now</button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +277,7 @@
                 <div class="card engagebox" style="background: url(https://images.pexels.com/photos/8296981/pexels-photo-8296981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat 0 0; background-size: cover">
                     <div class="card-header" style="z-index: 9;">
                         <div class="d-flex flex-wrap justify-content-between">
-                            <h4 class="me-2 mt-2 text-white text-shadow">Full-Service Bookkeeping for your business</h4> 
+                            <h4 class="text-white text-shadow">Full-Service Bookkeeping for your business</h4> 
                         </div>
                     </div>
                     <div class="card-body">

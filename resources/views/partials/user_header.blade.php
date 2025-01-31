@@ -7,10 +7,10 @@
                  <!--Logo start-->
                  <div class="logo-main">
                      <div class="logo-normal">
-                        <img width="30" src="https://promptfilings.com/wp-content/uploads/2024/04/symbol-300x300.png"/>
+                        <img width="30" src="/img/pf-symbol.png"/>
                      </div>
                      <div class="logo-mini">
-                     <img width="30" src="https://promptfilings.com/wp-content/uploads/2024/04/symbol-300x300.png"/>
+                     <img width="30" src="/img/pf-symbol.png"/>
                      </div>
                  </div>
                  <!--logo End-->

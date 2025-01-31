@@ -15,10 +15,10 @@
                                     <!--Logo start-->
                                     <div class="logo-main">
                                         <div class="logo-normal mb-2">
-                                            <img src="https://promptfilings.com/wp-content/uploads/2024/03/logo-h-1.png" alt="Logo" width="170">
+                                            <img src="/img/logo-h-1.png" alt="Logo" width="170">
                                         </div>
                                         <div class="logo-mini">
-                                            <img src="https://promptfilings.com/wp-content/uploads/2024/03/logo-h-1.png" alt="Logo" width="200">
+                                            <img src="/img/logo-h-1.png" alt="Logo" width="200">
                                         </div>
                                     </div>
                                     <!--logo End-->
@@ -45,8 +45,8 @@
                                             </div>
                                        </div>
                                        <div class="col-lg-12 d-flex justify-content-between">
-                                          <div class="form-check mb-3">
-                                             <input type="checkbox" class="form-check-input" id="customCheck1">
+                                          <div class="form-check mb-3 d-flex align-items-center justify-content-between">
+                                             <input type="checkbox" class="form-check-input me-2" id="customCheck1">
                                              <label class="form-check-label" for="customCheck1">Remember Me</label>
                                           </div>
                                           <a href="{{ route('password.request') }}">Forgot Password?</a>
@@ -65,7 +65,7 @@
                         </div>
                      </div>
                      <div class="sign-bg sign-bg-right">
-                         <img src="https://promptfilings.com/wp-content/uploads/2024/04/symbol-300x300.png" style="position: fixed; right:-100px;opacity: .1;transform: rotate(-45deg);" width="300" alt="">
+                         <img src="/img/pf-symbol.png" style="position: fixed; right:-100px;opacity: .1;transform: rotate(-45deg);" width="300" alt="">
                      </div>
                   </div>
                </div>

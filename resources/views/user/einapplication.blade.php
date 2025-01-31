@@ -15,8 +15,7 @@
                                         </div>
                                         </div>
                                         </div>
-    <!--action="https://promptfilings.com/wp-content/themes/astra/assets/authnet/payment-ein-process.php"--> 
-                                          <form id="einForm" class="row g-3 formsubmission needs-validation" novalidate="" enctype="application/x-www-form-urlencoded">
+                                           <form id="einForm" class="row g-3 formsubmission needs-validation" novalidate="" enctype="application/x-www-form-urlencoded">
                                             <div class="col-md-12 col-xl-12 mb-3 mb-md-4"> 
                                              <div class="card h-100">
                                                 <div class="card-header d-flex">
@@ -875,7 +874,7 @@
                                                                 </th>
                                                                 <th>
                                                                     <h2 class="mb-3"><span
-                                                                            id="totalpricing2">$73.49</span></h2>
+                                                                            id="totalpricing2">$309.57</span></h2>
                                                                 </th>
                                                             </tr>
                                                             </tbody>
@@ -897,9 +896,9 @@
                                                           <button type="button" class="btn btn-primary" id="reviewapplicationn">Review Your Application</button>  
                                                                 <button type="submit" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#upgradeModal" 
                                                                     data-package-id="9" 
-                                                                    data-package-name="BOI REPORTING"
-                                                                    data-package-price="154.315" 
-                                                                    id="llcformvalidate">Pay Now to Submit
+                                                                    data-package-name="EIN Application"
+                                                                    data-package-price="309.57" 
+                                                                    id="einformvalidate">Pay Now to Submit
                                                                     Application</button>
                                                             </div>
                                                             <div class="my-2 col-md-12 p-0"><img
@@ -916,13 +915,187 @@
                                               </div></div></div>
                         
                         <div class="formpreview column col-12 d-none" >
-                             <iframe class="pdf-preview" id="pdfPreviewein" src="https://promptfilings.com/wp-content/themes/astra/assets/forms/ss4.pdf" type="application/pdf" width="100%" height="600">
+                             <iframe class="pdf-preview" id="pdfPreviewein" src="/img/ss4.pdf" type="application/pdf" width="100%" height="600">
                             </iframe>
                           </div>
 
                           </div></div>
                           
+                          <div class="modal fade formarea" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-body">
+            <div class="d-flex align-items-start justify-content-start">
 
+            <div class="col-md-5 cardside">
+                     <h4  class="payamount" id="amount" name="amount">309.57</h4>
+                    <p><small>3.5% plus 10c<br>Pay with Credit/Debit Card (a non-refundable portal processing fee applies)</small></p>
+                    <div class="d-table bg-white p-3 text-center secureimg">
+                    <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
+                    </div>
+                    </div>
+                <div class="formareacontent col-md-7">
+                    <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
+                    <div class="packgename">Service: EIN Application</div>
+                    @csrf
+                    <!-- Hidden Field for Package ID -->
+                    <input type="hidden" id="package_id" name="package_id" value="9">
+                    <input type="hidden" id="package_name" name="package_name" value="EIN Application">
+                    <input type="hidden" id="package_type" name="package_type" value="one-time">
+                    <div class="mb-3 col-md-12">
+                        <label for="card_name" class="form-label">Card Holder Name</label>
+                        <input type="text" class="form-control" id="card_name" name="card_name" required>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required maxlength="16">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="expiry_date" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="card_code" class="form-label">Card Code (CVV)</label>
+                        <input type="text" class="form-control" id="card_code" name="card_code" required maxlength="3">
+                    </div>
+                    <hr>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="card_address" name="card_address" required>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="card_city" name="card_city" required>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="card_state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="card_state" name="card_state" required>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="card_zipcode" class="form-label">Zipcode</label>
+                        <input type="text" class="form-control" id="card_zipcode" name="card_zipcode" required>
+                    </div>
+
+                    <div class="col-md-12">
+                <button type="submit" class="btn btn-primary w-100">Pay Now!</button>
+                </div>
+                
+                </div> 
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="reviewModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Review Application Details</h2>
+    <div id="modalContent"></div> <!-- Form data will be injected here -->
+    <button id="confirmBtn" class="btn btn-primary m-4 ">Proceed to submit</button>
+  </div>
+</div> 
+<script>
+document.getElementById('reviewapplicationn').addEventListener('click', function(event) {
+
+// Get the form and modal elements
+const modal = document.getElementById('reviewModal');
+const modalContent = document.getElementById('modalContent');
+
+// Get all form fields except those with the id="authpricing"
+const formFields = document.querySelectorAll("#einForm input:not(#confidetails input):not(#authpricing), #einForm select:not([disabled]):not(#authpricing), #einForm textarea:not(#confidetails textarea):not(#authpricing)");
+
+var formein = document.getElementById("einForm");
+
+// Check if the form is valid
+if (formein.checkValidity() === false) {
+    event.stopPropagation(); // Prevent further actions if form is not valid
+    alert('Please make sure to fill in all required fields.');
+    formein.classList.add('was-validated');
+
+    // Handle radio button validation
+    var radios = formein.querySelectorAll('input[type="radio"]');
+    var radioValid = false;
+    radios.forEach(function (radio) {
+        if (radio.checked) {
+            radioValid = true;
+        }
+    });
+
+    // Don't show modal if form is not valid
+    return; // Exit the function early to prevent the modal from being displayed
+} else {
+
+    // If form is valid, generate the modal content
+    let modalHtml = ""; // To hold the HTML content for the modal
+
+    formFields.forEach(field => {
+        let label = field.getAttribute("name") || field.getAttribute("id");
+        let value = "";
+        
+        // Capitalize the label for display
+        if (label) {
+            label = label.charAt(0).toUpperCase() + label.slice(1);
+        }
+
+        // Handle different types of inputs
+        if (field.type === "checkbox" || field.type === "radio") {
+            if (field.checked) {
+                value = field.value;
+            }
+        } else if (field.type === "file") {
+            if (field.files.length > 0) {
+                value = `File attached: ${field.files[0].name}`;
+            }
+        } else if (field.type === "select-one") {
+            value = field.options[field.selectedIndex].text;
+        } else {
+            value = field.value;
+        }
+
+        // Add label and value to the modal content
+        if (value) {
+            modalHtml += `
+                <div class="modal-field">
+                    <strong>${label}:</strong> ${value}
+                </div>
+            `;
+        }
+    });
+
+    // Inject the HTML into the modal
+    modalContent.innerHTML = modalHtml;
+
+    // Display the modal
+    modal.style.display = "block";
+}
+});
+
+
+// Close the modal when the user clicks on <span> (x)
+document.querySelector('.close').addEventListener('click', function() {
+    const modal = document.getElementById('reviewModal');
+    modal.style.display = "none";
+});
+
+// Close the modal if the user clicks anywhere outside the modal
+window.onclick = function(event) {
+    const modal = document.getElementById('reviewModal');
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};
+
+// Confirm button event (optional, if you want to process the form data after confirmation)
+document.getElementById('confirmBtn').addEventListener('click', function() {
+    const modal = document.getElementById('reviewModal');
+    modal.style.display = "none"; // Close the modal after confirmation
+    
+    // You can add any additional logic here for form submission or processing
+});
+</script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
@@ -987,56 +1160,54 @@ return new bootstrap.Tooltip(tooltipTriggerEl)});</script>
                 observer.observe(summaryBox);
             }
             //Render pdf
-            // Step 1: Validate Form
-    document.getElementById("einformvalidate").addEventListener("click", function(event) {
-        var formein = document.getElementById("einForm");
-        if (formein.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation(); 
-            formein.classList.add('was-validated');
-            // Handle radio button validation
-            var radios = formein.querySelectorAll('input[type="radio"]');
-            var radioValid = false;
-            radios.forEach(function (radio) {
-                if (radio.checked) {
-                    radioValid = true;
-                }
-            });
-        } else {
-            // Step 2: Validation Confirmed, Update PDF
-            einupdatePdf();
-            setTimeout(() => {
-                loadingscreen.style.display = 'flex';
-                var blobUrl = document.getElementById('pdfPreviewein').getAttribute('src');
-    
-                // Fetch PDF content as Blob
-                fetch(blobUrl)
-                    .then(function(response) {
-                        return response.blob();
-                    })
-                    .then(function(blob) {
-                        // Convert Blob to data URL
-                        var reader = new FileReader();
-                        reader.readAsDataURL(blob);
-                        reader.onloadend = function() {
-                            var pdfDataUrl = reader.result;
-    
-                            // Perform AJAX request to send the PDF via email
-                            //var xhr = new XMLHttpRequest();
-                            //xhr.open('POST', custom_script_vars.ajax_url, true);
-                            //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    
-                            // Send the data in the format required by the server
-                            //var params = 'action=einemail_pdf&pdfDataUrl=' + encodeURIComponent(pdfDataUrl);
-                            //xhr.send(params);
-                        };
-                    })
-                    .catch(function(error) {
-                        console.error('Error fetching PDF content:', error);
-                    });
-            }, 2000); // Delay for loading screen
-        }
-    });
+
+
+// Step 1: Validate Form
+document.getElementById("einformvalidate").addEventListener("click", function(event) {
+    var formein = document.getElementById("einForm");
+    if (formein.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation(); 
+        alert('Please make sure to fill in all required fields.');
+        formein.classList.add('was-validated');
+        // Handle radio button validation
+        var radios = formein.querySelectorAll('input[type="radio"]');
+        var radioValid = false;
+        radios.forEach(function (radio) {
+            if (radio.checked) {
+                radioValid = true;
+            }
+        });
+    } else {
+        // Step 2: Validation Confirmed, Update PDF
+        einupdatePdf();
+      }
+});
+
+
+
+document.querySelector(".formsubmission").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    var formData = new FormData(this); 
+
+    // Start processing the PDF generation
+    var blobUrl = document.getElementById('pdfPreviewein').getAttribute('src');
+
+    // Fetch PDF content as Blob
+    fetch(blobUrl)
+        .then(function (response) {
+            return response.blob();
+        })
+        .catch(function (error) {
+            console.error('Error fetching PDF content:', error);
+        })
+        .finally(function () {
+            // You can add code here to hide the loading screen if required
+//            if (loadingScreen) loadingScreen.style.display = 'none'; // Hide loading screen
+        });
+});
+
      
     
     
@@ -1637,7 +1808,7 @@ return new bootstrap.Tooltip(tooltipTriggerEl)});</script>
     
     
      
-      const iconImageBytes = await fetch('/wp-content/themes/astra/assets/img/check2.png').then(res => res.arrayBuffer());
+      const iconImageBytes = await fetch('/img/check2.png').then(res => res.arrayBuffer());
       const iconImage = await pdfDoc.embedPng(iconImageBytes);
       //const iconImage2 = await pdfDoc.embedPng(iconImageBytes);
       
@@ -1877,256 +2048,41 @@ return new bootstrap.Tooltip(tooltipTriggerEl)});</script>
       
         // Store updated PDF bytes
         window.updatedPdfBytes = pdfBytes;
-      
       } 
-    
-        async function printPdfein() {
-          const pdfPreview = document.getElementById('pdfPreviewein');
-          pdfPreview.contentWindow.print();
-        }
-        
-         
-    
-        
-                                const loadingscreen = document.querySelector('.loading');
-                                loadingscreen.style.display = 'flex';
-                                setTimeout(() => {
-                            loadingscreen.style.display = 'none';
-                            }, 3000); // 3000 milliseconds = 3 seconds
+      
                            
-                              
-                        
-    
+
+document.addEventListener('DOMContentLoaded', function () {
+        const upgradeButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+
+        upgradeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const packageId = this.getAttribute('data-package-id');
+                const packageName = this.getAttribute('data-package-name');
+                const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+
+                // Update the modal with the correct package information
+                document.getElementById('package_id').value = packageId;
+                document.getElementById('packageName').innerText = `Package: ${packageName}`;
+                
+                // Set the amount to the package price and make it readonly
+                const amountField = document.getElementById('amount');
+                amountField.textContent = packagePrice; // Set the price dynamically
+                //amountField.setAttribute('readonly', true); // Prevent editing
+            });
+        });
+    });
+                  
+
+
+document.getElementById('expiry_date').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    if (value.length > 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    e.target.value = value;
+});
     </script>    
 
-<style>@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
-    @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
-    .bg-primary,.btn-primary{
-        background: #009aff!important;
-        border-color:#009aff;
-        color:#FFFFFF!important
-    }
-    .btn-secondary{
-        background: #00276e!important;
-        border-color:#00276e;
-        color:#FFFFFF!important
-    }
-    .btn-secondary:hover{
-        background: #009aff!important;
-        border-color:#009aff;
-        color:#FFFFFF
-    }
-    .clientlogin{
-        display:flex;align-items:center;justify-content:center;width: 100%;height: 100vh; position: relative;}
-    .formbox{
-    flex-flow:column;
-    display:flex;align-items:center;justify-content:center;width: 30%;text-align:center;
-    }
-    .formbox input{margin:10px 0; width:100%}
-    .footerform{
-        position:fixed;width:100%;text-align:center;background:#00276e;color:#FFFFFF;font-size:11px;bottom:0;left:0
-    }
-    @media(max-width:991px){
-        .formbox{width: 90%!important
-    }
-    
-    .clientlogin:before{
-        content:'';
-        background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
-        background-size: cover!important;
-        background-position: center center!important;
-    }
-    }
-    .clientlogin:before{
-        content:'';
-        background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
-        background-size: 120%;
-        background-position: bottom right;
-        position: fixed;
-        top:0;
-        left:0;
-        bottom:0;
-        right:0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        opacity: .2
-    }
-    .card-body label{font-size:14px; margin:10px 0}
-        
-        </style>
-
-
-
-
-
-<style>.exemptentitypopup{
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-  }
-  .popupcontent{
-    max-width: 30%;
-      text-align: center;
-      background: #eaeaea;
-      padding: 35px;
-      border-radius: 2px;
-      box-shadow: 0 0 #000;
-  }
-  div.reportinngcompanynotinitial{display: none;}
-  @media(max-width:991px){
-  .popupcontent{
-    max-width: 100%;
-  }}
-  .table thead th{color:#FFFFFF!important;font-size:18px!important}
-  .table td{color:#121212!important;font-size:14px!important}
-  .was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
-  .accordion-collapse{background-color: #00800011;}
-  .accordion-button{border-radius: 4px!important;}
-  .modal{z-index: 1051!important;}
-  
-
-/* Modal styles */
-.modal {
-display: none; /* Hidden by default */
-position: fixed;
-z-index: 1; /* Sit on top */
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0,0,0,0.4); /* Black w/opacity */
-padding-top: 60px;
-}
-
-.modal-content {
-background-color: #fff;
-margin: 1% auto;
-padding: 0px!important;
-border: 1px solid #888;
-width: 100%;
-max-width: 800px;
-}
-.modal-content h2{background-color: #f3f7f8; padding:20px;}
-#modalContent{padding:20px}
-#modalContent .modal-field {margin-bottom:10px; font-weight: 600; color:#121212}
-#modalContent .modal-field strong{color:#121212;font-weight: 400;}
-.close {
-color: #aaa;
-float: right;
-font-size: 28px;
-font-weight: bold;
-position: absolute;
-right: 20px;
-top: 0px;
-}
-
-.close:hover,
-.close:focus {
-color: black;
-text-decoration: none;
-cursor: pointer;
-}
-
-
-.exemptentitypopup{
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100%;
-}
-.popupcontent{
-  max-width: 30%;
-    text-align: center;
-    background: #eaeaea;
-    padding: 35px;
-    border-radius: 2px;
-    box-shadow: 0 0 #000;
-}
-div.reportinngcompanynotinitial{display: none;}
-.h-100{height: inherit!important;}
-@media(max-width:991px){
-.popupcontent{
-  max-width: 100%;
-}}
-.table thead th{color:#FFFFFF!important;font-size:18px!important}
-.table td{color:#121212!important;font-size:14px!important}
-.was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
-.accordion-collapse{background-color: #00800011;}
-.accordion-button{border-radius: 4px!important;}
-@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
-@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
-.bg-primary,.btn-primary{
-    background: #009aff!important;
-    border-color:#009aff;
-    color:#FFFFFF!important
-}
-.btn-secondary{
-    background: #00276e!important;
-    border-color:#00276e;
-    color:#FFFFFF!important
-}
-.btn-secondary:hover{
-    background: #009aff!important;
-    border-color:#009aff;
-    color:#FFFFFF
-}
-.clientlogin{
-    display:flex;align-items:center;justify-content:center;width: 100%;height: 100vh; position: relative;}
-.formbox{
-flex-flow:column;
-display:flex;align-items:center;justify-content:center;width: 30%;text-align:center;
-}
-.formbox input{margin:10px 0; width:100%}
-.footerform{
-    position:fixed;width:100%;text-align:center;background:#00276e;color:#FFFFFF;font-size:11px;bottom:0;left:0
-}
-@media(max-width:991px){
-    .formbox{width: 90%!important
-}
-
-.clientlogin:before{
-    content:'';
-    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
-    background-size: cover!important;
-    background-position: center center!important;
-}
-}
-.clientlogin:before{
-    content:'';
-    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
-    background-size: 120%;
-    background-position: bottom right;
-    position: fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: .2
-}
-.card-body label{font-size:13px; margin:10px 0}
-.card-header h5{color:var(--bs-primary)}
-.thead-dark tr th:first-child {border-radius:calc(0.75rem - 1px) 0 0 0}
-.thead-dark tr th:last-child {border-radius:0 calc(0.75rem - 1px) 0 0 }
- .card .card-header{background-color: #00276e!important; padding-bottom: 15px!important;}
-.card .card-header h5{color: #ffffff!important;}
-.card .thead-dark th{background: #121212!important;}    
-.modal{z-index: 1051!important;}
-.radiobox label{margin-right: 20px}
-.mid{font-weight:600!important;color:#121212!important}
-</style>
     </x-app-layout>
     

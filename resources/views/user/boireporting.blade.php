@@ -17,8 +17,7 @@
                                     </div>
                                     </div> 
                                 <form id="boiForm" class="row g-3 formsubmission needs-validation" novalidate enctype="application/x-www-form-urlencoded">
-                                <!-- action="/wp-content/themes/astra/assets/authnet/payment-boi-process.php"-->
-                                    <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
+                                     <div class="col-md-12 col-xl-12 mb-3 mb-md-4">
                                         <div class="card h-100">
                                             <div class="card-header d-flex">
                                                 <h5 class="h6 font-weight-semi-bold text-uppercase mb-0">Part I. Filing Information</h5>
@@ -3912,7 +3911,7 @@
                     </div>
                      <div class="formpreview column col-12 d-none">
                         <h4>Pleaese Review Your BOI Reporting Application</h4>
-                        <iframe class="pdf-preview" id="pdfPreviewein"
+                        <iframe class="pdf-preview" id="pdfPreviewboi"
                             src="" type="application/pdf" width="100%"
                             height="600">
                         </iframe>
@@ -3920,51 +3919,74 @@
                         <img src="" id="imageidentificationimg" alt="image">
                     </div>
                
-    
-  <div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+                    <div class="modal fade formarea" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="upgradeModalLabel">Complete Payment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h4 id="packageNameDisplay" class="text-center mb-4">Package: </h4>
-                
-                <form action="{{ route('payment.create') }}" method="POST">
+        <div class="modal-body">
+            <div class="d-flex align-items-start justify-content-start">
+
+            <div class="col-md-5 cardside">
+              <small>You'll Pay</small>
+            <h4  class="payamount" id="amount" name="amount">$154.315</h4>
+            <p><small>Pay with Credit/Debit Card Fee "3.5% plus 10c" (a non-refundable portal processing fee applies)</small></p>
+            <div class="d-table bg-white p-3 text-center secureimg">
+                    <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
+                    </div>
+          </div>
+                <div class="formareacontent col-md-7">
+                    <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
+                    <div class="packgename">Service: BOI Reporting</div>
                     @csrf
                     <!-- Hidden Field for Package ID -->
                     <input type="hidden" id="package_id" name="package_id" value="9">
-                    <input type="hidden" id="package_name" name="package_name" value="BOI REPORTING">
+                    <input type="hidden" id="package_name" name="package_name" value="BOI Reporting">
                     <input type="hidden" id="package_type" name="package_type" value="one-time">
-
-                    <div class="mb-3">
-                        <label for="card_number" class="form-label">Card Number</label>
-                        <input type="text" class="form-control" id="card_number" name="card_number" required>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_name" class="form-label">Card Holder Name</label>
+                        <input type="text" class="form-control" id="card_name" name="card_name" required>
                     </div>
-
-                    <div class="mb-3">
+                    <div class="mb-3 col-md-12">
+                        <label for="card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required maxlength="16">
+                    </div>
+                    <div class="mb-3 col-md-6">
                         <label for="expiry_date" class="form-label">Expiry Date</label>
                         <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
                     </div>
-
-                    <div class="mb-3">
+                    <div class="mb-3 col-md-6">
                         <label for="card_code" class="form-label">Card Code (CVV)</label>
-                        <input type="text" class="form-control" id="card_code" name="card_code" required>
+                        <input type="text" class="form-control" id="card_code" name="card_code" required maxlength="3">
+                    </div>
+                    <hr>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="card_address" name="card_address" required>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="card_city" name="card_city" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="amount" class="form-label">Amount</label>
-                        <!-- Set the amount field to be readonly and set the value dynamically -->
-                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                    <div class="mb-3 col-md-6">
+                        <label for="card_state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="card_state" name="card_state" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Pay</button>
-                </form>
+                    <div class="mb-3 col-md-6">
+                        <label for="card_zipcode" class="form-label">Zipcode</label>
+                        <input type="text" class="form-control" id="card_zipcode" name="card_zipcode" required>
+                    </div>
+
+                    <div class="col-md-12">
+                <button type="submit" class="btn btn-primary w-100">Pay Now!</button>
+                </div>
+                
+                </div> 
+                </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
   <div class="exemptentitypopup p-4" style="display: none;">
     <div class="popupcontent">
     <h3>Exemption Entity Confirmation</h3>
@@ -3977,7 +3999,7 @@
     <span class="close">&times;</span>
     <h2>Review Application Details</h2>
     <div id="modalContent"></div> <!-- Form data will be injected here -->
-    <button id="confirmBtn" class="btn btn-primary m-4 ">Close</button>
+    <button id="confirmBtn" class="btn btn-primary m-4 ">Proceed to submit</button>
   </div>
 </div> 
 <script>
@@ -4145,7 +4167,7 @@ document.querySelector(".formsubmission").addEventListener("submit", function (e
     updateImageSrc('imageidentificationimg', identificationFile);
 
     // Start processing the PDF generation
-    var blobUrl = document.getElementById('pdfPreviewein').getAttribute('src');
+    var blobUrl = document.getElementById('pdfPreviewboi').getAttribute('src');
 
     // Fetch PDF content as Blob
     fetch(blobUrl)
@@ -4250,7 +4272,7 @@ async function generatePDF() {
   
   // Check if PDF document is loaded
   if (!pdfDoc) {
-    const url = 'img/boi-reporting.pdf';
+    const url = '/img/boi-reporting.pdf';
     const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
     pdfDoc = await PDFDocument.load(existingPdfBytes);
   }
@@ -5013,7 +5035,7 @@ if (exemptentityCheckbox) {
 //const fontBytes = await fetch('path_to_checkbox_font.ttf').then(res => res.arrayBuffer());
 //const checkboxFont = await pdfDoc.embedFont(pdfBytes);
 
-const iconImageBytes = await fetch('img/check2.png').then(res => res.arrayBuffer());
+const iconImageBytes = await fetch('/img/check2.png').then(res => res.arrayBuffer());
 const iconImage = await pdfDoc.embedPng(iconImageBytes);
 //const iconImage2 = await pdfDoc.embedPng(iconImageBytes);
 
@@ -5151,7 +5173,7 @@ document.getElementById("residentialimageidentificationform").addEventListener("
 
   // Update PDF preview
   const pdfBytes = await pdfDoc.save();
-  const pdfPreview = document.getElementById('pdfPreviewein');
+  const pdfPreview = document.getElementById('pdfPreviewboi');
   pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
 
   // Enable download button
@@ -5164,7 +5186,7 @@ document.getElementById("residentialimageidentificationform").addEventListener("
 }
 
 async function printPdfein() {
-  const pdfPreview = document.getElementById('pdfPreviewein');
+  const pdfPreview = document.getElementById('pdfPreviewboi');
   pdfPreview.contentWindow.print();
 }
 
@@ -5781,153 +5803,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 
                 // Set the amount to the package price and make it readonly
                 const amountField = document.getElementById('amount');
-                amountField.value = packagePrice; // Set the price dynamically
-                amountField.setAttribute('readonly', true); // Prevent editing
+                amountField.textContent = packagePrice; // Set the price dynamically
+               // amountField.setAttribute('readonly', true); // Prevent editing
             });
         });
     });
+
+document.getElementById('expiry_date').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    if (value.length > 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    e.target.value = value;
+});
+
     </script>
-
-<style>
-    /* Modal styles */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed;
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4); /* Black w/opacity */
-  padding-top: 60px;
-}
-
-.modal-content {
-  background-color: #fff;
-  margin: 1% auto;
-  padding: 0px!important;
-  border: 1px solid #888;
-  width: 100%;
-  max-width: 800px;
-}
-.modal-content h2{background-color: #f3f7f8; padding:20px;}
-#modalContent{padding:20px}
-#modalContent .modal-field {margin-bottom:10px; font-weight: 600; color:#121212}
-#modalContent .modal-field strong{color:#121212;font-weight: 400;}
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  position: absolute;
-    right: 20px;
-    top: 0px;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-.card .card-header{background-color: #00276e!important; padding-bottom: 15px!important;}
-.card .card-header h5{color: #ffffff!important;}
-
-
-.exemptentitypopup{
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100%;
-}
-.popupcontent{
-  max-width: 30%;
-    text-align: center;
-    background: #eaeaea;
-    padding: 35px;
-    border-radius: 2px;
-    box-shadow: 0 0 #000;
-}
-div.reportinngcompanynotinitial{display: none;}
-@media(max-width:991px){
-.popupcontent{
-  max-width: 100%;
-}}
-.table thead th{color:#FFFFFF!important;font-size:18px!important}
-.table td{color:#121212!important;font-size:14px!important}
-.was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
-.accordion-collapse{background-color: #00800011;}
-.accordion-button{border-radius: 4px!important;}
-
-
-@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
-@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
-.bg-primary,.btn-primary{
-    background: #009aff!important;
-    border-color:#009aff;
-    color:#FFFFFF!important
-}
-.btn-secondary{
-    background: #00276e!important;
-    border-color:#00276e;
-    color:#FFFFFF!important
-}
-.btn-secondary:hover{
-    background: #009aff!important;
-    border-color:#009aff;
-    color:#FFFFFF
-}
-.clientlogin{
-    display:flex;align-items:center;justify-content:center;width: 100%;height: 100vh; position: relative;}
-.formbox{
-flex-flow:column;
-display:flex;align-items:center;justify-content:center;width: 30%;text-align:center;
-}
-.formbox input{margin:10px 0; width:100%}
-.footerform{
-    position:fixed;width:100%;text-align:center;background:#00276e;color:#FFFFFF;font-size:11px;bottom:0;left:0
-}
-@media(max-width:991px){
-    .formbox{width: 90%!important
-}
-
-.clientlogin:before{
-    content:'';
-    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
-    background-size: cover!important;
-    background-position: center center!important;
-}
-}
-.clientlogin:before{
-    content:'';
-    background: url(https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg) 0 0 no-repeat;
-    background-size: 120%;
-    background-position: bottom right;
-    position: fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: .2
-}
-
-.card-body label{font-size:13px; margin:10px 0}
-.card-header h5{color:var(--bs-primary)}
-.thead-dark tr th:first-child {border-radius:calc(0.75rem - 1px) 0 0 0}
-.thead-dark tr th:last-child {border-radius:0 calc(0.75rem - 1px) 0 0 }
- .card .card-header{background-color: #00276e!important; padding-bottom: 15px!important;}
-.card .card-header h5{color: #ffffff!important;}
-.card .thead-dark th{background: #121212!important;}    
-.modal{z-index: 1051!important;}
-.radiobox label{margin-right: 20px}
-.mid{font-weight:600!important;color:#121212!important}
-    </style>
 </x-app-layout>
+

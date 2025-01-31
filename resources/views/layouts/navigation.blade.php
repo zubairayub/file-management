@@ -4,10 +4,10 @@
                  <!--Logo start-->
                  <div class="logo-main">
                      <div class="logo-normal">
-                       <img src="https://promptfilings.com/wp-content/uploads/2024/04/symbol-300x300.png" alt="Prompt Filings" width="32">
+                       <img src="/img/pf-symbol.png" alt="Prompt Filings" width="32">
                      </div>
                      <div class="logo-mini">
-                        <img src="https://promptfilings.com/wp-content/uploads/2024/04/symbol-300x300.png" alt="Prompt Filings" width="24">
+                        <img src="/img/pf-symbol.png" alt="Prompt Filings" width="24">
                      </div>
                  </div>
                  <!--logo End-->
