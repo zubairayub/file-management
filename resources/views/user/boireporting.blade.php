@@ -3927,15 +3927,15 @@
 
             <div class="col-md-5 cardside">
               <small>You'll Pay</small>
-            <h4  class="payamount" id="amount" name="amount">$154.315</h4>
-            <p><small>Pay with Credit/Debit Card Fee "3.5% plus 10c" (a non-refundable portal processing fee applies)</small></p>
+              <h4  class="payamount" id="amount" name="amount"></h4>
+              <p><small>Pay with Credit/Debit Card Fee "3.5% plus 10c" (a non-refundable portal processing fee applies)</small></p>
             <div class="d-table bg-white p-3 text-center secureimg">
                     <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
                     </div>
           </div>
                 <div class="formareacontent col-md-7">
                     <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
-                    <div class="packgename">Service: BOI Reporting</div>
+                    <div class="packgename" id="packageNameDisplay">Service: </div>
                     @csrf
                     <!-- Hidden Field for Package ID -->
                     <input type="hidden" id="package_id" name="package_id" value="9">
@@ -5787,24 +5787,26 @@ document.getElementById("residentialimageidentificationform").addEventListener("
 
 
 
-
-document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener('DOMContentLoaded', function () {
         const upgradeButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
 
         upgradeButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const packageId = this.getAttribute('data-package-id');
                 const packageName = this.getAttribute('data-package-name');
-                const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+                //const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+                const packagePrice = document.getElementById('authpricing').value;
+                
 
                 // Update the modal with the correct package information
                 document.getElementById('package_id').value = packageId;
                 document.getElementById('packageNameDisplay').innerText = `Package: ${packageName}`;
                 
                 // Set the amount to the package price and make it readonly
+                //const amountField = document.getElementById('amount');
                 const amountField = document.getElementById('amount');
-                amountField.textContent = packagePrice; // Set the price dynamically
-               // amountField.setAttribute('readonly', true); // Prevent editing
+                amountField.textContent = "$" + packagePrice; // Set the price dynamically
+                //amountField.setAttribute('readonly', true); // Prevent editing
             });
         });
     });

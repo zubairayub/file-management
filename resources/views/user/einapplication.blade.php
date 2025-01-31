@@ -5,7 +5,7 @@
                         <div class="content">
                             <div class="py-4 px-3 px-md-4">
                               <div class="mb-3 mb-md-4 d-flex justify-content-between">
-                                <div class="h3 mb-0">Application for Employer Identification Number</div>
+                                <div class="h3 mb-0">Application for Employer Identification Number (EIN)</div>
                               </div>
                               <div class="row my-5">
                                 <div class="col-md-12">
@@ -755,6 +755,13 @@
                                              <div class="card-body">
                                             <div class="media-body row" id="ordersummary"> 
                                                     <div class="col-lg-12"> 
+                                                    <div class="alert alert-primary mt-5 d-none">
+                                                            <h4>You'll Pay: <span id="totalpricing"
+                                                                    name="totalpricing">$71.52</span></h4>
+                                                            <div class="d-none">
+                                                              <input type="text" id="service" name="service" value="BOI Reporting Service" readonly>
+                                                              <input type="text" id="authpricing" name="authpricing" value="71.52" readonly></div>
+                                                        </div>
                                                         <table cellpadding="5" cellspacing="0" width="100%" class="border  table pricingtable">
                                                         <thead class="thead-dark">
                                                         <tr>
@@ -874,7 +881,7 @@
                                                                 </th>
                                                                 <th>
                                                                     <h2 class="mb-3"><span
-                                                                            id="totalpricing2">$309.57</span></h2>
+                                                                            id="totalpricing2">$71.52</span></h2>
                                                                 </th>
                                                             </tr>
                                                             </tbody>
@@ -897,7 +904,7 @@
                                                                 <button type="submit" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#upgradeModal" 
                                                                     data-package-id="9" 
                                                                     data-package-name="EIN Application"
-                                                                    data-package-price="309.57" 
+                                                                    data-package-price="" 
                                                                     id="einformvalidate">Pay Now to Submit
                                                                     Application</button>
                                                             </div>
@@ -928,15 +935,15 @@
             <div class="d-flex align-items-start justify-content-start">
 
             <div class="col-md-5 cardside">
-                     <h4  class="payamount" id="amount" name="amount">309.57</h4>
-                    <p><small>3.5% plus 10c<br>Pay with Credit/Debit Card (a non-refundable portal processing fee applies)</small></p>
+            <h4  class="payamount" id="amount" name="amount"></h4>
+            <p><small>3.5% plus 10c<br>Pay with Credit/Debit Card (a non-refundable portal processing fee applies)</small></p>
                     <div class="d-table bg-white p-3 text-center secureimg">
                     <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
                     </div>
                     </div>
                 <div class="formareacontent col-md-7">
                     <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
-                    <div class="packgename">Service: EIN Application</div>
+                    <div class="packgename" id="packageNameDisplay">Service: </div>
                     @csrf
                     <!-- Hidden Field for Package ID -->
                     <input type="hidden" id="package_id" name="package_id" value="9">
@@ -2052,22 +2059,26 @@ document.querySelector(".formsubmission").addEventListener("submit", function (e
       
                            
 
-document.addEventListener('DOMContentLoaded', function () {
+
+      document.addEventListener('DOMContentLoaded', function () {
         const upgradeButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
 
         upgradeButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const packageId = this.getAttribute('data-package-id');
                 const packageName = this.getAttribute('data-package-name');
-                const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+                //const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+                const packagePrice = document.getElementById('authpricing').value;
+                
 
                 // Update the modal with the correct package information
                 document.getElementById('package_id').value = packageId;
-                document.getElementById('packageName').innerText = `Package: ${packageName}`;
+                document.getElementById('packageNameDisplay').innerText = `Package: ${packageName}`;
                 
                 // Set the amount to the package price and make it readonly
+                //const amountField = document.getElementById('amount');
                 const amountField = document.getElementById('amount');
-                amountField.textContent = packagePrice; // Set the price dynamically
+                amountField.textContent = "$" + packagePrice; // Set the price dynamically
                 //amountField.setAttribute('readonly', true); // Prevent editing
             });
         });

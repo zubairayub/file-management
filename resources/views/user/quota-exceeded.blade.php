@@ -20,16 +20,20 @@
 
         <!-- Package List Section -->
         <div class="mt-4">
-            <h4>Choose Your Plan</h4>
-            <div class="row">
+            <h4>Affordable pricing tailored to your needs</h4>
+            <p>Choose the package that best suits your business or personal tax requirements, and get started with expert assistance today.</p>
+            <div class="row mt-4">
             @foreach($packages as $package)
-            <div class="col-md-4 col-sm-6 mb-4">
-    <div class="card shadow-lg border-0 rounded-3 overflow-hidden h-100">
-        <div class="card-header text-center bg-gradient-primary text-white py-4">
-            <h5 class="card-title mb-0 fs-5 fw-bold">{{ $package->package_name }}</h5>
-        </div>
-        <div class="card-body">
-            @php
+            <div class="col-md-4  col-sm-6 mb-4">
+                <div class="pricebox card text-center shadow-lg rounded-3">  
+                <div class="price-header">
+                <h5 class="packagename text-bold ">{{ $package->package_name }}</h5>
+                    <small class="text-bold text-dark">As low as</small>
+                    <h2 class="display-3 packageprice"><small>$</small>{{ $package->price }}</h2>
+                    </div>
+                    <div class="price-body text-center">
+                    <div class="pricedata">
+                    @php
                 // Assuming quota is in KB, format it appropriately
                 if (!function_exists('formatBytes')) {
                 function formatBytes($kb, $precision = 2) {
@@ -47,35 +51,30 @@
 
                 // Check if 'features' is a string before decoding
                 $features = is_string($package->features) ? json_decode($package->features, true) : $package->features;
-
             @endphp
-
-            <div class="d-flex justify-content-between mb-3">
-                <p class="mb-0 text-muted"><strong>Quota:</strong> {{ $formattedQuota }}</p>
-                <p class="mb-0 text-muted"><strong>Price:</strong> ${{ $package->price }} / month</p>
-            </div>
-
             <!-- Services List -->
             @if(is_array($services) && count($services) > 0)
-                <ul class="list-unstyled mb-3">
-                    <li class="fw-bold text-dark">Included Services:</li>
+                <ul class="list-unstyled mb-3 services">
                     @foreach($services as $service)
-                        <li><i class="fas fa-check-circle text-success me-2"></i> {{ $service }}</li>
+                        <li>{{ $service }}, </li>
                     @endforeach
                 </ul>
             @endif
 
             <!-- Features List -->
             @if(is_array($features) && count($features) > 0)
-                <ul class="list-unstyled mb-3">
-                    <li class="fw-bold text-dark">Features:</li>
+                <ul class="list-unstyled mb-3 features">
+                    <li><p class="mb-0 text-dark"><strong>E-Filing:</strong> {{ $formattedQuota }}</p></li>
+                    <li class="fw-bold text-dark">Included Services:</li>
                     @foreach($features as $feature)
-                        <li><i class="fas fa-arrow-right text-info me-2"></i> {{ $feature }}</li>
+                        <li>{{ $feature }}</li>
                     @endforeach
                 </ul>
             @endif
-        </div>
-        <div class="card-footer text-center">
+                    </div>
+        
+                </div>
+                <div class="text-center">
             <!-- Check if the user is using the current package -->
             @if(auth()->user()->userPackages->contains('package_id', $package->id))
                 <button class="btn btn-secondary btn-lg w-100" disabled>Current Plan</button>
@@ -84,10 +83,10 @@
                 data-package-id="{{ $package->id }}" 
                 data-package-name="{{ $package->package_name }}"
                 data-package-price="{{ $package->price }}" 
-                class="btn btn-primary btn-lg w-100">Upgrade Now</a>
+                class="btn btn-primary btn-lg w-100">Buy Now!</a>
             @endif
         </div>
-    </div>
+                </div>
 </div>
 
 @endforeach
@@ -100,89 +99,78 @@
     </div>
 </div>
 
-<!-- Modal for Payment -->
-<div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+<div class="modal fade formarea" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="upgradeModalLabel">Complete Payment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h4 id="packageNameDisplay" class="text-center mb-4">Package: </h4>
-                
-                <form action="{{ route('payment.create') }}" method="POST">
+        <div class="modal-body">
+            <div class="d-flex align-items-start justify-content-start">
+
+            <div class="col-md-5 cardside">
+              <small>You'll Pay</small>
+            <h4  class="payamount" id="amount" name="amount"></h4>
+            <p><small>Pay with Credit/Debit Card Fee "3.5% plus 10c" (a non-refundable portal processing fee applies)</small></p>
+            <div class="d-table bg-white p-3 text-center secureimg">
+                    <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
+                    </div>
+          </div>
+                <div class="formareacontent col-md-7">
+                    <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
+                    <div class="packgename" id="packageNameDisplay">Service: </div>
                     @csrf
                     <!-- Hidden Field for Package ID -->
-                    <input type="hidden" id="package_id" name="package_id" value="{{ $package->id }}">
-                    <input type="hidden" id="package_name" name="package_name" value="{{ $package->package_name }}">
-                    <input type="hidden" id="package_type" name="package_type" value="{{ $package->validity }}">
-
-                    <div class="mb-3">
-                        <label for="card_number" class="form-label">Card Number</label>
-                        <input type="text" class="form-control" id="card_number" name="card_number" required>
+                    <input type="hidden" id="package_id" name="package_id" value="9">
+                    <input type="hidden" id="package_name" name="package_name" value="BOI Reporting">
+                    <input type="hidden" id="package_type" name="package_type" value="one-time">
+                    <div class="mb-3 col-md-12">
+                        <label for="card_name" class="form-label">Card Holder Name</label>
+                        <input type="text" class="form-control" id="card_name" name="card_name" required>
                     </div>
-
-                    <div class="mb-3">
+                    <div class="mb-3 col-md-12">
+                        <label for="card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required maxlength="16">
+                    </div>
+                    <div class="mb-3 col-md-6">
                         <label for="expiry_date" class="form-label">Expiry Date</label>
                         <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
                     </div>
-
-                    <div class="mb-3">
+                    <div class="mb-3 col-md-6">
                         <label for="card_code" class="form-label">Card Code (CVV)</label>
-                        <input type="text" class="form-control" id="card_code" name="card_code" required>
+                        <input type="text" class="form-control" id="card_code" name="card_code" required maxlength="3">
+                    </div>
+                    <hr>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="card_address" name="card_address" required>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="card_city" name="card_city" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="amount" class="form-label">Amount</label>
-                        <!-- Set the amount field to be readonly and set the value dynamically -->
-                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                    <div class="mb-3 col-md-6">
+                        <label for="card_state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="card_state" name="card_state" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Pay</button>
-                </form>
+                    <div class="mb-3 col-md-6">
+                        <label for="card_zipcode" class="form-label">Zipcode</label>
+                        <input type="text" class="form-control" id="card_zipcode" name="card_zipcode" required>
+                    </div>
+
+                    <div class="col-md-12">
+                <button type="submit" class="btn btn-primary w-100">Pay Now!</button>
+                </div>
+                
+                </div> 
+                </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 @section('styles')
 <style>
-   .card {
-    max-width: 350px;  /* Adjust max width of cards */
-    margin: 0 auto;    /* Centers the cards if needed */
-}
-.modal-content {
-    border-radius: 8px;
-}
-
-.modal-header {
-    background-color: #f8f9fa;
-}
-
-.modal-body {
-    padding: 30px;
-}
-
-.form-control {
-    border-radius: 5px;
-    box-shadow: none;
-    border: 1px solid #ced4da;
-}
-
-.form-label {
-    font-weight: bold;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
-}
+    
 
 </style>
 @endsection
@@ -204,11 +192,27 @@
                 
                 // Set the amount to the package price and make it readonly
                 const amountField = document.getElementById('amount');
-                amountField.value = packagePrice; // Set the price dynamically
-                amountField.setAttribute('readonly', true); // Prevent editing
+//                amountField.value = packagePrice; // Set the price dynamically
+amountField.textContent = packagePrice; // Set the price dynamically
+
+//amountField.setAttribute('readonly', true); // Prevent editing
             });
         });
     });
+    document.querySelectorAll("li").forEach(li => {
+    if (li.textContent.trim() === "space") {
+        li.classList.add("space-item");
+    }
+});
+
+
+document.getElementById('expiry_date').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    if (value.length > 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    e.target.value = value;
+});
 </script>
 
 </x-app-layout>

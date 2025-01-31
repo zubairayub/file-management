@@ -1108,10 +1108,10 @@
                                                     <div class="col-lg-12 pt-5 pb-5">
                                         <div class="alert alert-primary mt-5 d-none">
                                                             <h4>You'll Pay: <span id="totalpricing"
-                                                                    name="totalpricing">$154.315</span></h4>
+                                                                    name="totalpricing"></span></h4>
                                                             <div class="d-none">
                                                               <input type="text" id="service" name="service" value="Business Formation" readonly>
-                                                              <input type="text" id="authpricing" name="authpricing" value="154.315" readonly></div>
+                                                              <input type="text" id="authpricing" name="authpricing"  readonly></div>
                                                         </div>
                                                         <table cellpadding="5" cellspacing="0" width="100%" class="border mt-5 table pricingtable">
                                                         <thead class="thead-dark">
@@ -1232,7 +1232,7 @@
                                                                 </th>
                                                                 <th>
                                                                     <h2 class="mb-3"><span
-                                                                            id="totalpricing2">$154.315</span></h2>
+                                                                            id="totalpricing2"></span></h2>
                                                                 </th>
                                                             </tr>
                                                             </tbody>
@@ -1255,7 +1255,7 @@
                                                                 <button type="submit" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#upgradeModal" 
                                                                     data-package-id="9" 
                                                                     data-package-name="Business Formation"
-                                                                    data-package-price="154.315" 
+                                                                    data-package-price="" 
                                                                     id="llcformvalidate">Pay Now to Submit
                                                                     Application</button>
                                                             </div>
@@ -1300,7 +1300,7 @@
             <div class="d-flex align-items-start justify-content-start">
 
             <div class="col-md-5 cardside">
-            <h4  class="payamount" id="amount" name="amount">$99.99</h4>
+            <h4  class="payamount" id="amount" name="amount"></h4>
             <p><small>3.5% plus 10c<br>Pay with Credit/Debit Card (a non-refundable portal processing fee applies)</small></p>
             <div class="d-table bg-white p-3 text-center secureimg">
                     <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
@@ -1308,7 +1308,7 @@
                     </div>
                 <div class="formareacontent col-md-7">
                     <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
-                    <div class="packgename">Service: Business Formation</div>
+                    <div class="packgename" id="packageNameDisplay">Service: </div>
                     @csrf
                     <!-- Hidden Field for Package ID -->
                     <input type="hidden" id="package_id" name="package_id" value="9">
@@ -1421,7 +1421,7 @@ function updateTotalPricing() {
         const priceValue = parseFloat(priceElement.innerHTML.replace('$', '')) || 0;
         total += priceValue;
     });
-        const PFserviceAmount = 99.00;
+        const PFserviceAmount = 49.00;
         total += PFserviceAmount;
         //total = 1.50;
 
@@ -2751,15 +2751,18 @@ document.addEventListener('DOMContentLoaded', function () {
             button.addEventListener('click', function () {
                 const packageId = this.getAttribute('data-package-id');
                 const packageName = this.getAttribute('data-package-name');
-                const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+                //const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+                const packagePrice = document.getElementById('authpricing').value;
+                
 
                 // Update the modal with the correct package information
                 document.getElementById('package_id').value = packageId;
-                document.getElementById('packageName').innerText = `Package: ${packageName}`;
+                document.getElementById('packageNameDisplay').innerText = `Package: ${packageName}`;
                 
                 // Set the amount to the package price and make it readonly
+                //const amountField = document.getElementById('amount');
                 const amountField = document.getElementById('amount');
-                amountField.textContent = packagePrice; // Set the price dynamically
+                amountField.textContent = "$" + packagePrice; // Set the price dynamically
                 //amountField.setAttribute('readonly', true); // Prevent editing
             });
         });
