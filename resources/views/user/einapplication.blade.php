@@ -963,7 +963,7 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="card_code" class="form-label">Card Code (CVV)</label>
-                        <input type="text" class="form-control" id="card_code" name="card_code" required maxlength="3">
+                        <input type="password" class="form-control" id="card_code" name="card_code" required maxlength="3">
                     </div>
                     <hr>
                     <div class="mb-3 col-md-12">
