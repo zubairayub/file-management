@@ -1282,57 +1282,46 @@
                     <div class="modal-body">
                         <div class="d-flex align-items-start justify-content-start">
 
-                            <div class="col-md-5 cardside">
-                                <h4 class="payamount" id="amount2" name="amount2"></h4>
-                                <p><small>3.5% plus 10c<br>Pay with Credit/Debit Card (a non-refundable portal
-                                        processing fee applies)</small></p>
-                                <div class="d-table bg-white p-3 text-center secureimg">
-                                    <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png"
-                                        width="80%" alt="secure">
-                                </div>
-                            </div>
-                            <div class="formareacontent col-md-7">
-                                <form action="{{ route('payment.create') }}" method="POST"
-                                    class="d-flex align-items-center justify-content-between flex-wrap">
-                                    <div class="packgename" id="packageNameDisplay">Service: </div>
-                                    @csrf
-                                    <!-- Hidden Field for Package ID -->
-                                    <input type="hidden" id="package_id" name="package_id" value="9">
-                                    <input type="hidden" id="package_name" name="package_name"
-                                        value="Business Formation">
-                                    <input type="hidden" id="package_type" name="package_type" value="one-time">
-                                    <div class="mb-3 col-md-12">
-                                        <label for="card_name" class="form-label">Card Holder Name</label>
-                                        <input type="text" class="form-control" id="card_name" name="card_name"
-                                            required>
-                                    </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label for="card_number" class="form-label">Card Number</label>
-                                        <input type="text" class="form-control" id="card_number" name="card_number"
-                                            required maxlength="16">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="expiry_date" class="form-label">Expiry Date</label>
-                                        <input type="text" class="form-control" id="expiry_date" name="expiry_date"
-                                            required placeholder="MM/YY">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="card_code" class="form-label">Card Code (CVV)</label>
-                                        <input type="text" class="form-control" id="card_code" name="card_code" required
-                                            maxlength="3">
-                                    </div>
-                                    <hr>
-                                    <div class="mb-3 col-md-12">
-                                        <label for="card_address" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="card_address" name="card_address"
-                                            required>
-                                    </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label for="card_city" class="form-label">City</label>
-                                        <input type="text" class="form-control" id="card_city" name="card_city"
-                                            required>
-                                    </div>
-                                    </fieldset>
+            <div class="col-md-5 cardside">
+            <h4  class="payamount" id="amount2" name="amount2"></h4>
+            <p><small>3.5% plus 10c<br>Pay with Credit/Debit Card (a non-refundable portal processing fee applies)</small></p>
+            <div class="d-table bg-white p-3 text-center secureimg">
+                    <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
+                    </div>
+                    </div>
+                <div class="formareacontent col-md-7">
+                    <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
+                    <div class="packgename" id="packageNameDisplay">Service: </div>
+                    @csrf
+                    <!-- Hidden Field for Package ID -->
+                    <input type="hidden" id="package_id" name="package_id" value="9">
+                    <input type="hidden" id="package_name" name="package_name" value="Business Formation">
+                    <input type="hidden" id="package_type" name="package_type" value="one-time">
+                    <div class="mb-3 col-md-12">
+                        <label for="card_name" class="form-label">Card Holder Name</label>
+                        <input type="text" class="form-control" id="card_name" name="card_name" required>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required maxlength="16">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="expiry_date" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="card_code" class="form-label">Card Code (CVV)</label>
+                        <input type="password" class="form-control" id="card_code" name="card_code" required maxlength="3">
+                    </div>
+                    <hr>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="card_address" name="card_address" required>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="card_city" name="card_city" required>
+                    </div>
 
                                     <!-- Billing Information -->
                                     <fieldset class="border p-3 mb-4">

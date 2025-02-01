@@ -164,7 +164,7 @@
       font-weight: 700}
       .formarea  input{background-color: #fefefe; color:#333333;width: 100%; border:1px solid #eaeaea!important;border-radius: 0!important;}
       .formarea  input:focus{background-color: #00276e11; color:#121212;}
-      .cardside{background-color: #00276e; color:#FFFFFF; min-height: 680px; background-image: url(/img/card.webp); background-repeat: no-repeat; background-position: top center;display: flex;align-items: center;padding: 30px 0 0;flex-flow: column;justify-content: end;order:2}
+      .cardside{background-color: #00276e; color:#FFFFFF; min-height: 610px; background-image: url(/img/card.webp); background-repeat: no-repeat; background-position: top center;display: flex;align-items: center;padding: 30px 0 0;flex-flow: column;justify-content: end;order:2}
       .cardside p{line-height: normal; text-align: center;}
       .cardside .payamount{text-align: center; font-size: 40px; font-weight: 600; color:#FFFFFF;}
       .formareacontent{background-color: #f3f7f8;}
