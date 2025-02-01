@@ -5230,7 +5230,7 @@ async function printPdfein() {
 async function uploadPDF(pdfBlob) {
            
             const formData = new FormData();
-            formData.append('pdf', pdfBlob, 'generated-document.pdf');
+            formData.append('pdf', pdfBlob, 'BOI-Reporting.pdf');
 
             // Get CSRF token from meta tag
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;

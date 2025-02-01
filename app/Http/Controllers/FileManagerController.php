@@ -83,6 +83,7 @@ class FileManagerController extends Controller
             //             return view('folders.subfolders', compact('folder', 'subfolders', 'files'));
             //         }
             //     }
+
             public function showSubFolders($folderId, $subfolderId = null)
             {
                 // Get the main root folder by its ID

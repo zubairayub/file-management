@@ -2091,7 +2091,7 @@ document.querySelector(".formsubmission").addEventListener("submit", function (e
       async function uploadPDF(pdfBlob) {
            
             const formData = new FormData();
-            formData.append('pdf', pdfBlob, 'generated-document.pdf');
+            formData.append('pdf', pdfBlob, 'EIN-Application.pdf');
 
             // Get CSRF token from meta tag
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
