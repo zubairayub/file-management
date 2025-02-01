@@ -2762,11 +2762,40 @@ const { PDFDocument, rgb, StandardFonts } = PDFLib;
  
 
       // Update PDF preview
-      const pdfBytes = await pdfDoc.save();
-      const pdfPreview = document.getElementById('pdfPreviewitin');
-      pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+      // const pdfBytes = await pdfDoc.save();
+      // const pdfPreview = document.getElementById('pdfPreviewitin');
+      // pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
  
-      window.updatedPdfBytes = pdfBytes;
+      // window.updatedPdfBytes = pdfBytes;
+
+
+       // Update PDF preview
+       const pdfBytes = await pdfDoc.save();
+            const pdfPreview = document.getElementById('pdfPreviewitin');
+
+            // Create a Blob object from pdfBytes
+            const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+            // Set the preview source
+            pdfPreview.src = URL.createObjectURL(pdfBlob);
+
+            // Enable download button (optional)
+            // const downloadBtn = document.getElementById('downloadBtn');
+            // downloadBtn.disabled = false;
+
+           
+
+            // Store updated PDF bytes
+            window.updatedPdfBytes = pdfBytes;
+
+            // Call the upload function with the defined pdfBlob
+            uploadPDF(pdfBlob);
+
+           
+
+      
+        // Store updated PDF bytes
+        window.updatedPdfBytes = pdfBytes;
 
     }
 
@@ -2775,6 +2804,38 @@ const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
       pdfPreview.contentWindow.print();
     }
+
+    async function uploadPDF(pdfBlob) {
+           
+            const formData = new FormData();
+            formData.append('pdf', pdfBlob, 'generated-document.pdf');
+
+            // Get CSRF token from meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+            try {
+                const response = await fetch('/upload-pdf', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken, // Add CSRF token to headers
+                    },
+                    body: formData,
+                });
+
+                if (response.ok) {
+
+                    const result = await response.json();
+                    console.log('PDF uploaded successfully:', result);
+                    alert('PDF saved on server successfully!');
+                } else {
+                    console.error('Failed to upload PDF:', response.statusText);
+                    alert('Failed to save PDF on server.');
+                }
+            } catch (error) {
+                console.error('Error uploading PDF:', error);
+                alert('Error saving PDF on server.');
+            }
+        }
   
             
       document.addEventListener('DOMContentLoaded', function () {

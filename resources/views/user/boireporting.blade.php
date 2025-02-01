@@ -3888,7 +3888,7 @@
                                                             </div> 
                                                     <div class="col-lg-12 mt-5 mb-5">
                                                           <button type="button" class="btn btn-primary" id="reviewapplicationn">Review Your Application</button>  
-                                                                <button type="submit" class="btn btn-success" 
+                                                                <button type="submit" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#upgradeModal" 
                                                                     data-package-id="9" 
                                                                     data-package-name="BOI REPORTING"
                                                                     data-package-price="154.315" 
@@ -3955,7 +3955,7 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="card_code" class="form-label">Card Code (CVV)</label>
-                        <input type="text" class="form-control" id="card_code" name="card_code" required maxlength="3">
+                        <input type="password" class="form-control" id="card_code" name="card_code" required maxlength="3">
                     </div>
                     <hr>
                     <div class="mb-3 col-md-12">
@@ -3966,33 +3966,6 @@
                         <label for="card_city" class="form-label">City</label>
                         <input type="text" class="form-control" id="card_city" name="card_city" required>
                     </div>
-                                                                   </fieldset>
-
-                       <!-- Billing Information -->
-                       <fieldset class="border p-3 mb-4">
-                        <legend class="text-primary fw-bold px-2">Billing Information</legend>
-
-                        <div class="mb-3">
-                            <label for="billing_address" class="form-label">Billing Address</label>
-                            <input type="text" class="form-control" id="billing_address" name="billing_address" placeholder="123 Main Street" required>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="billing_city" class="form-label">City</label>
-                                <input type="text" class="form-control" id="billing_city" name="billing_city" placeholder="City" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="billing_zip" class="form-label">ZIP/Postal Code</label>
-                                <input type="text" class="form-control" id="billing_zip" name="billing_zip" placeholder="ZIP Code" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="billing_country" class="form-label">Country</label>
-                            <input type="text" class="form-control" id="billing_country" name="billing_country" placeholder="Country" required>
-                        </div>
-                    </fieldset>
 
                     <div class="mb-3 col-md-6">
                         <label for="card_state" class="form-label">State</label>
@@ -4006,7 +3979,7 @@
                     <div class="mb-3" style="display:none">
                         <label for="amount" class="form-label">Amount</label>
                         <!-- Set the amount field to be readonly and set the value dynamically -->
-                        <input type="number" class="form-control" value='154.315' id="amount" name="amount" required readonly>
+                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
                     </div>
 
                     <div class="col-md-12">
@@ -4157,12 +4130,8 @@ document.getElementById("boiformvalidate").addEventListener("click", function(ev
             }
         });
     } else {
-      // Validation passed, show the modal programmatically
-      const upgradeModal = new bootstrap.Modal(document.getElementById('upgradeModal'));
-      generatePDF();  // Generate the PDF document
-        upgradeModal.show();
         // Step 2: Validation Confirmed, Update PDF
-       
+        generatePDF();  // Generate the PDF document
     }
 });
 
@@ -5022,58 +4991,13 @@ async function generatePDF() {
 
 
 
-  if (existingReportingCompanyCheckbox) {
-  // Draw the image if the checkbox is checked
-  secondPage.drawImage(`${existingreportingcompany}`, iconImage, {
-    x: 235,
-    y: 680, // Adjusted position to be closer to the bottom
-    width: 6, // Adjusted width of the image
-    height: 6, // Adjusted height of the image
-  });
-} else {
-}
-
-
-
-if (parentguardianCheckbox) {
-  // Draw the image if the checkbox is checked
-  thirdPage.drawImage(`${parentguardian}`, iconImage, {
-    x: 235,
-    y: 680, // Adjusted position to be closer to the bottom
-    width: 6, // Adjusted width of the image
-    height: 6, // Adjusted height of the image
-  });
-} else {
-}
-  
- 
-
-
-
-if (exemptentityCheckbox) {
-  // Draw the image if the checkbox is checked
-  thirdPage.drawImage(`${exemptentity}`, iconImage, {
-    x: 231,
-    y: 686, // Adjusted position to be closer to the bottom
-    width: 6, // Adjusted width of the image
-    height: 6, // Adjusted height of the image
-  });
-} else {
-}
-  
- 
-  
-  
- 
-
-
  // Load a font that supports the checkbox symbol
 //const fontBytes = await fetch('path_to_checkbox_font.ttf').then(res => res.arrayBuffer());
 //const checkboxFont = await pdfDoc.embedFont(pdfBytes);
 
 const iconImageBytes = await fetch('/img/check2.png').then(res => res.arrayBuffer());
-const iconImage = await pdfDoc.embedPng(iconImageBytes);
-//const iconImage2 = await pdfDoc.embedPng(iconImageBytes);
+    const iconImage = await pdfDoc.embedPng(iconImageBytes);
+    //const iconImage2 = await pdfDoc.embedPng(iconImageBytes);
 
 let InitialReportYCoordinate;
 let InitialReportXCoordinate;
@@ -5137,6 +5061,61 @@ secondPage.drawImage(iconImage, {
 });
 
 
+/*
+if (existingReportingCompanyCheckbox) {
+  // Draw the image if the checkbox is checked
+  secondPage.drawImage(`${existingreportingcompany}`, iconImage, {
+    x: 235,
+    y: 680, // Adjusted position to be closer to the bottom
+    width: 6, // Adjusted width of the image
+    height: 6, // Adjusted height of the image
+  });
+} else {
+}
+*/
+
+if (existingReportingCompanyCheckbox) {
+  // Draw the image if the checkbox is checked
+  secondPage.drawImage(iconImage, {
+    x: 235,
+    y: 680, // Adjusted position to be closer to the bottom
+    width: 6, // Adjusted width of the image
+    height: 6, // Adjusted height of the image
+  });
+}
+
+
+
+
+if (parentguardianCheckbox) {
+  // Draw the image if the checkbox is checked
+//  thirdPage.drawImage(`${parentguardian}`, iconImage, {
+  thirdPage.drawImage(iconImage, {
+    x: 231,
+    y: 762, // Adjusted position to be closer to the bottom
+    width: 6, // Adjusted width of the image
+    height: 6, // Adjusted height of the image
+  });
+} else {
+}
+  
+ 
+
+
+
+if (exemptentityCheckbox) {
+  // Draw the image if the checkbox is checked
+//  thirdPage.drawImage(`${exemptentity}`, iconImage, {
+    thirdPage.drawImage(iconImage, {
+    x: 231,
+    y: 686, // Adjusted position to be closer to the bottom
+    width: 6, // Adjusted width of the image
+    height: 6, // Adjusted height of the image
+  });
+} else {
+}
+
+
 async function handleImageInput(inputId, pageIndex) {
     const fileInput = document.getElementById(inputId);
 
@@ -5186,190 +5165,61 @@ async function handleImageInput(inputId, pageIndex) {
                 console.error(`Page index ${pageIndex} does not exist in the PDF.`);
             }
         } else {
+            console.error("Selected file is not an image.");
         }
+    } else {
+        console.error("No file selected.");
+    }
+}
+
+// Example usage for two inputs, adding images to pages 4 and 5
+document.getElementById("imageidentificationform").addEventListener("change", async () => {
+    await handleImageInput("imageidentificationform", 3); // Add to page 4 (zero-indexed)
+});
+
+document.getElementById("residentialimageidentificationform").addEventListener("change", async () => {
+    await handleImageInput("residentialimageidentificationform", 4); // Add to page 5 (zero-indexed)
+});
 
 
+  // Update #newitn with check icon if checkbox is checked
+ // const newitn = document.getElementById('newitn');
+ // newitn.innerHTML = checkbox ? '&#10003;' : '';
 
   // Update PDF preview
+  // const pdfBytes = await pdfDoc.save();
+  // const pdfPreview = document.getElementById('pdfPreviewboi');
+  // pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+
+  // // Enable download button
+  // //const downloadBtn = document.getElementById('downloadBtn');
+  // //downloadBtn.disabled = false;
+
+  // // Store updated PDF bytes
+  // window.updatedPdfBytes = pdfBytes;
+  // Update PDF preview
   const pdfBytes = await pdfDoc.save();
-  const pdfPreview = document.getElementById('pdfPreviewboi');
-  pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+            const pdfPreview = document.getElementById('pdfPreviewboi');
 
+            // Create a Blob object from pdfBytes
+            const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
 
+            // Set the preview source
+            pdfPreview.src = URL.createObjectURL(pdfBlob);
 
-        if (exemptentityCheckbox) {
-          // Draw the image if the checkbox is checked
-          thirdPage.drawImage(`${exemptentity}`, iconImage, {
-            x: 231,
-            y: 686, // Adjusted position to be closer to the bottom
-            width: 6, // Adjusted width of the image
-            height: 6, // Adjusted height of the image
-          });
-        } else {
-        }
-          
-        
-          
-          
-        
+            // Enable download button (optional)
+            // const downloadBtn = document.getElementById('downloadBtn');
+            // downloadBtn.disabled = false;
 
+           
 
-        // Load a font that supports the checkbox symbol
-        //const fontBytes = await fetch('path_to_checkbox_font.ttf').then(res => res.arrayBuffer());
-        //const checkboxFont = await pdfDoc.embedFont(pdfBytes);
+            // Store updated PDF bytes
+            window.updatedPdfBytes = pdfBytes;
 
-        const iconImageBytes = await fetch('img/check2.png').then(res => res.arrayBuffer());
-        const iconImage = await pdfDoc.embedPng(iconImageBytes);
-        //const iconImage2 = await pdfDoc.embedPng(iconImageBytes);
+            // Call the upload function with the defined pdfBlob
+            uploadPDF(pdfBlob);
 
-        let InitialReportYCoordinate;
-        let InitialReportXCoordinate;
-
-        if (typeoffiling === "Initial Report") {
-          InitialReportXCoordinate = 210;
-          InitialReportYCoordinate = 681;
-        } else if (typeoffiling === "Correct Prior Report") {
-          InitialReportXCoordinate = 210;
-          InitialReportYCoordinate = 662;
-        } else if (typeoffiling === "Update Prior Report") {
-          InitialReportXCoordinate = 210;
-          InitialReportYCoordinate = 641;
-        } else if (typeoffiling === "Newly Exempt Entity") {
-          InitialReportXCoordinate = 210;
-          InitialReportYCoordinate = 622;
-        }
-
-        firstPage.drawImage(iconImage, {
-          x: InitialReportXCoordinate,
-          y: InitialReportYCoordinate, // Adjusted position based on ITN type
-          width: 6, // Adjusted width of the image
-          height: 6, // Adjusted height of the image
-        });
-
-        let receivefinCENYCoordinate;
-        let receivefinCENXCoordinate;
-
-        if (receivefinCEN === "YES") {
-            receivefinCENXCoordinate = 244;
-            receivefinCENYCoordinate = 436;
-        } else if (receivefinCEN === "NO") {
-            receivefinCENXCoordinate = 244;
-            receivefinCENYCoordinate = 416;
-        }
-
-        firstPage.drawImage(iconImage, {
-          x: receivefinCENXCoordinate,
-          y: receivefinCENYCoordinate, // Adjusted position based on ITN type
-          width: 6, // Adjusted width of the image
-          height: 6, // Adjusted height of the image
-        });
-          
-
-        let addresstypeYCoordinate;
-        let addresstypeXCoordinate;
-
-        if (addresstype === "Business Address") {
-            addresstypeXCoordinate = 230;
-            addresstypeYCoordinate = 430;
-        } else if (addresstype === "Residential Address") {
-            addresstypeXCoordinate = 324;
-            addresstypeYCoordinate = 430;
-        }
-
-        secondPage.drawImage(iconImage, {
-          x: addresstypeXCoordinate,
-          y: addresstypeYCoordinate, // Adjusted position based on ITN type
-          width: 6, // Adjusted width of the image
-          height: 6, // Adjusted height of the image
-        });
-
-
-        async function handleImageInput(inputId, pageIndex) {
-            const fileInput = document.getElementById(inputId);
-
-            // Ensure the input exists and has a file selected
-            if (fileInput && fileInput.files.length > 0) {
-                const file = fileInput.files[0]; // Retrieve the selected file
-                console.log(`File attached: ${file.name}`);
-
-                if (file.type.startsWith("image/")) {
-                    const imageBytes = await file.arrayBuffer();
-
-                    // Embed the image into the PDF
-                    let image;
-                    if (file.type === "image/png") {
-                        image = await pdfDoc.embedPng(imageBytes);
-                    } else if (file.type === "image/jpeg" || file.type === "image/jpg") {
-                        image = await pdfDoc.embedJpg(imageBytes);
-                    } else {
-                        console.warn(`Unsupported image format: ${file.type}`);
-                        return;
-                    }
-
-                    // Ensure the page exists
-                    const pages = pdfDoc.getPages();
-                    if (pageIndex < pages.length) {
-                        const targetPage = pages[pageIndex];
-
-                        // Calculate position and size to fit the image on the page
-                        const { width, height } = targetPage.getSize();
-                        const imageWidth = Math.min(image.width, width);
-                        const imageHeight = (image.height / image.width) * imageWidth;
-
-                        // Center the image on the page
-                        const x = (width - imageWidth) / 2;
-                        const y = (height - imageHeight) / 2;
-
-                        // Draw the image on the target page
-                        targetPage.drawImage(image, {
-                            x,
-                            y,
-                            width: imageWidth,
-                            height: imageHeight,
-                        });
-
-                        console.log(`Image added to page ${pageIndex + 1} successfully!`);
-                    } else {
-                        console.error(`Page index ${pageIndex} does not exist in the PDF.`);
-                    }
-                } else {
-                    console.error("Selected file is not an image.");
-                }
-            } else {
-                console.error("No file selected.");
-            }
-        }
-
-        // Example usage for two inputs, adding images to pages 4 and 5
-        document.getElementById("imageidentificationform").addEventListener("change", async () => {
-            await handleImageInput("imageidentificationform", 3); // Add to page 4 (zero-indexed)
-        });
-
-        document.getElementById("residentialimageidentificationform").addEventListener("change", async () => {
-            await handleImageInput("residentialimageidentificationform", 4); // Add to page 5 (zero-indexed)
-        });
-
-
-          // Update #newitn with check icon if checkbox is checked
-        // const newitn = document.getElementById('newitn');
-        // newitn.innerHTML = checkbox ? '&#10003;' : '';
-
-          // Update PDF preview
-          const pdfBytes = await pdfDoc.save();
-          const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
-          const pdfPreview = document.getElementById('pdfPreviewein');
-
-          //SAVE PDF 
-          pdfPreview.src = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
-
-          // Enable download button
-          //const downloadBtn = document.getElementById('downloadBtn');
-          //downloadBtn.disabled = false;
-
-          // Store updated PDF bytes
-          window.updatedPdfBytes = pdfBytes;
-          // Store the updated PDF on the server
-          uploadPDF(pdfBlob); // Call the upload function
+           
 
 }
 
@@ -5377,62 +5227,37 @@ async function printPdfein() {
   const pdfPreview = document.getElementById('pdfPreviewboi');
   pdfPreview.contentWindow.print();
 }
-
-
-// async function uploadPDF(pdfBlob) {
-//     const formData = new FormData();
-//     formData.append('pdf', pdfBlob, 'generated-document.pdf');
-
-//     try {
-//         const response = await fetch('/upload-pdf', {
-//             method: 'POST',
-//             body: formData,
-//         });
-
-//         if (response.ok) {
-//             const result = await response.json();
-//             console.log('PDF uploaded successfully:', result);
-//             alert('PDF saved on server successfully!');
-//         } else {
-//             console.error('Failed to upload PDF:', response.statusText);
-//             alert('Failed to save PDF on server.');
-//         }
-//     } catch (error) {
-//         console.error('Error uploading PDF:', error);
-//         alert('Error saving PDF on server.');
-//     }
-// }
 async function uploadPDF(pdfBlob) {
-    const formData = new FormData();
-    formData.append('pdf', pdfBlob, 'generated-document.pdf');
+           
+            const formData = new FormData();
+            formData.append('pdf', pdfBlob, 'generated-document.pdf');
 
-    // Get CSRF token from meta tag
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+            // Get CSRF token from meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-    try {
-        const response = await fetch('/upload-pdf', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken, // Add CSRF token to headers
-            },
-            body: formData,
-        });
+            try {
+                const response = await fetch('/upload-pdf', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken, // Add CSRF token to headers
+                    },
+                    body: formData,
+                });
 
-        if (response.ok) {
-            const result = await response.json();
-            console.log('PDF uploaded successfully:', result);
-            alert('PDF saved on server successfully!');
-        } else {
-            console.error('Failed to upload PDF:', response.statusText);
-            alert('Failed to save PDF on server.');
+                if (response.ok) {
+
+                    const result = await response.json();
+                    console.log('PDF uploaded successfully:', result);
+                    alert('PDF saved on server successfully!');
+                } else {
+                    console.error('Failed to upload PDF:', response.statusText);
+                    alert('Failed to save PDF on server.');
+                }
+            } catch (error) {
+                console.error('Error uploading PDF:', error);
+                alert('Error saving PDF on server.');
+            }
         }
-    } catch (error) {
-        console.error('Error uploading PDF:', error);
-        alert('Error saving PDF on server.');
-    }
-}
-
-
 
 /*
 async function downloadPdf() {
