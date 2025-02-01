@@ -107,7 +107,7 @@
 
             <div class="col-md-5 cardside">
               <small>You'll Pay</small>
-            <h4  class="payamount" id="amount" name="amount"></h4>
+            <h4  class="payamount" id="amount2" name="amount2"></h4>
             <p><small>Pay with Credit/Debit Card Fee "3.5% plus 10c" (a non-refundable portal processing fee applies)</small></p>
             <div class="d-table bg-white p-3 text-center secureimg">
                     <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
@@ -157,6 +157,11 @@
                         <input type="text" class="form-control" id="card_zipcode" name="card_zipcode" required>
                     </div>
 
+                    <div class="mb-3" style="display:none">
+                        <label for="amount" class="form-label">Amount</label>
+                        <!-- Set the amount field to be readonly and set the value dynamically -->
+                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                    </div>
                     <div class="col-md-12">
                 <button type="submit" class="btn btn-primary w-100">Pay Now!</button>
                 </div>
@@ -190,10 +195,12 @@
                 document.getElementById('package_id').value = packageId;
                 document.getElementById('packageNameDisplay').innerText = `Package: ${packageName}`;
                 
-                // Set the amount to the package price and make it readonly
+                 // Set the amount to the package price and make it readonly
+                 const amountField2 = document.getElementById('amount2');
                 const amountField = document.getElementById('amount');
-//                amountField.value = packagePrice; // Set the price dynamically
-amountField.textContent = packagePrice; // Set the price dynamically
+                amountField2.textContent = "$" + packagePrice; // Set the price dynamically
+                amountField.value = packagePrice; // Set the price dynamically
+                amountField.setAttribute('readonly', true); // Prevent editing
 
 //amountField.setAttribute('readonly', true); // Prevent editing
             });
