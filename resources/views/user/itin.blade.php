@@ -2796,7 +2796,7 @@ const { PDFDocument, rgb, StandardFonts } = PDFLib;
                                 const amountField2 = document.getElementById('amount2');
                 const amountField = document.getElementById('amount');
                 amountField2.textContent = "$" + packagePrice; // Set the price dynamically
-                amountField.textContent = "$" + packagePrice; // Set the price dynamically
+                amountField.value = packagePrice; // Set the price dynamically
                 amountField.setAttribute('readonly', true); // Prevent editing
 
             });
