@@ -4991,58 +4991,13 @@ async function generatePDF() {
 
 
 
-  if (existingReportingCompanyCheckbox) {
-  // Draw the image if the checkbox is checked
-  secondPage.drawImage(`${existingreportingcompany}`, iconImage, {
-    x: 235,
-    y: 680, // Adjusted position to be closer to the bottom
-    width: 6, // Adjusted width of the image
-    height: 6, // Adjusted height of the image
-  });
-} else {
-}
-
-
-
-if (parentguardianCheckbox) {
-  // Draw the image if the checkbox is checked
-  thirdPage.drawImage(`${parentguardian}`, iconImage, {
-    x: 235,
-    y: 680, // Adjusted position to be closer to the bottom
-    width: 6, // Adjusted width of the image
-    height: 6, // Adjusted height of the image
-  });
-} else {
-}
-  
- 
-
-
-
-if (exemptentityCheckbox) {
-  // Draw the image if the checkbox is checked
-  thirdPage.drawImage(`${exemptentity}`, iconImage, {
-    x: 231,
-    y: 686, // Adjusted position to be closer to the bottom
-    width: 6, // Adjusted width of the image
-    height: 6, // Adjusted height of the image
-  });
-} else {
-}
-  
- 
-  
-  
- 
-
-
  // Load a font that supports the checkbox symbol
 //const fontBytes = await fetch('path_to_checkbox_font.ttf').then(res => res.arrayBuffer());
 //const checkboxFont = await pdfDoc.embedFont(pdfBytes);
 
 const iconImageBytes = await fetch('/img/check2.png').then(res => res.arrayBuffer());
-const iconImage = await pdfDoc.embedPng(iconImageBytes);
-//const iconImage2 = await pdfDoc.embedPng(iconImageBytes);
+    const iconImage = await pdfDoc.embedPng(iconImageBytes);
+    //const iconImage2 = await pdfDoc.embedPng(iconImageBytes);
 
 let InitialReportYCoordinate;
 let InitialReportXCoordinate;
@@ -5104,6 +5059,61 @@ secondPage.drawImage(iconImage, {
   width: 6, // Adjusted width of the image
   height: 6, // Adjusted height of the image
 });
+
+
+/*
+if (existingReportingCompanyCheckbox) {
+  // Draw the image if the checkbox is checked
+  secondPage.drawImage(`${existingreportingcompany}`, iconImage, {
+    x: 235,
+    y: 680, // Adjusted position to be closer to the bottom
+    width: 6, // Adjusted width of the image
+    height: 6, // Adjusted height of the image
+  });
+} else {
+}
+*/
+
+if (existingReportingCompanyCheckbox) {
+  // Draw the image if the checkbox is checked
+  secondPage.drawImage(iconImage, {
+    x: 235,
+    y: 680, // Adjusted position to be closer to the bottom
+    width: 6, // Adjusted width of the image
+    height: 6, // Adjusted height of the image
+  });
+}
+
+
+
+
+if (parentguardianCheckbox) {
+  // Draw the image if the checkbox is checked
+//  thirdPage.drawImage(`${parentguardian}`, iconImage, {
+  thirdPage.drawImage(iconImage, {
+    x: 231,
+    y: 762, // Adjusted position to be closer to the bottom
+    width: 6, // Adjusted width of the image
+    height: 6, // Adjusted height of the image
+  });
+} else {
+}
+  
+ 
+
+
+
+if (exemptentityCheckbox) {
+  // Draw the image if the checkbox is checked
+//  thirdPage.drawImage(`${exemptentity}`, iconImage, {
+    thirdPage.drawImage(iconImage, {
+    x: 231,
+    y: 686, // Adjusted position to be closer to the bottom
+    width: 6, // Adjusted width of the image
+    height: 6, // Adjusted height of the image
+  });
+} else {
+}
 
 
 async function handleImageInput(inputId, pageIndex) {
