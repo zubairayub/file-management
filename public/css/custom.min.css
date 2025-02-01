@@ -81,9 +81,9 @@
     .was-validated .form-control:valid, .form-control.is-valid{border-color:#121212!important;background-image:none!important}
     .accordion-collapse{background-color: #00800011;}
     .accordion-button{border-radius: 4px!important;}
-    input.form-control,select.form-control,textarea.form-control,.form-check-input {border-color:#121212;}
+    input.form-control,select.form-control,textarea.form-contro l,.form-check-input {border-color:#121212;}
     .was-validated .form-control:invalid, .form-control.is-invalid{
-      background: var(--bs-primary);color:#FFFFFF}
+      background:#c0322111!important}
     
     
     @import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
@@ -163,12 +163,44 @@
       font-size: 20px;
       font-weight: 700}
       .formarea  input{background-color: #fefefe; color:#333333;width: 100%; border:1px solid #eaeaea!important;border-radius: 0!important;}
-      .formarea  input:focus{background-color: #00276e; color:#FFFFFF;}
-      .cardside{background-color: #00276e; color:#FFFFFF; min-height: 620px; background-image: url(/img/card.webp); background-repeat: no-repeat; background-position: top center;display: flex;align-items: center;padding: 30px 0 0;flex-flow: column;justify-content: end;order:2}
+      .formarea  input:focus{background-color: #00276e11; color:#121212;}
+      .cardside{background-color: #00276e; color:#FFFFFF; min-height: 680px; background-image: url(/img/card.webp); background-repeat: no-repeat; background-position: top center;display: flex;align-items: center;padding: 30px 0 0;flex-flow: column;justify-content: end;order:2}
       .cardside p{line-height: normal; text-align: center;}
       .cardside .payamount{text-align: center; font-size: 40px; font-weight: 600; color:#FFFFFF;}
       .formareacontent{background-color: #f3f7f8;}
+      .text-bold{font-weight: bold!important;}
+      .pricebox h2 small{font-size: 24px;}
+      .pricedata{font-size: 16px;}
+      .pricedata li{margin-bottom: 10px;}
+      .pricebox.card{background-color: #FFFFFF;
+        border-color: #1E3264;
+        transition-duration: 0.1s;
+        padding: 0px 0px 0px 0px;
+        border-style: solid;
+        border-width: 5px 5px 5px 5px;
+        border-radius: 10px;
+        }
+        .pricebox.card .services{background: #dbedf2;padding: 10px 0 0;}
+        .price-header{
+          padding:20px;
+          background: #f3f7f8;
+         }
+        .packageprice{color:#2A2A2A;font-weight: 600!important;}
+        .packagename{color:#B22234}
+        li.space-item {
+          color: red;
+          display: none
+      }
+      .services{display: flex;
+            flex-flow: wrap;
+            align-items: center;
+            justify-content: center;}
+      li.space-item+li{ border-top:1px solid #eaeaea; margin-top: 30px!important; padding-top:30px!important;font-weight: 700;color:#121212;}
+      .packageprice{margin-bottom: 0!important;}
+      .btn.btn-primary.btn-lg.w-100{border-radius: 0!important;}
+      .btn.btn-primary.btn-lg.w-100:hover,.formareacontent .btn.btn-primary.w-100:hover{background: #B22234!important;}
       @media (max-width:768px){
+        .pricebox.card{padding:29px}
           .table{max-width: 100%; overflow: auto!important;white-space: normal!important; display: block;}
           .table thead,.table>tbody, td, tr, th{white-space: normal!important;}
           body,.formarea{padding:0!important}
