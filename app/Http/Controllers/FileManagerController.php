@@ -26,6 +26,7 @@ class FileManagerController extends Controller
             {
                 // Validate the folder name
                 $request->validate(['name' => 'required|string|max:255']);
+                $user = Auth::user();
 
                 // Create the folder in the file system (storage/app/public by default)
                 $folderName = $request->name;

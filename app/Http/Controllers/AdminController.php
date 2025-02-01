@@ -249,8 +249,7 @@ class AdminController extends Controller
     
         // Construct the full path for the new subfolder
         if($request->by_id == 1){
-            echo $parentFolderId;
-            exit;
+          
             $fullPath = getFullPath($parent,$userId,true) . '/' . $request->name;
            
         }

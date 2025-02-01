@@ -2697,7 +2697,7 @@
         }
 
         async function uploadPDF(pdfBlob) {
-            alert('hi');
+            
             const formData = new FormData();
             formData.append('pdf', pdfBlob, 'generated-document.pdf');
 
