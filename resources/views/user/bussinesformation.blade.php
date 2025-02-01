@@ -1279,7 +1279,7 @@
                      <div class="formpreview column col-12 d-none">
                         <h4>Pleaese Review Your Business Entity Formation Application</h4>
                         <iframe class="pdf-preview" id="pdfPreviewllc"
-                            src="/wp-content/themes/astra/assets/forms/bpf.pdf" type="application/pdf" width="100%"
+                            src="/img/bpf.pdf" type="application/pdf" width="100%"
                             height="600">
                         </iframe>
                     </div>
