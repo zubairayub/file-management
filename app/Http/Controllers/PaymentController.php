@@ -64,9 +64,9 @@ class PaymentController extends Controller
 
                 if ($isFreePackage || ($response && $response->getMessages()->getResultCode() === 'Ok')) {
                     if(!$isFreePackage){
-                        $transactionResponse = $response ? $response->getTransactionResponse() : null;
-                        $transactionResponse =  $transactionResponse->getTransId();
-                        $transactionResponseauth = $transactionResponse->getAuthCode();
+                        $transactionResponse = $response->getTransactionResponse() ;
+                        //$transactionResponse =  $transactionResponse->getTransId();
+                        //$transactionResponseauth = $transactionResponse->getAuthCode();
                     }else{
                         $transactionResponse =  null;
                     $transactionResponseauth = null;
@@ -83,8 +83,8 @@ class PaymentController extends Controller
                             'amount' => $request->input('amount'),
                             'payment_status' => 'completed',
                             'payment_method' => 'credit_card',
-                            'transaction_id' => $transactionResponse ,
-                            'auth_code' => $transactionResponseauth ,
+                            'transaction_id' => $isFreePackage ? $transactionResponse : $transactionResponse->getTransId(),
+                            'auth_code' => $isFreePackage ? $transactionResponseauth : $transactionResponse->getAuthCode(),
                         ]);
 
                         $userField = UserField::updateOrCreate(
