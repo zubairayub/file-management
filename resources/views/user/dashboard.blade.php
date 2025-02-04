@@ -253,7 +253,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header">
@@ -314,8 +314,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                </div> -->
+                <!-- <div class="row">
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
@@ -378,15 +378,15 @@
                             <div id="admin-chart-03" class="admin-chart-03"></div>
                             <div class="card-body">
                                 <h5 class="mb-0 text-center">Storage Details</h5>
-                                <!-- Add data-storage attribute to store the used storage value -->
+                                
                                 <div class="my-4 pb-2" id="storage-chart" data-storage="{{ $quotaUsed }}"
-                                    data-total-storage="{{ $totalStorage }}"></div> <!-- Example with 75MB used -->
+                                    data-total-storage="{{ $totalStorage }}"></div> 
                             </div>
 
                         </div>
                     </div>
 
-                </div>
+                </div> -->
             </div>
 
             <div class="col-lg-4">
@@ -404,13 +404,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-success engagebox">
+                <!-- <div class="card bg-success engagebox">
                     <div class="card-body">
                         <h3 class="mb-0 text-white text-center">Your Personalized Tax Engagement Solution</h3>
                         <p class="text-white  text-center pt-5">Estimate Tax Savings</p>
                         <h2 class="text-white counter mb-0  text-center">$300.00</h2>
                     </div>
-                </div>
+                </div> -->
+                <div class="col-lg-12">
+                        <div class="card bg-white">
+                            <div id="admin-chart-03" class="admin-chart-03"></div>
+                            <div class="card-body">
+                                <h5 class="mb-0 text-center">Storage Details</h5>
+                                
+                                <div class="my-4 pb-2" id="storage-chart" data-storage="{{ $quotaUsed }}"
+                                    data-total-storage="{{ $totalStorage }}"></div> 
+                            </div>
+
+                        </div>
+                    </div>
 
                 <div class="col-lg-12">
                     <div class="card engagebox"
