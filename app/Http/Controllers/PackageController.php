@@ -103,7 +103,7 @@ public function store(Request $request)
         $validated = $request->validate([
             'package_name' => 'required|string|max:255',
             'quota' => 'required|numeric|min:1', // Ensure quota is numeric and at least 1
-            'price' => 'required|numeric|min:0.01', // Ensure price is numeric and greater than zero
+            'price' => 'required|numeric|min:0', // Ensure price is numeric and greater than zero
             'services' => 'nullable|array', // Validate services as an optional array
             'services.*' => 'string|distinct', // Ensure services are unique and strings
             'features' => 'required|string', // Ensure features are required and a string

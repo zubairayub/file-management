@@ -60,9 +60,9 @@
     <!-- Sub-Subfolder Creation Form -->
     <form action="{{ route('admin.createSubFolderForUser', ['userId' => $user->id, 'parentFolderId' => $subfolder->id]) }}" method="POST" class="mt-3">
         @csrf
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <input type="text" id="name" name="name" class="form-control" placeholder="Sub-Subfolder Name" required>
-        </div>
+        </div> -->
 
         <div class="mb-3 form-check" hidden>
             <input type="checkbox" id="is_subfolder" name="is_subfolder" class="form-check-input" checked>
@@ -74,9 +74,9 @@
             <label for="by_id" class="form-check-label">By ID</label>
         </div>
 
-        <div class="d-grid">
+        <!-- <div class="d-grid">
             <button type="submit" class="btn btn-primary">Create folder</button>
-        </div>
+        </div> -->
     </form>
     <div class="mt-4">
     <button class="btn btn-primary ms-1" data-bs-toggle="modal" data-bs-target="#uploadModal" type="button" 

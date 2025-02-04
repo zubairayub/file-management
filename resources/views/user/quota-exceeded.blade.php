@@ -24,7 +24,7 @@
             <p>Choose the package that best suits your business or personal tax requirements, and get started with expert assistance today.</p>
             <div class="row mt-4">
             @foreach($packages as $package)
-            <div class="col-md-4  col-sm-6 mb-4">
+            <div class="col-md-4  col-sm-6 mb-4" >
                 <div class="pricebox card text-center shadow-lg rounded-3">  
                 <div class="price-header">
                 <h5 class="packagename text-bold ">{{ $package->package_name }}</h5>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="text-center">
             <!-- Check if the user is using the current package -->
-            @if(auth()->user()->userPackages->contains('package_id', $package->id))
+            <!-- @if(auth()->user()->userPackages->contains('package_id', $package->id))
                 <button class="btn btn-secondary btn-lg w-100" disabled>Current Plan</button>
             @else
                 <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#upgradeModal" 
@@ -84,7 +84,24 @@
                 data-package-name="{{ $package->package_name }}"
                 data-package-price="{{ $package->price }}" 
                 class="btn btn-primary btn-lg w-100">Buy Now!</a>
-            @endif
+            @endif -->
+            @if(auth()->user()->userPackages->contains('package_id', $package->id))
+    <button class="btn btn-secondary btn-lg w-100" disabled>Current Plan</button>
+@else
+    @if($package->price == 0)
+        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#freePackageModal" 
+           data-package-id="{{ $package->id }}" 
+           data-package-name="{{ $package->package_name }}"
+           class="btn btn-success btn-lg w-100">Get for Free</a>
+    @else
+        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#upgradeModal" 
+           data-package-id="{{ $package->id }}" 
+           data-package-name="{{ $package->package_name }}"
+           data-package-price="{{ $package->price }}" 
+           class="btn btn-primary btn-lg w-100">Buy Now!</a>
+    @endif
+@endif
+
         </div>
                 </div>
 </div>
@@ -164,7 +181,81 @@
                     <div class="col-md-12">
                 <button type="submit" class="btn btn-primary w-100">Pay Now!</button>
                 </div>
+                </form>
                 
+                </div> 
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade formarea" id="freePackageModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-body">
+            <div class="d-flex align-items-start justify-content-start">
+
+            <div class="col-md-5 cardside">
+              <small>You'll Pay</small>
+            <h4  class="payamount" id="amount2" name="amount2"></h4>
+            <p><small>Pay with Credit/Debit Card Fee "3.5% plus 10c" (a non-refundable portal processing fee applies)</small></p>
+            <div class="d-table bg-white p-3 text-center secureimg">
+                    <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
+                    </div>
+          </div>
+                <div class="formareacontent col-md-7">
+                    <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
+                    <div class="packgename" id="packageNameDisplay">Service: </div>
+                    @csrf
+                    <!-- Hidden Field for Package ID -->
+                    <input type="hidden" id="package_id" name="package_id" value="1">
+                    <input type="hidden" id="package_name" name="package_name" value="BOI Reporting">
+                    <input type="hidden" id="package_type" name="package_type" value="one-time">
+                    <!-- <div class="mb-3 col-md-12">
+                        <label for="card_name" class="form-label">Card Holder Name</label>
+                        <input type="text" class="form-control" id="card_name" name="card_name" required>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required maxlength="16">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="expiry_date" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="card_code" class="form-label">Card Code (CVV)</label>
+                        <input type="password" class="form-control" id="card_code" name="card_code" required maxlength="3">
+                    </div> -->
+                    <hr>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="card_address" name="card_address" required>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="card_city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="card_city" name="card_city" required>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="card_state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="card_state" name="card_state" required>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="card_zipcode" class="form-label">Zipcode</label>
+                        <input type="text" class="form-control" id="card_zipcode" name="card_zipcode" required>
+                    </div>
+
+                    <div class="mb-3" style="display:none">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount" value="0" readonly>
+                    </div>
+                    <div class="col-md-12">
+                <button type="submit" class="btn btn-primary w-100">Pay Now!</button>
+                </div>
+                </form>
                 </div> 
                 </div>
                 </div>

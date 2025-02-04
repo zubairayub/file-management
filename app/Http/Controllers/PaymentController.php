@@ -19,9 +19,12 @@ class PaymentController extends Controller
 {
     public function createTransaction(Request $request)
     {
+        
         $apiLoginId = config('authorize.api_login_id');
         $transactionKey = config('authorize.transaction_key');
-
+        $amount = $request->input('amount');
+        $isFreePackage = ($amount == 0); // Check if the package is free
+        if(!$isFreePackage){
         // Prepare Credit Card Information
         $creditCard = new CreditCardType();
         $creditCard->setCardNumber($request->input('card_number'));
@@ -57,10 +60,19 @@ class PaymentController extends Controller
         // Execute the API Request
         $controller = new CreateTransactionController($createTransactionRequest);
         $response = $controller->executeWithApiResponse(ANetEnvironment::SANDBOX);
+    }
 
-                if ($response && $response->getMessages()->getResultCode() === 'Ok') {
-                    $transactionResponse = $response->getTransactionResponse();
-                    if ($transactionResponse && $transactionResponse->getResponseCode() == '1') {
+                if ($isFreePackage || ($response && $response->getMessages()->getResultCode() === 'Ok')) {
+                    if(!$isFreePackage){
+                        $transactionResponse = $response ? $response->getTransactionResponse() : null;
+                        $transactionResponse =  $transactionResponse->getTransId();
+                        $transactionResponseauth = $transactionResponse->getAuthCode();
+                    }else{
+                        $transactionResponse =  null;
+                    $transactionResponseauth = null;
+                    }
+                 
+                    if ($isFreePackage || ($transactionResponse && $transactionResponse->getResponseCode() == '1')) {
 
                         // Save order details to the database
                         $order = Order::create([
@@ -71,8 +83,8 @@ class PaymentController extends Controller
                             'amount' => $request->input('amount'),
                             'payment_status' => 'completed',
                             'payment_method' => 'credit_card',
-                            'transaction_id' => $transactionResponse->getTransId(),
-                            'auth_code' => $transactionResponse->getAuthCode(),
+                            'transaction_id' => $transactionResponse ,
+                            'auth_code' => $transactionResponseauth ,
                         ]);
 
                         $userField = UserField::updateOrCreate(
@@ -99,15 +111,17 @@ class PaymentController extends Controller
 
                         // Check if the package is monthly or one-time
                         if ($request->input('package_type') === 'monthly') {
+                            $package_type = $request->input('package_type');
                             $expiryDate = now()->addMonth(); // Set expiry date for monthly packages
                         } else {
+                            $package_type = 'one_time';
                             $expiryDate = now(); // For one-time packages, set expiry date to the current date or set as null (no expiry)
                         }
 
                         UserPackage::create([
                             'user_id' => $request->user()->id, // User ID from the request
                             'package_id' => $request->input('package_id'), // Package ID from the request
-                            'package_type' => $request->input('package_type'), // Package type, could be 'one_time' or 'monthly'
+                            'package_type' => $package_type, // Package type, could be 'one_time' or 'monthly'
                             'expiry_date' => $expiryDate, // Set expiry date dynamically
                         ]);
                         $paymentSuccess = true;
