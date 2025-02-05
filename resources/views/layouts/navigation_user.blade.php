@@ -59,7 +59,7 @@
                             <span class="item-name">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('packages.index') }}">
                             <i class="icon">
                                 <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                
@@ -69,7 +69,7 @@
                             </i>
                             <span class="item-name">Manage Packages</span>
                         </a>
-                    </li>
+                    </li> -->
 
                     <!-- <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">
@@ -135,19 +135,19 @@
                   
 
 
-                    <!-- <li class="nav-item static-item">
+                    <li class="nav-item static-item">
                         <a class="nav-link static-item disabled text-start" href="#" tabindex="-1">
-                            <span class="default-icon">Manage Users Document</span>
+                            <span class="default-icon">Services</span>
                             <span class="mini-icon">-</span>
                         </a>
-                    </li> -->
+                    </li>
                     @php
     // Initialize an array to store all folder names that the user has access to
     $folderNames = [];
-   
+
     // Loop through the purchased packages for the logged-in user
     foreach(auth()->user()->userPackages as $userPackage) { @endphp
-        
+       
                     @php
         $package = $userPackage->package; // Get the related package
         $services = $package->services; // Get the services field
@@ -174,13 +174,13 @@
 @endphp
 
 @foreach($folders as $folder)
-    <!-- <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('folder.showSubFolders', $folder->id) }}">
-             Generate random color for each icon 
-            <i class="{{ $folder->icon }}" style="color: {{ sprintf('#%06X', mt_rand(0, 0xFFFFFF)) }};"></i>  Random color applied here 
-            <span class="item-name">{{ $folder->name }}</span>  Display folder name 
+            <!-- Generate random color for each icon -->
+            <i class="{{ $folder->icon }}" style="color: {{ sprintf('#%06X', mt_rand(0, 0xFFFFFF)) }};"></i> <!-- Random color applied here -->
+            <span class="item-name">{{ $folder->name }}</span> <!-- Display folder name -->
         </a>
-    </li> -->
+    </li>
 @endforeach
  <!-- Check if the logged-in user is an admin -->
  @if(auth()->user()->role === 'admin')

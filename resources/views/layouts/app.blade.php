@@ -44,10 +44,14 @@
     </div>
     <!-- loader END -->
       
-     <aside class="sidebar sidebar-base " data-toggle="main-sidebar" data-sidebar="responsive">
-     @include('layouts.navigation')
-    
-    </aside>
+    <aside class="sidebar sidebar-base" data-toggle="main-sidebar" data-sidebar="responsive">
+    @if(auth()->check() && auth()->user()->role === 'customer')
+        @include('layouts.navigation_user')
+    @else
+        @include('layouts.navigation')
+    @endif
+</aside>
+
     <main class="main-content">
     @if(auth()->user()->role == 'admin')
     @include('partials.header')  <!-- Include header for admin -->
