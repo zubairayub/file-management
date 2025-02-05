@@ -1,64 +1,117 @@
 <?php
+
 use App\Models\Package;
 use App\Models\Folder;
 use App\Models\SubFolder;
 use App\Models\User;
+use App\Models\UserPackage;
+use Illuminate\Support\Facades\Auth;
 
-
-if (! function_exists('checkQuota')) {
+if (!function_exists('checkQuota')) {
     /**
      * Check if the user has exceeded their quota.
      *
-     * @param  int  $quotaUsed
-     * @param  int  $packageQuota
      * @return bool
      */
-     function checkQuota()
+    function checkQuota()
     {
-        // Get the authenticated user
-        $user = auth()->user();
+        $user = Auth::user();
 
-        // Find the associated package based on the user's package_id
-        $package = Package::find($user->package_id);
-
-        // Check if the package exists
-        if ($package) {
-            // Compare the user's quota_used with the package's quota
-            if ($user->quota_used >= $package->quota) {
-                // Quota exceeded, return true
-                return true;
-            }
+        if (!$user) {
+            return false; // No user is logged in
         }
 
-        // If package is not found or quota is not exceeded, return false
-        return false;
-    }
+        // Get all user packages
+        $packages = UserPackage::where('user_id', $user->id)->with('package')->get();
 
+        if ($packages->isEmpty()) {
+            return true; // No valid package found, consider it as exceeded
+        }
+
+        // Calculate total allowed quota
+        $totalQuota = $packages->sum(fn($userPackage) => $userPackage->package->quota ?? 0);
+
+        return $user->quota_used >= $totalQuota;
+    }
 }
 
-if (! function_exists('getFullPath')) {
-    // Helper function to get full path recursively
-    function getFullPath($folder, $userId = null,$sub_folder = null)
+if (!function_exists('getFullPath')) {
+    /**
+     * Generate the full storage path for a folder or sub-folder.
+     *
+     * @param mixed $folder
+     * @param int|null $userId
+     * @param bool $sub_folder
+     * @return string
+     */
+    function getFullPath($folder, $userId = null, $sub_folder = false)
     {
-        // Use the provided userId, or fallback to Auth::id() if userId is null
         $userId = $userId ?? Auth::id();
 
-        if($sub_folder)
-        {
-            $parentFolder = SubFolder::findOrFail($folder);
-            return  $parentFolder->path;
-
+        if ($sub_folder) {
+            $parentFolder = SubFolder::find($folder);
+            return $parentFolder ? $parentFolder->path : '';
         }
+
         if ($folder->parent_folder_id) {
-            // Recursively build the path from parent folders
-            $parentFolder = Folder::findOrFail($folder->parent_folder_id);
-            return getFullPath($parentFolder, $userId) . '/' . $folder->name;  // Recursion without $this
-        } else {
-            // Base folder path for the specified user
-            $user = User::findOrFail($userId);
-          
-            return 'files/' . $user->id . '_' . str_replace(' ', '_', $user->name) . '/' . $folder->name;
+            $parentFolder = Folder::find($folder->parent_folder_id);
+            return $parentFolder ? getFullPath($parentFolder, $userId) . '/' . $folder->name : '';
         }
-    }
 
+        $user = User::find($userId);
+        return $user ? 'files/' . $user->id . '_' . str_replace(' ', '_', $user->name) . '/' . $folder->name : '';
+    }
+}
+
+if (!function_exists('getStorageDetails')) {
+    /**
+     * Retrieve user's storage usage and quota details.
+     *
+     * @return array
+     */
+    function getStorageDetails()
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return [
+                'quota_used' => 0,
+                'total_storage' => 0,
+            ];
+        }
+
+        // Get all user packages
+        $packages = UserPackage::where('user_id', $user->id)
+            ->when(function ($query) {
+                // Apply expiry date check only if package_type is not 'one_time'
+                return $query->where('package_type', '!=', 'one_time');
+            }, function ($query) {
+                return $query->where('expiry_date', '>=', now());
+            })
+            ->orWhere(function ($query) {
+                // If package_type is 'one_time', skip expiry check
+                return $query->where('package_type', 'one_time');
+            })
+            ->with('package')
+            ->get();
+
+
+
+
+        if ($packages->isEmpty()) {
+            return [
+                'quota_used' => 0,
+                'total_storage' => 0,
+            ];
+        }
+
+        // Calculate total storage quota assigned to the user
+        $totalStorage = $packages->sum(fn($userPackage) => $userPackage->package->quota ?? 0);
+        $quotaUsed = $user->quota_used ?? 0;
+
+        return [
+            'quota_used' => $quotaUsed,
+            'total_storage' => $totalStorage,
+        ];
+    }
 }

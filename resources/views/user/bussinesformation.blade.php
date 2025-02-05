@@ -1233,7 +1233,7 @@
                                         <div class="col-lg-12 mt-5 mb-5">
                                             <button type="button" class="btn btn-primary" id="reviewapplicationn">Review
                                                 Your Application</button>
-                                            <button type="submit" class="btn btn-success" data-package-id="9"
+                                            <button type="submit" class="btn btn-success" data-package-id="3"
                                                 data-package-name="Business Formation" data-package-price=""
                                                 id="llcformvalidate">Pay Now to Submit
                                                 Application</button>
@@ -1294,7 +1294,7 @@
                     <div class="packgename" id="packageNameDisplay">Service: </div>
                     @csrf
                     <!-- Hidden Field for Package ID -->
-                    <input type="hidden" id="package_id" name="package_id" value="9">
+                    <input type="hidden" id="package_id" name="package_id" value="3">
                     <input type="hidden" id="package_name" name="package_name" value="Business Formation">
                     <input type="hidden" id="package_type" name="package_type" value="one-time">
                     <div class="mb-3 col-md-12">
@@ -2686,37 +2686,41 @@
         }
 
         async function uploadPDF(pdfBlob) {
-            
-            const formData = new FormData();
-            formData.append('pdf', pdfBlob, 'Business-Formation.pdf');
-            
+    const formData = new FormData();
+    formData.append('pdf', pdfBlob, 'Business-Formation.pdf');
 
-            // Get CSRF token from meta tag
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
+    try {
+        const response = await fetch('/upload-pdf', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            let errorMessage = 'Failed to upload PDF.';
             try {
-                const response = await fetch('/upload-pdf', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken, // Add CSRF token to headers
-                    },
-                    body: formData,
-                });
-
-                if (response.ok) {
-
-                    const result = await response.json();
-                    console.log('PDF uploaded successfully:', result);
-                    alert('PDF saved on server successfully!');
-                } else {
-                    console.error('Failed to upload PDF:', response.statusText);
-                    alert('Failed to save PDF on server.');
-                }
-            } catch (error) {
-                console.error('Error uploading PDF:', error);
-                alert('Error saving PDF on server.');
+                const errorData = await response.json();
+                errorMessage = errorData.error || response.statusText;
+            } catch (e) {
+                console.error('Error parsing error response:', e);
             }
+            throw new Error(errorMessage);
         }
+
+        const result = await response.json();
+        console.log('PDF uploaded successfully:', result);
+      //  alert('PDF saved on server successfully!');
+
+    } catch (error) {
+        console.error('Error uploading PDF:', error);
+        alert(`Error: ${error.message}`);
+    }
+}
+
     </script>
     <script>
         document.getElementById('reviewapplicationn').addEventListener('click', function (event) {

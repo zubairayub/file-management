@@ -411,18 +411,24 @@
                         <h2 class="text-white counter mb-0  text-center">$300.00</h2>
                     </div>
                 </div> -->
-                <div class="col-lg-12">
-                        <div class="card bg-white">
-                            <div id="admin-chart-03" class="admin-chart-03"></div>
-                            <div class="card-body">
-                                <h5 class="mb-0 text-center">Storage Details</h5>
-                                
-                                <div class="my-4 pb-2" id="storage-chart" data-storage="{{ $quotaUsed }}"
-                                    data-total-storage="{{ $totalStorage }}"></div> 
-                            </div>
+               @php
+    $storage = getStorageDetails();
+@endphp
 
-                        </div>
-                    </div>
+<div class="col-lg-12">
+    <div class="card bg-white">
+        <div id="admin-chart-03" class="admin-chart-03"></div>
+        <div class="card-body">
+            <h5 class="mb-0 text-center">Storage Details</h5>
+
+            <div class="my-4 pb-2" id="storage-chart"
+                data-storage="{{ $storage['quota_used'] }}"
+                data-total-storage="{{ $storage['total_storage'] }}">
+            </div>
+        </div>
+    </div>
+</div>
+
 
                 <div class="col-lg-12">
                     <div class="card engagebox"

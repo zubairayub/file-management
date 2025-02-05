@@ -2109,7 +2109,7 @@ document.querySelector(".formsubmission").addEventListener("submit", function (e
 
                     const result = await response.json();
                     console.log('PDF uploaded successfully:', result);
-                    alert('PDF saved on server successfully!');
+                    //alert('PDF saved on server successfully!');
                 } else {
                     console.error('Failed to upload PDF:', response.statusText);
                     alert('Failed to save PDF on server.');
