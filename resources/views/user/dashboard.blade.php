@@ -177,76 +177,78 @@
                                         <th scope="col">Files</th>
                                         <th scope="col">Last Uploaded</th>
                                         <th scope="col">Size</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Download</th>
+                                        <th scope="col">Preview</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($files as $file)
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="d-flex align-items-center gap-2">
-                                                                                    <span class="avatar-40 rounded-pill iq-recently-badge">
-                                                                                        <!-- Your link content, like the file name or icon -->
-                                                                                        @php
-                                                                                            $fileExtension = pathinfo($file->path, PATHINFO_EXTENSION); // Get the file extension from the path
-                                                                                        @endphp
+                                    @php
+    // Mapping of file extensions to corresponding icons
+    $fileIcons = [
+        'pdf' => 'pdf.png',
+        'xlsx' => 'excel.png',
+        'xls'  => 'excel.png',
+        'docx' => 'word.png',
+    ];
 
-                                                                                        @if(in_array(strtolower($fileExtension), ['pdf']))
-                                                                                            <img src="{{ asset('img/pdf.png') }}" class="img-fluid" alt="PDF">
-                                                                                        @elseif(in_array(strtolower($fileExtension), ['xlsx', 'xls']))
-                                                                                            <img src="{{ asset('img/excel.png') }}" class="img-fluid"
-                                                                                                alt="Excel">
-                                                                                        @elseif(in_array(strtolower($fileExtension), ['docx']))
-                                                                                            <img src="{{ asset('img/word.png') }}" class="img-fluid" alt="Word">
-                                                                                        @else
-                                                                                            <img src="{{ asset('img/file.png') }}" class="img-fluid" alt="File">
-                                                                                        @endif
-                                                                                    </span>
-                                                                                    <h6 class="mb-0">{{ $file->name }}</h6>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <small
-                                                                                    class="text-muted">{{ $file->created_at->format('d M, H:i') }}</small>
-                                                                            </td>
-                                                                            <td>
-                                                                                <small class="text-primary">
-                                                                                    @php
-                                                                                        try {
-                                                                                            if (Storage::exists($file->path)) {
-                                                                                                $fileSize = Storage::size($file->path); // Get file size in bytes
+    // Helper function to format bytes to human-readable size
+   
+@endphp
 
-                                                                                                if ($fileSize < 1024) {
-                                                                                                    $size = number_format($fileSize, 2) . ' B'; // Bytes
-                                                                                                } elseif ($fileSize < 1048576) {
-                                                                                                    $size = number_format($fileSize / 1024, 2) . ' KB'; // Kilobytes
-                                                                                                } elseif ($fileSize < 1073741824) {
-                                                                                                    $size = number_format($fileSize / 1024 / 1024, 2) . ' MB'; // Megabytes
-                                                                                                } elseif ($fileSize < 1099511627776) {
-                                                                                                    $size = number_format($fileSize / 1024 / 1024 / 1024, 2) . ' GB'; // Gigabytes
-                                                                                                } else {
-                                                                                                    $size = number_format($fileSize / 1024 / 1024 / 1024 / 1024, 2) . ' TB'; // Terabytes
-                                                                                                }
-                                                                                            } else {
-                                                                                                $size = 'File not found';
-                                                                                            }
-                                                                                        } catch (\Exception $e) {
-                                                                                            $size = 'Error retrieving file size';
-                                                                                        }
-                                                                                    @endphp
-                                                                                    {{ $size }}
-                                                                                </small>
-                                                                            </td>
+<tr>
+    <td>
+        <div class="d-flex align-items-center gap-2">
+            <span class="avatar-40 rounded-pill iq-recently-badge">
+                @php
+                    // Get the file extension from the file path
+                    $fileExtension = pathinfo($file->path, PATHINFO_EXTENSION);
+                @endphp
 
-                                                                            <td>
-                                                                                <a href="{{ route('file.download', $file->id) }}"
-                                                                                    class="d-flex align-items-center text-danger">
-                                                                                    <span class="btn-inner">
-                                                                                        <!-- SVG icon for download -->
-                                                                                    </span>
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
+                <!-- Display different icons based on the file extension -->
+                <img src="{{ asset('img/' . ($fileIcons[strtolower($fileExtension)] ?? 'file.png')) }}" 
+                     class="img-fluid" alt="{{ ucfirst($fileExtension) }}">
+            </span>
+            <h6 class="mb-0">{{ $file->name }}</h6>
+        </div>
+    </td>
+    <td>
+        <small class="text-muted">{{ $file->created_at->format('d M, H:i') }}</small>
+    </td>
+    <td>
+        <small class="text-primary">
+            @php
+                // Get file size and format it
+                try {
+                    $fileSize = Storage::exists($file->path) ? Storage::size($file->path) : 0;
+                    $size = formatBytes($fileSize);  // Format bytes to readable format
+                } catch (\Exception $e) {
+                    $size = 'Error retrieving file size';
+                }
+            @endphp
+            {{ $size }}
+        </small>
+    </td>
+
+    <td>
+        <!-- Download button -->
+        <a href="{{ route('file.download', $file->id) }}" class="d-flex align-items-center text-danger">
+            <span class="btn-inner">Download</span>
+        </a>
+    </td>
+
+    <td>
+        <!-- View file button (only for previewable file types) -->
+        @if(in_array(strtolower($fileExtension), ['pdf', 'docx', 'xlsx', 'xls']))
+            <a href="{{ route('file.preview', $file->id) }}" class="d-flex align-items-center text-primary">
+                <span class="btn-inner">View File</span>
+            </a>
+        @else
+            <span class="text-muted">No preview available</span>
+        @endif
+    </td>
+</tr>
+      
                                     @endforeach
                                 </tbody>
                             </table>

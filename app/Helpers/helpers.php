@@ -115,3 +115,16 @@ if (!function_exists('getStorageDetails')) {
         ];
     }
 }
+
+
+
+
+if (!function_exists('formatBytes')) {
+    function formatBytes($bytes, $precision = 2) {
+        if ($bytes == 0) return '0 B';
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $factor = floor((strlen($bytes) - 1) / 3);
+        return sprintf("%.{$precision}f", $bytes / pow(1024, $factor)) . ' ' . $units[$factor];
+    }
+}
+
