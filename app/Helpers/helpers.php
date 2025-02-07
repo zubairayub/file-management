@@ -22,16 +22,38 @@ if (!function_exists('checkQuota')) {
         }
 
         // Get all user packages
-        $packages = UserPackage::where('user_id', $user->id)->with('package')->get();
+        //$packages = UserPackage::where('user_id', $user->id)->with('package')->get();
+         // Get all user packages
+         $packages = UserPackage::where('user_id', $user->id)
+         ->when(function ($query) {
+             // Apply expiry date check only if package_type is not 'one_time'
+             return $query->where('package_type', '!=', 'one_time');
+         }, function ($query) {
+             return $query->where('expiry_date', '>=', now());
+         })
+         ->orWhere(function ($query) {
+             // If package_type is 'one_time', skip expiry check
+             return $query->where('package_type', 'one_time');
+         })
+         ->with('package')
+         ->get();
 
         if ($packages->isEmpty()) {
             return true; // No valid package found, consider it as exceeded
         }
 
-        // Calculate total allowed quota
-        $totalQuota = $packages->sum(fn($userPackage) => $userPackage->package->quota ?? 0);
+        // Calculate total storage quota assigned to the user
+        $totalStorage = $packages->sum(fn($userPackage) => $userPackage->package->quota ?? 0);
+        $quotaUsed = $user->quota_used ?? 0;
 
-        return $user->quota_used >= $totalQuota;
+        // return [
+        //     'quota_used' => $quotaUsed,
+        //     'total_storage' => $totalStorage,
+        // ];
+        // Calculate total allowed quota
+       // $totalQuota = $packages->sum(fn($userPackage) => $userPackage->package->quota ?? 0);
+
+        return $user->quota_used >= $totalStorage;
     }
 }
 
