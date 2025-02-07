@@ -34,10 +34,10 @@
           <p>Your payment amount was: <span id="successAmount"></span></p>
         </div>
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
         <a href="{{ route('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
