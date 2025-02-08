@@ -51,7 +51,9 @@
                 {{ __('Email Password Reset Link') }}
             </x-primary-button>
     </div>
-     
+    <p class="mt-3 text-center">
+        Already have an Account <a href="{{ route('login') }}" class="text-underline">Sign In</a>
+    </p>
 </form>
 
                                  </div>

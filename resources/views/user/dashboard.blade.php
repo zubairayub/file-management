@@ -3,7 +3,7 @@
     <div class="container-fluid content-inner pb-0" id="page_layout">
 
         <div class="row">
-            <h3 class="mb-0 d-flex align-items-center">Documents Management</h3>
+            <h3 class="mb-0 d-flex align-items-center">Files Management</h3>
             <div class="col-lg-8 foldericons">
                 <div class="row row-cols-lg-4 row-cols-md-4 row-cols-1">
                     @php
@@ -78,91 +78,76 @@
                                             </div>
                                         </div>
 
-                    @endforeach
-                    
-<div class="col">
-    <div class="card card-folder" onclick="window.location='{{ route('showbusiness') }}'">
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
-                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                                        @endforeach
 
+                                    </div>
+                                    <h3 class="mb-0 d-flex align-items-center">e-File Applications</h3>
+                <div class="row row-cols-lg-4 row-cols-md-4 row-cols-1">
+<div class="col">
+    <div class="py-3 mt-4">
+                <a class="card-body  py -2 d-block" onclick="window.location='{{ route('showbusiness') }}'">
+                <i class="icon">
+                                <svg  class="icon-64" width="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
+                                  </svg>                
+                            </i>
+
+                            <h5 class="mt-3">Business Formation</h5>
                 </a>
                
-            </div>
-            <div class="mt-4">
-                <h5>Business Formation</h5>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="col">
-    <div class="card card-folder" onclick="window.location='{{ route('showein') }}'">
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
-                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-
-                </a>
-               
-            </div>
-            <div class="mt-4">
-                <h5>EIN Application</h5>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="card card-folder" onclick="window.location='{{ route('showitin') }}'">
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
-                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-
-                </a>
-               
-            </div>
-            <div class="mt-4">
-                <h5>ITIN Application</h5>
-                
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col">
-    <div class="card card-folder" onclick="window.location='{{ route('showboi') }}'">
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-                <a class="avatar-40 bg-primary-subtle rounded-pill d-flex justify-content-center align-items-center">
-                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-
-                </a>
-               
-            </div>
-            <div class="mt-4">
-                <h5>BOI Reporting</h5>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
                 </div>
-                <div class="col-lg-12">
+            </div> 
+
+
+<div class="col">
+<div class="py-3 mt-4">
+                <a class="card-body  py -2 d-block" onclick="window.location='{{ route('showbusiness') }}'">
+                <i class="icon">
+                                <svg  class="icon-100" width="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
+                                  </svg>                
+                            </i>
+
+                            <h5 class="mt-3">EIN Application</h5>
+                </a>
+               
+            </div>
+    </div>
+ 
+    <div class="col">
+    <div class="py-3 mt-4">
+                <a class="card-body  py -2 d-block" onclick="window.location='{{ route('showbusiness') }}'">
+                <i class="icon">
+                                <svg  class="icon-100" width="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
+                                  </svg>                
+                            </i>
+
+                            <h5 class="mt-3">ITIN Application</h5>
+                </a>
+               
+            </div>
+</div>
+<div class="col">
+<div class="py-3 mt-4">
+                <a class="card-body  py -2 d-block" onclick="window.location='{{ route('showbusiness') }}'">
+                <i class="icon">
+                                <svg  class="icon-100" width="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4" d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z" fill="currentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z" fill="currentColor"></path>
+                                  </svg>                
+                            </i>
+
+                            <h5 class="mt-3">BOI Reporting</h5>
+                </a>
+               
+            </div>
+            
+    </div>
+                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
@@ -174,11 +159,11 @@
                             <table class="table table-borderless iq-file-manager-table mb-0">
                                 <thead>
                                     <tr class="border-bottom bg-transparent text-dark">
-                                        <th scope="col">Files</th>
-                                        <th scope="col">Last Uploaded</th>
-                                        <th scope="col">Size</th>
-                                        <th scope="col">Download</th>
-                                        <th scope="col">Preview</th>
+                                        <th scope="col" class="text-left">Files</th>
+                                        <th scope="col" class="text-center">Date</th>
+                                        <th scope="col" class="text-center">Size</th>
+                                        <th scope="col" class="text-center">Download</th>
+                                        <th scope="col" class="text-center">Open</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -209,13 +194,13 @@
                 <img src="{{ asset('img/' . ($fileIcons[strtolower($fileExtension)] ?? 'file.png')) }}" 
                      class="img-fluid" alt="{{ ucfirst($fileExtension) }}">
             </span>
-            <h6 class="mb-0">{{ $file->name }}</h6>
+            <small class="mb-0"><a href="{{ route('file.preview', $file->id) }}" target="_blank">{{ $file->name }}</a></small   >
         </div>
     </td>
-    <td>
+    <td class="text-center">
         <small class="text-muted">{{ $file->created_at->format('d M, H:i') }}</small>
     </td>
-    <td>
+    <td class="text-center">
         <small class="text-primary">
             @php
                 // Get file size and format it
@@ -230,18 +215,18 @@
         </small>
     </td>
 
-    <td>
+    <td class="text-center">
         <!-- Download button -->
-        <a href="{{ route('file.download', $file->id) }}" class="d-flex align-items-center text-danger">
-            <span class="btn-inner">Download</span>
+        <a href="{{ route('file.download', $file->id) }}" class="text-danger" target="_blank">
+            <span class="btn-sm btn btn-primary">Download</span>
         </a>
     </td>
 
-    <td>
+    <td class="text-center">
         <!-- View file button (only for previewable file types) -->
         @if(in_array(strtolower($fileExtension), ['pdf', 'docx', 'xlsx', 'xls']))
-            <a href="{{ route('file.preview', $file->id) }}" class="d-flex align-items-center text-primary">
-                <span class="btn-inner">View File</span>
+            <a href="{{ route('file.preview', $file->id) }}" class="text-primary" target="_blank">
+                <i class="far fa-eye"></i>
             </a>
         @else
             <span class="text-muted">No preview available</span>
@@ -390,6 +375,7 @@
 
                 </div> -->
             </div>
+            </div>
 
             <div class="col-lg-4">
                 <div class="card">
@@ -397,11 +383,10 @@
                         <div class="text-center">
                             <img src="{{ asset('img/upgradestorage.jpg') }}" class="img-fluid w-100 mb-3" alt="Package"
                                 loading="lazy">
-                            <h5 class="mb-3">Streamline your business with our expert Bookkeeping, Payroll, Tax, and
-                                Business Formation Services.</h5>
+                            <h5 class="mb-3">Simplify Your Finances with Our Expert Plans!</h5>
                             <div class="d-flex justify-content-center ms-2">
                                 <a href="{{ route('quota.exceeded') }}"><button type="button"
-                                        class="btn btn-warning">Buy it now</button></a>
+                                        class="btn btn-primary">See Pricing</button></a>
                             </div>
                         </div>
                     </div>
@@ -437,7 +422,7 @@
                         style="background: url(https://images.pexels.com/photos/8296981/pexels-photo-8296981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat 0 0; background-size: cover">
                         <div class="card-header" style="z-index: 9;">
                             <div class="d-flex flex-wrap justify-content-between">
-                                <h4 class="text-white text-shadow">Full-Service Bookkeeping for your business</h4>
+                                <h2 class="text-white text-shadow px-3 pt-5">Full-Service Bookkeeping for your business</h2>
                             </div>
                         </div>
                         <div class="card-body">
@@ -445,8 +430,9 @@
                                 than bookkeeping.<br><br>At Prompt Filings, we provide experienced, affordable, and
                                 dependable bookkeeping services so you can focus on running your business and generating
                                 profits.</p>
-                            <button type="button" class="btn btn-success mt-5">Get Started</button>
-                        </div>
+                                <a href="/choose-packages" class="btn btn-primary mt-5">Explore More</a>
+                                <a href="https://promptfilings.com/services/" target="_blank" class="btn btn-success mt-5">Get Started</a>
+                                </div>
                     </div>
                 </div>
             </div>

@@ -60,22 +60,22 @@
                                                                             <label>
                                                                                 <input type="radio" id="InitialReport"
                                                                                     name="Type of Filing" value="Initial Report"
-                                                                                    class="radio radio radioInput  form-check-input" >
+                                                                                    class="radio radio radioInput   form-check-input border-primary" >
                                                                                     Initial Report</label>
                                                                                     <label>
                                                                                         <input type="radio" id="CorrectPriorReport"
                                                                                             name="Type of Filing" value="Correct Prior Report"
-                                                                                            class="radio radio radioInput  form-check-input" >
+                                                                                            class="radio radio radioInput   form-check-input border-primary" >
                                                                                             Correct Prior Report</label>
                                                                                             <label>
                                                                                                 <input type="radio" id="UpdatePriorReport"
                                                                                                     name="Type of Filing" value="Update Prior Report"
-                                                                                                    class="radio radio radioInput  form-check-input" >
+                                                                                                    class="radio radio radioInput   form-check-input border-primary" >
                                                                                                     Update Prior Report</label>
                                                                                                     <label>
                                                                                                         <input type="radio" id="NewlyExemptEntity"
                                                                                                             name="Type of Filing" value="Newly Exempt Entity"
-                                                                                                            class="radio radio radioInput  form-check-input" >
+                                                                                                            class="radio radio radioInput   form-check-input border-primary" >
                                                                                                             Newly Exempt Entity</label>
                                                                 </div>
                                                         </div> 
@@ -391,11 +391,11 @@
                                                             <div class="radiobox">
                                                                 <label>
                                                                     <input type="radio" id="receivefinCENYes" name="Receive FinCEN"
-                                                                        value="YES" class="radio radioInput  form-check-input">
+                                                                        value="YES" class="radio radioInput   form-check-input border-primary">
                                                                     Yes</label>
                                                                 <label>
                                                                     <input type="radio" id="receivefinCENNo" name="Receive FinCEN"
-                                                                        value="NO" class="radio radioInput  form-check-input">
+                                                                        value="NO" class="radio radioInput   form-check-input border-primary">
                                                                     No</label>
                                                             </div>
                                                         </div>
@@ -405,11 +405,11 @@
                                                         <div class="radiobox">
                                                             <label>
                                                                 <input type="radio" id="foriegnpooledinvesmYes" name="Foriegn Pooled Investment Vehicle"
-                                                                    value="YES" class="radio radioInput  form-check-input">
+                                                                    value="YES" class="radio radioInput   form-check-input border-primary">
                                                                 Yes</label>
                                                             <label>
                                                                 <input type="radio" id="foriegnpooledinvesmNo" name="Foriegn Pooled Investment Vehicle"
-                                                                    value="NO" class="radio radioInput  form-check-input">
+                                                                    value="NO" class="radio radioInput   form-check-input border-primary">
                                                                 No</label>
                                                         </div>
                                                     </div>  
@@ -2276,12 +2276,12 @@
                                                 <div class="media-body row">
                                                     <div class="col-lg-2">
                                                         <label class="form-check-label"><input type="radio" id="currentaddresstypebusiness"
-                                                                name="Address Type" value="Business Address" class="radio radioInput  form-check-input"> Business Address</label>
+                                                                name="Address Type" value="Business Address" class="radio radioInput   form-check-input border-primary"> Business Address</label>
                                                     </div>
                                                     <div class="col-lg-2">
                                                         <label class="form-check-label"><input type="radio" id="currentaddresstyperesidential"
                                                                 name="Address Type" value="Residential Address"
-                                                                class="radio radioInput  form-check-input "> Residential Address</label>
+                                                                class="radio radioInput  form-check-input border-primary"> Residential Address</label>
                                                     </div>
                                                     <div class="col-lg-12">&nbsp;</div>
                                                     <div class="col-lg-4">
@@ -3877,7 +3877,7 @@
                                                         <div class="col-12"><small class="mt-5 text-left d-block">Important Note: If any incorrect information is provided during the application process, you will need to restart and resubmit the entire application. It is essential to review all details carefully before submission to avoid any delays or complications.</small></div>
                                                         <div class="col-lg-12 d-flex align-items-center">
                                                                 <input type="checkbox" id="terms" name="terms"
-                                                                    class="form-check-input me-2 " required="">
+                                                                    class="form-check-input border-primary me-2 " required="">
                                                                 <label for="terms">I have read the <a
                                                                         href="https://promptfilings.com/terms-of-service/"
                                                                         target="_blank">terms of

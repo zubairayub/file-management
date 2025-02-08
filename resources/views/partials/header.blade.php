@@ -68,7 +68,7 @@
                     </div>
                  </div>
               </div>
-              <div class="d-flex align-items-center">
+              <!--div class="d-flex align-items-center">
                  <button id="navbar-toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -78,7 +78,7 @@
                        <span class="navbar-toggler-bar bar3"></span>
                     </span>
                  </button>
-              </div>
+              </div-->
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                  <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
                     <li class="nav-item dropdown me-0 me-xl-3">
@@ -96,7 +96,7 @@
                           </label> 
                        </div>
                     </li>
-                    <li class="nav-item dropdown border-end pe-3 d-none d-xl-block">
+                    <!--li class="nav-item dropdown border-end pe-3 d-none d-xl-block">
                        <div class="form-group input-group mb-0 search-input">
                           <input type="text" class="form-control" placeholder="Search...">
                           <span class="input-group-text">
@@ -109,7 +109,7 @@
                              </svg>
                           </span>
                        </div>
-                    </li>
+                    </li-->
                     <li class="nav-item dropdown iq-responsive-menu border-end d-block d-xl-none">
                        <div class="btn btn-sm bg-body" id="navbarDropdown-search-11" role="button" data-bs-toggle="dropdown"
                           aria-expanded="false">
@@ -158,11 +158,11 @@
    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
       <li>
          <!-- Quota Exceeded -->
-         <a class="dropdown-item" href="{{ route('quota.exceeded') }}">Upgrade Quota</a>
+         <a class="dropdown-item" href="{{ route('quota.exceeded') }}">Explore Plan</a>
       </li>
       <li>
          <!-- Quota Exceeded -->
-         <a class="dropdown-item" href="{{ route('password.update.form') }}">Update password</a>
+         <a class="dropdown-item" href="{{ route('password.update.form') }}">Change password</a>
       </li>
       <li>
          <!-- Authentication -->
