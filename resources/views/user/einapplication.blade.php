@@ -287,7 +287,7 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentitysoleprop"
                                               name="typeofentity"
                                               value="Sole proprietor"
-                                              class="radio radioInput form-check-input" required>  Sole proprietor (SSN)</label>
+                                              class="radio radioInput form-check-input border-primary" required>  Sole proprietor (SSN)</label>
                                               </div>
                                             <div class="col-lg-12 typeof-a d-none">
                                              <div class="row">
@@ -302,7 +302,7 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentitypartnership"
                                               name="typeofentity"
                                               value="Partnership"
-                                              class="radio radioInput form-check-input" required>  Partnership
+                                              class="radio radioInput form-check-input border-primary" required>  Partnership
                                           </label>
                                            </div>
     
@@ -310,7 +310,7 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentitycorporation"
                                               name="typeofentity"
                                               value="Corporation"
-                                              class="radio radioInput form-check-input" required>   Corporation (enter form number to be filed) </label>
+                                              class="radio radioInput form-check-input border-primary" required>   Corporation (enter form number to be filed) </label>
                                               </div>
                                               <div class="col-lg-12 typeof-b d-none">
                                              <div class="row">
@@ -323,21 +323,21 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentitypersonalservicecorporation"
                                               name="typeofentity"
                                               value="Personal service corporation"
-                                              class="radio radioInput form-check-input" required>  Personal service corporation
+                                              class="radio radioInput form-check-input border-primary" required>  Personal service corporation
                                           </label>
                                            </div>
                                            <div class="col-lg-12">
                                             <label class="form-check-label"><input type="radio" id="typeofentitychurch"
                                               name="typeofentity"
                                               value="Church or church-controlled organization"
-                                              class="radio radioInput form-check-input" required>  Church or church-controlled organization
+                                              class="radio radioInput form-check-input border-primary" required>  Church or church-controlled organization
                                           </label>
                                            </div>
                                            <div class="col-lg-12">
                                             <label class="form-check-label"><input type="radio" id="typeofentitynonprofit"
                                               name="typeofentity"
                                               value="Other nonprofit organization"
-                                              class="radio radioInput form-check-input" required>  Other nonprofit organization (specify)</label>
+                                              class="radio radioInput form-check-input border-primary" required>  Other nonprofit organization (specify)</label>
                                               </div>
                                         <div class="col-lg-12 typeof-c d-none">
                                              <div class="row">
@@ -350,7 +350,7 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentityestatessn"
                                               name="typeofentity"
                                               value="Estate"
-                                              class="radio radioInput form-check-input" required>  Estate (SSN of decedent) </label>
+                                              class="radio radioInput form-check-input border-primary" required>  Estate (SSN of decedent) </label>
                                               </div>
                                               <div class="col-lg-12 typeof-d d-none">
                                              <div class="row">
@@ -363,7 +363,7 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentityplanadmin"
                                               name="typeofentity"
                                               value="Plan administrator"
-                                              class="radio radioInput form-check-input" required>  Plan administrator (TIN)</label>
+                                              class="radio radioInput form-check-input border-primary" required>  Plan administrator (TIN)</label>
                                               </div>
                                               <div class="col-lg-12 typeof-e d-none">
                                              <div class="row">
@@ -376,7 +376,7 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentitytrust"
                                               name="typeofentity"
                                               value="Trust"
-                                              class="radio radioInput form-check-input" required>  Trust (TIN of grantor)</label>
+                                              class="radio radioInput form-check-input border-primary" required>  Trust (TIN of grantor)</label>
                                               </div>
                                               <div class="col-lg-12 typeof-f d-none">
                                              <div class="row">
@@ -389,49 +389,49 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentitymilitary"
                                               name="typeofentity"
                                               value="Military"
-                                              class="radio radioInput form-check-input" required>  Military/National Guard
+                                              class="radio radioInput form-check-input border-primary" required>  Military/National Guard
                                           </label>
                                            </div>
                                            <div class="col-lg-12">
                                             <label class="form-check-label"><input type="radio" id="typeofentitystatelocal"
                                               name="typeofentity"
                                               value="local government"
-                                              class="radio radioInput form-check-input" required>  State/local government
+                                              class="radio radioInput form-check-input border-primary" required>  State/local government
                                           </label>
                                            </div>
                                            <div class="col-lg-12">
                                             <label class="form-check-label"><input type="radio" id="typeofentityfarmerscorp"
                                               name="typeofentity"
                                               value="Farmers Cooperative"
-                                              class="radio radioInput form-check-input" required> Farmers' cooperative
+                                              class="radio radioInput form-check-input border-primary" required> Farmers' cooperative
                                           </label>
                                            </div>
                                            <div class="col-lg-12">
                                             <label class="form-check-label"><input type="radio" id="typeofentityfederalgov"
                                               name="typeofentity"
                                               value="Federal government"
-                                              class="radio radioInput form-check-input" required>  Federal government
+                                              class="radio radioInput form-check-input border-primary" required>  Federal government
                                           </label>
                                            </div>
                                            <div class="col-lg-12">
                                             <label class="form-check-label"><input type="radio" id="typeofentityremic"
                                               name="typeofentity"
                                               value="REMIC"
-                                              class="radio radioInput form-check-input" required>  REMIC
+                                              class="radio radioInput form-check-input border-primary" required>  REMIC
                                           </label>
                                            </div>
                                            <div class="col-lg-12">
                                             <label class="form-check-label"><input type="radio" id="typeofentityindiantribal"
                                               name="typeofentity"
                                               value="Indian tribal governments"
-                                              class="radio radioInput form-check-input" required>  Indian tribal governments/enterprises
+                                              class="radio radioInput form-check-input border-primary" required>  Indian tribal governments/enterprises
                                           </label>
                                            </div>
                                            <div class="col-lg-12">
                                             <label class="form-check-label"><input type="radio" id="typeofentitygen"
                                               name="typeofentity"
                                               value="Group Exemption Number"
-                                              class="radio radioInput form-check-input" required>  Group Exemption Number (GEN) if any</label>
+                                              class="radio radioInput form-check-input border-primary" required>  Group Exemption Number (GEN) if any</label>
                                               </div>
                                               <div class="col-lg-12 typeof-g d-none">
                                              <div class="row">
@@ -444,7 +444,7 @@
                                             <label class="form-check-label"><input type="radio" id="typeofentityother"
                                               name="typeofentity"
                                               value="Other"
-                                              class="radio radioInput form-check-input" required>  Other </label>
+                                              class="radio radioInput form-check-input border-primary" required>  Other </label>
                                               </div>
                                               <div class="col-lg-12 typeof-h d-none">
                                              <div class="row">
@@ -481,7 +481,7 @@
                                               <label class="form-check-label"><input type="radio" id="reasonforapplyingstartnew"
                                                 name="reasonforapplying"
                                                 value="Started new business"
-                                                class="radio radioInput form-check-input" required>  Started new business (specify type)</label>
+                                                class="radio radioInput form-check-input border-primary" required>  Started new business (specify type)</label>
                                                 </div>
                                                 <div class="col-lg-12 d-none reason-a">
                                               <div class="row">
@@ -494,21 +494,21 @@
                                               <label class="form-check-label"><input type="radio" id="reasonforapplyinghired"
                                                 name="reasonforapplying"
                                                 value="Hired employees"
-                                                class="radio radioInput form-check-input" required>  Hired employees (Check the box and see line 13.)
+                                                class="radio radioInput form-check-input border-primary" required>  Hired employees (Check the box and see line 13.)
                                             </label>
                                              </div>
                                              <div class="col-lg-12">
                                               <label class="form-check-label"><input type="radio" id="reasonforapplyingcompliancewithholdingregulations"
                                                 name="reasonforapplying"
                                                 value="Compliance with IRS withholding regulations"
-                                                class="radio radioInput form-check-input" required>  Compliance with IRS withholding regulations
+                                                class="radio radioInput form-check-input border-primary" required>  Compliance with IRS withholding regulations
                                             </label>
                                              </div>
                                              <div class="col-lg-12">
                                               <label class="form-check-label"><input type="radio" id="reasonforapplyingbankingpurpose"
                                                 name="reasonforapplying"
                                                 value="Banking purpose"
-                                                class="radio radioInput form-check-input" required>  Banking purpose (specify purpose)</label>
+                                                class="radio radioInput form-check-input border-primary" required>  Banking purpose (specify purpose)</label>
                                             </div>
                                             <div class="col-lg-12 d-none reason-b">
                                               <div class="row">
@@ -521,7 +521,7 @@
                                               <label class="form-check-label"><input type="radio" id="reasonforapplyingchangeorganization"
                                                 name="reasonforapplying"
                                                 value="Changed type of organization"
-                                                class="radio radioInput form-check-input" required>  Changed type of organization (specify new type)</label>
+                                                class="radio radioInput form-check-input border-primary" required>  Changed type of organization (specify new type)</label>
                                                     </div>
                                                     <div class="col-lg-12 d-none reason-c"  >
                                               <div class="row">
@@ -534,14 +534,14 @@
                                               <label class="form-check-label"><input type="radio" id="reasonforapplyingpurchasebusiness"
                                                 name="reasonforapplying"
                                                 value="Purchased going business"
-                                                class="radio radioInput form-check-input" required>  Purchased going business
+                                                class="radio radioInput form-check-input border-primary" required>  Purchased going business
                                             </label>
                                              </div>
                                              <div class="col-lg-12">
                                               <label class="form-check-label"><input type="radio" id="reasonforapplyingcreatedtrust"
                                                 name="reasonforapplying"
                                                 value="Created a trust"
-                                                class="radio radioInput form-check-input" required>  Created a trust (specify type)</label>
+                                                class="radio radioInput form-check-input border-primary" required>  Created a trust (specify type)</label>
                                             </div>
                                             <div class="col-lg-12 d-none reason-d">
                                               <div class="row">
@@ -554,7 +554,7 @@
                                               <label class="form-check-label"><input type="radio" id="reasonforapplyingpenionplan"
                                                 name="reasonforapplying"
                                                 value="Created a pension plan"
-                                                class="radio radioInput form-check-input" required>  Created a pension plan (specify type)</label></div>
+                                                class="radio radioInput form-check-input border-primary" required>  Created a pension plan (specify type)</label></div>
                                                 <div class="col-lg-12 d-none reason-e">
                                               <div class="row">
                                                 <div class="col-12">
@@ -566,7 +566,7 @@
                                                 <label class="form-check-label"><input type="radio" id="reasonforapplyingother"
                                                   name="reasonforapplying"
                                                   value="other"
-                                                  class="radio radioInput form-check-input" required>  Other (Specify)</label>
+                                                  class="radio radioInput form-check-input border-primary" required>  Other (Specify)</label>
                                                 </div>
                                                 <div class="col-lg-12 d-none reason-f">
                                                 <div class="row">
@@ -617,73 +617,73 @@
                                                     <label class="form-check-label"><input type="radio" id="principalactivityhealth"
                                                       name="principalactivity"
                                                       value="Health care & social assistance"
-                                                      class="radio radioInput form-check-input" required>  Health care & social assistance</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Health care & social assistance</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivitywholesale"
                                                       name="principalactivity"
                                                       value="Wholesale agent broker"
-                                                      class="radio radioInput form-check-input" required>  Wholesale—agent/broker</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Wholesale—agent/broker</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivityconstruction"
                                                       name="principalactivity"
                                                       value="Construction"
-                                                      class="radio radioInput form-check-input" required>  Construction</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Construction</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivityrental"
                                                       name="principalactivity"
                                                       value="Rental & leasing"
-                                                      class="radio radioInput form-check-input" required>  Rental & leasing</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Rental & leasing</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivitytransportation"
                                                       name="principalactivity"
                                                       value="Transportation & warehousing"
-                                                      class="radio radioInput form-check-input" required>  Transportation & warehousing</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Transportation & warehousing</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivityaccomodation"
                                                       name="principalactivity"
                                                       value="Accommodation & food service"
-                                                      class="radio radioInput form-check-input" required>  Accommodation & food service</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Accommodation & food service</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivitywholealeother"
                                                       name="principalactivity"
                                                       value="Wholesale other"
-                                                      class="radio radioInput form-check-input" required>  Wholesale—other</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Wholesale—other</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivityretail"
                                                       name="principalactivity"
                                                       value="Retail"
-                                                      class="radio radioInput form-check-input" required>  Retail</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Retail</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivityrealestate"
                                                       name="principalactivity"
                                                       value="Real estate"
-                                                      class="radio radioInput form-check-input" required>  Real estate</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Real estate</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivitymanufacturing"
                                                       name="principalactivity"
                                                       value="Manufacturing"
-                                                      class="radio radioInput form-check-input" required>  Manufacturing</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Manufacturing</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivityfinance"
                                                       name="principalactivity"
                                                       value="Finance & insurance"
-                                                      class="radio radioInput form-check-input" required>  Finance & insurance</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Finance & insurance</label>
                                                    </div>
                                                    <div class="col-lg-12">
                                                     <label class="form-check-label"><input type="radio" id="principalactivityother"
                                                       name="principalactivity"
                                                       value="Other"
-                                                      class="radio radioInput form-check-input" required>  Other (specify)</label>
+                                                      class="radio radioInput form-check-input border-primary" required>  Other (specify)</label>
                                                       </div>
                                                     <div class="col-lg-12 principle-a">
                                                        <input type="text" id="principalactivityother" class="form-control" name="principalactivityother" placeholder="Other (specify)">
@@ -699,13 +699,13 @@
                                                       <label class="form-check-label"><input type="radio" id="everappliedeinyes"
                                                         name="everappliedein"
                                                         value="Yes"
-                                                        class="radio radioInput form-check-input" required>  Yes</label>
+                                                        class="radio radioInput form-check-input border-primary" required>  Yes</label>
                                                      </div>
                                                      <div class="col-lg-12">
                                                       <label class="form-check-label"><input type="radio" id="everappliedeinno"
                                                         name="everappliedein"
                                                         value="No"
-                                                        class="radio radioInput form-check-input" required>  No</label>
+                                                        class="radio radioInput form-check-input border-primary" required>  No</label>
                                                      </div>
                                                      <div class="col-lg-12">
                                                       <label class="form-check-label">If “Yes,” write previous EIN here</label>
@@ -890,7 +890,7 @@
                                                         <div class="col-12"><small class="mt-5 text-left d-block">Important Note: If any incorrect information is provided during the application process, you will need to restart and resubmit the entire application. It is essential to review all details carefully before submission to avoid any delays or complications.</small></div>
                                                         <div class="col-lg-12 d-flex align-items-center">
                                                                 <input type="checkbox" id="terms" name="terms"
-                                                                    class="form-check-input me-2 " required="">
+                                                                    class="form-check-input border-primary me-2 " required="">
                                                                 <label for="terms">I have read the <a
                                                                         href="https://promptfilings.com/terms-of-service/"
                                                                         target="_blank">terms of
@@ -902,6 +902,7 @@
                                                     <div class="col-lg-12 mt-5 mb-5">
                                                           <button type="button" class="btn btn-primary" id="reviewapplicationn">Review Your Application</button>  
                                                                 <button type="submit" class="btn btn-success" 
+                                                                data-bs-toggle="modal"  data-bs-target="#upgradeModal"
                                                                     data-package-id="9" 
                                                                     data-package-name="EIN Application"
                                                                     data-package-price="" 

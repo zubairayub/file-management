@@ -46,7 +46,7 @@
                                        </div>
                                        <div class="col-lg-12 d-flex justify-content-between">
                                           <div class="form-check mb-3 d-flex align-items-center justify-content-between">
-                                             <input type="checkbox" class="form-check-input me-2" id="customCheck1">
+                                             <input type="checkbox" class="form-check-input border-primary me-2" id="customCheck1">
                                              <label class="form-check-label" for="customCheck1">Remember Me</label>
                                           </div>
                                           <a href="{{ route('password.request') }}">Forgot Password?</a>

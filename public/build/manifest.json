@@ -1,0 +1,127 @@
+{
+  "resources/css/theme/custom.min.css": {
+    "file": "assets/custom-BgX0X0X6.css",
+    "src": "resources/css/theme/custom.min.css",
+    "isEntry": true
+  },
+  "resources/css/theme/customizer.min.css": {
+    "file": "assets/customizer-CJuE3Tam.css",
+    "src": "resources/css/theme/customizer.min.css",
+    "isEntry": true
+  },
+  "resources/css/theme/file-manager.min.css": {
+    "file": "assets/file-manager-B6Iv53GS.css",
+    "src": "resources/css/theme/file-manager.min.css",
+    "isEntry": true
+  },
+  "resources/css/theme/libs.min.css": {
+    "file": "assets/libs-Dp-GQ1kx.css",
+    "src": "resources/css/theme/libs.min.css",
+    "isEntry": true
+  },
+  "resources/css/theme/pf-ui.min.css": {
+    "file": "assets/pf-ui-CrnOKKnw.css",
+    "src": "resources/css/theme/pf-ui.min.css",
+    "isEntry": true
+  },
+  "resources/css/theme/pro.min.css": {
+    "file": "assets/pro-C0ZmSWdL.css",
+    "src": "resources/css/theme/pro.min.css",
+    "isEntry": true
+  },
+  "resources/css/theme/rtl.min.css": {
+    "file": "assets/rtl-paVz0xMg.css",
+    "src": "resources/css/theme/rtl.min.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Kdf6WaXf.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/theme/alternate-dashboard.js": {
+    "file": "assets/alternate-dashboard-CL3jVQlP.js",
+    "name": "alternate-dashboard",
+    "src": "resources/js/theme/alternate-dashboard.js",
+    "isEntry": true
+  },
+  "resources/js/theme/dashboard.js": {
+    "file": "assets/dashboard-CIy3p91w.js",
+    "name": "dashboard",
+    "src": "resources/js/theme/dashboard.js",
+    "isEntry": true
+  },
+  "resources/js/theme/external.min.js": {
+    "file": "assets/external.min-DidIyTsg.js",
+    "name": "external.min",
+    "src": "resources/js/theme/external.min.js",
+    "isEntry": true
+  },
+  "resources/js/theme/file-manager.js": {
+    "file": "assets/file-manager-BN2IE3i4.js",
+    "name": "file-manager",
+    "src": "resources/js/theme/file-manager.js",
+    "isEntry": true
+  },
+  "resources/js/theme/libs.min.js": {
+    "file": "assets/libs.min-Bk62-b4x.js",
+    "name": "libs.min",
+    "src": "resources/js/theme/libs.min.js",
+    "isEntry": true
+  },
+  "resources/js/theme/lodash.min.js": {
+    "file": "assets/lodash.min-DP7x4SQw.js",
+    "name": "lodash.min",
+    "src": "resources/js/theme/lodash.min.js",
+    "isEntry": true
+  },
+  "resources/js/theme/pf-ui.js": {
+    "file": "assets/pf-ui-CVdfCTVc.js",
+    "name": "pf-ui",
+    "src": "resources/js/theme/pf-ui.js",
+    "isEntry": true
+  },
+  "resources/js/theme/pf-uipro.js": {
+    "file": "assets/pf-uipro-DHtepnig.js",
+    "name": "pf-uipro",
+    "src": "resources/js/theme/pf-uipro.js",
+    "isEntry": true
+  },
+  "resources/js/theme/setting-init.js": {
+    "file": "assets/setting-init-CY-lJZy7.js",
+    "name": "setting-init",
+    "src": "resources/js/theme/setting-init.js",
+    "isEntry": true
+  },
+  "resources/js/theme/setting.min.js": {
+    "file": "assets/setting.min-DJDu-9JO.js",
+    "name": "setting.min",
+    "src": "resources/js/theme/setting.min.js",
+    "isEntry": true
+  },
+  "resources/js/theme/sidebar.js": {
+    "file": "assets/sidebar-BZR34Oi6.js",
+    "name": "sidebar",
+    "src": "resources/js/theme/sidebar.js",
+    "isEntry": true
+  },
+  "resources/js/theme/slider-tabs.js": {
+    "file": "assets/slider-tabs-CaJK-5fi.js",
+    "name": "slider-tabs",
+    "src": "resources/js/theme/slider-tabs.js",
+    "isEntry": true
+  },
+  "resources/js/theme/utility.min.js": {
+    "file": "assets/utility.min-CakOzRVH.js",
+    "name": "utility.min",
+    "src": "resources/js/theme/utility.min.js",
+    "isEntry": true
+  },
+  "resources/js/theme/widgetcharts.js": {
+    "file": "assets/widgetcharts-BASiUSlo.js",
+    "name": "widgetcharts",
+    "src": "resources/js/theme/widgetcharts.js",
+    "isEntry": true
+  }
+}

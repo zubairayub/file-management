@@ -41,18 +41,18 @@
                                 <span class="nav-text ms-2">More e-Filing Services</span>
                              </a>
                              <ul class="iq-header-sub-menu list-unstyled collapse" id="homeData">
+                                <li class="nav-item"><a
+                                      class="nav-link "
+                                      href="/business">Business Formation</a></li>
                                 <li class="nav-item"><a class="nav-link "
-                                      href="https://promptfilings.com/client/itin"> ITIN Application
+                                      href="/itin"> ITIN Application
                                     </a></li>
                                 <li class="nav-item"><a
                                       class="nav-link "
-                                      href="https://promptfilings.com/client/ein">EIN Application</a></li>
+                                      href="/einapplication">EIN Application</a></li>
                                     
-                                <li class="nav-item"><a
-                                      class="nav-link "
-                                      href="https://promptfilings.com/client/business-formation">Business Formation</a></li>
                                 <li class="nav-item"><a class="nav-link "
-                                      href="https://promptfilings.com/client/boi-reporting">BOI Reporting</a></li>
+                                      href="/boi">BOI Reporting</a></li>
                                  
                              </ul>
                           </li>     
@@ -60,7 +60,7 @@
                     </div>
                  </div>
               </div>
-              <div class="d-flex align-items-center">
+              <!--div class="d-flex align-items-center">
                  <button id="navbar-toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -70,7 +70,7 @@
                        <span class="navbar-toggler-bar bar3"></span>
                     </span>
                  </button>
-              </div>
+              </div-->
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                  <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
                     <li class="nav-item dropdown me-0 me-xl-3">
@@ -150,11 +150,11 @@
    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
       <li>
          <!-- Quota Exceeded -->
-         <a class="dropdown-item" href="{{ route('quota.exceeded') }}">Upgrade Quota</a>
+         <a class="dropdown-item" href="{{ route('quota.exceeded') }}">Upgrade Plan</a>
       </li>
       <li>
          <!-- Quota Exceeded -->
-         <a class="dropdown-item" href="{{ route('password.update.form') }}">Update password</a>
+         <a class="dropdown-item" href="{{ route('password.update.form') }}">Change password</a>
       </li>
       <li>
          <!-- Authentication -->

@@ -27,10 +27,10 @@
                                         <div class="media-body">
                                           <div class="radiobox form-check  form-group">
                                             <label class="form-check-label" style="display: table; width: inherit;"><input
-                                                class="form-check-input" type="radio" id="newItn" name="itnType" value="New ITN"
+                                                class=" form-check-input border-primary" type="radio" id="newItn" name="itnType" value="New ITN"
                                                 class="radio radioInput" required>Apply for a new
                                               ITIN</label>
-                                            <label class="form-check-label"><input class="form-check-input" type="radio"
+                                            <label class="form-check-label"><input class=" form-check-input border-primary" type="radio"
                                                 id="renewItn" name="itnType" value="Renew ITN"
                                                 class="radio radioInput form-check-label" required> Renew an
                                               existing
@@ -57,7 +57,7 @@
                                           <label class="form-check-label"><input type="radio" id="NonresidentGetITIN"
                                               name="reasonsubmit"
                                               value="Nonresident alien to get an ITIN to claim tax treaty benefit"
-                                              class="radio radioInput form-check-input" required> a) Nonresident alien to get
+                                              class="radio radioInput  form-check-input border-primary" required> a) Nonresident alien to get
                                             an ITIN to claim tax treaty benefit</label>
   
                                           <label class="option-a d-none form-check-label">
@@ -77,19 +77,19 @@
   
                                           <label class="form-check-label"><input type="radio" id="NonresidentFilingITIN"
                                               name="reasonsubmit" value="Nonresident alien filing a U.S. federal tax return"
-                                              class="radio radioInput form-check-input" required> b) Nonresident alien filing
+                                              class="radio radioInput  form-check-input border-primary" required> b) Nonresident alien filing
                                             a U.S. federal tax return</label>
   
                                           <label class="form-check-label"><input type="radio" id="BasedonDaysPresent"
                                               name="reasonsubmit"
                                               value="U.S. resident alien (based on days present in the United States) filing a U.S. federal tax return"
-                                              class="radio radioInput form-check-input" required> c) U.S. resident alien
+                                              class="radio radioInput  form-check-input border-primary" required> c) U.S. resident alien
                                             <b>(based on days present in
                                             the United States)</b> filing a U.S. federal tax return</label>
   
                                           <label class="form-check-label"><input type="radio" id="dependentresidentalien"
                                               name="reasonsubmit" value="Dependent of U.S. citizen/resident alien"
-                                              class="radio radioInput form-check-input" required>
+                                              class="radio radioInput  form-check-input border-primary" required>
                                             d) Dependent of U.S. citizen/resident alien <small class="alert-sm alert-warning alert p-1">If d, enter relationship to U.S. citizen/resident alien.</small></label>
                                           <label class="option-d d-none form-check-label">
                                             <div class="row">
@@ -112,7 +112,7 @@
                                           </label>
                                           <label class="form-check-label"><input type="radio" id="spouseofuscitizen"
                                               name="reasonsubmit" value="Spouse of U.S. citizen/resident alien"
-                                              class="radio radioInput form-check-input" required> e)
+                                              class="radio radioInput  form-check-input border-primary" required> e)
                                             Spouse of U.S. citizen/resident alien
                                             <small class="alert-sm alert-warning alert p-1">If d or e, enter name and SSN/ITIN of U.S. citizen/resident alien.</small>
                                           </label>
@@ -134,7 +134,7 @@
                                           <label class="form-check-label"><input type="radio" id="nonresidentstudentprofessor"
                                               name="reasonsubmit"
                                               value="Nonresident alien student, professor, or researcher filing a U.S. federal tax return or claiming an exception"
-                                              class="radio radioInput form-check-input" required> f) Nonresident alien
+                                              class="radio radioInput  form-check-input border-primary" required> f) Nonresident alien
                                             student, professor, or
                                             researcher filing a U.S. federal tax return or claiming an exception</label>
   
@@ -156,12 +156,12 @@
                                           <label class="form-check-label"><input type="radio" id="dependentspousenonresident"
                                               name="reasonsubmit"
                                               value="Dependent/spouse of a nonresident alien holding a U.S. visa"
-                                              class="radio radioInput form-check-input" required> g) Dependent/spouse of a
+                                              class="radio radioInput  form-check-input border-primary" required> g) Dependent/spouse of a
                                             nonresident alien
                                             holding a U.S. visa
                                           </label>
                                           <label class="form-check-label"><input type="radio" id="others" name="reasonsubmit"
-                                              value="ReasonOther" class="radio radioInput form-check-input" required> h) Other
+                                              value="ReasonOther" class="radio radioInput  form-check-input border-primary" required> h) Other
                                           </label>
                                           <label class="option-h d-none form-check-label">
                                             <div class="row">
@@ -524,10 +524,10 @@
                                             <div style="display: flex; text-transform: uppercase;">
                                               <label class="form-check-label" style="display: table; width: inherit;"><input
                                                   type="radio" id="maleItn" name="genderType" value="Male"
-                                                  class="radio radioInput  form-check-input" required>
+                                                  class="radio radioInput   form-check-input border-primary" required>
                                                 Male</label>
                                               <label class="mx-3 form-check-label"><input type="radio" id="femaleItn"
-                                                  name="genderType" value="Female" class="radio radioInput form-check-input"
+                                                  name="genderType" value="Female" class="radio radioInput  form-check-input border-primary"
                                                   required> Female</label>
                                             </div>
                                           </div>
@@ -648,19 +648,19 @@
                                             <div class="radiobox">
                                               <label class="form-check-label" style="display: table; width: inherit;">
                                                 <input type="radio" id="passport" name="identificationdocument" value="Passport"
-                                                  class="radio radioInput form-check-input" required>
+                                                  class="radio radioInput  form-check-input border-primary" required>
                                                 Passport</label>
                                               <label class="form-check-label"><input type="radio" id="driverlicense"
                                                   name="identificationdocument" value="Driver's license/Stat/ I.D"
-                                                  class="radio radioInput form-check-input" required> Driver's
+                                                  class="radio radioInput  form-check-input border-primary" required> Driver's
                                                 license/State I.D.</label>
                                               <label class="form-check-label"><input type="radio" id="uscisdocument"
                                                   name="identificationdocument" value="USCIS documentation"
-                                                  class="radio radioInput form-check-input" required> USCIS
+                                                  class="radio radioInput  form-check-input border-primary" required> USCIS
                                                 documentation</label>
                                               <label class="form-check-label"><input type="radio" id="otherdocument"
                                                   name="identificationdocument" value="Other document"
-                                                  class="radio radioInput form-check-input" required> Other</label>
+                                                  class="radio radioInput  form-check-input border-primary" required> Other</label>
                                             </div>
                                             <div>
                                               <div class="option-6dother d-none">
@@ -717,11 +717,11 @@
                                             <div class="radiobox">
                                               <label class="form-check-label">
                                                 <input type="radio" id="previouslyreceiveditin" name="previouslyreceiveditin"
-                                                  value="No/Dont Know" class="radio radioInput form-check-input" required> No/Don't
+                                                  value="No/Dont Know" class="radio radioInput  form-check-input border-primary" required> No/Don't
                                                 know.</label>
                                               <label class="form-check-label">
                                                 <input type="radio" id="yesreceiveditin" name="previouslyreceiveditin"
-                                                  value="Yes (Complete Line 6f)" class="radio radioInput form-check-input" required>
+                                                  value="Yes (Complete Line 6f)" class="radio radioInput  form-check-input border-primary" required>
                                                 Yes (Complete
                                                 Line 6f)</label>
                                             </div>
@@ -880,16 +880,16 @@
                                               <div class="radiobox">
                                                 <label class="form-check-label" style="display: table; width: inherit;">
                                                   <input type="radio" id="parent" name="delegaterelationship" value="Parent"
-                                                    class="radio radioInput form-check-input">
+                                                    class="radio radioInput  form-check-input border-primary">
                                                   Parent
                                                 </label>
                                                 <label class="form-check-label" style="display: table; width: inherit;"><input
                                                     type="radio" id="courtappointed" name="delegaterelationship"
-                                                    value="Court-appointed guardian" class="radio radioInput form-check-input">
+                                                    value="Court-appointed guardian" class="radio radioInput  form-check-input border-primary">
                                                   Court-appointed guardian</label>
                                                 <label class="form-check-label">
                                                   <input type="radio" id="powerofattorney" name="delegaterelationship"
-                                                    value="Power of attorney" class="radio radioInput form-check-input">
+                                                    value="Power of attorney" class="radio radioInput  form-check-input border-primary">
                                                   Power of attorney
                                                 </label>
                                               </div>
@@ -1132,7 +1132,7 @@
                                                         <div class="col-12"><small class="mt-5 text-left d-block">Important Note: If any incorrect information is provided during the application process, you will need to restart and resubmit the entire application. It is essential to review all details carefully before submission to avoid any delays or complications.</small></div>
                                                         <div class="col-lg-12 d-flex align-items-center">
                                                                 <input type="checkbox" id="terms" name="terms"
-                                                                    class="form-check-input me-2 " required="">
+                                                                    class="form-check-input border-primary me-2 " required="">
                                                                 <label for="terms">I have read the <a
                                                                         href="https://promptfilings.com/terms-of-service/"
                                                                         target="_blank">terms of

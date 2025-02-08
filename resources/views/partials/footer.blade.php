@@ -6,7 +6,7 @@
                   <li class="list-inline-item"><a href="https://promptfilings.com/terms-of-service/">Terms of Services</a></li>
               </ul>
               <div class="right-panel">
-                  <small> <span>Powered By</span>, <a href="https://rasulcllc.com/" target="_blank">Rasul Consulting</a>.</small>
+                  <small> <span>Powered By</span>, <a href="https://promptfilings.com/" target="_blank">Prompt Filings</a>.</small>
               </div>
           </div>
       </footer>

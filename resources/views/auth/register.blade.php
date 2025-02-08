@@ -49,18 +49,18 @@
             <div class="form-group">
                 <label for="prefix" class="form-label">Prefix</label>
                 <select id="prefix" name="prefix" class="form-control" required>
-                    <option value="Mr" {{ old('prefix') == 'Mr' ? 'selected' : '' }}>Mr</option>
-                    <option value="Ms" {{ old('prefix') == 'Ms' ? 'selected' : '' }}>Ms</option>
-                    <option value="Mrs" {{ old('prefix') == 'Mrs' ? 'selected' : '' }}>Mrs</option>
-                    <option value="Dr" {{ old('prefix') == 'Dr' ? 'selected' : '' }}>Dr</option>
-                    <option value="Prof" {{ old('prefix') == 'Prof' ? 'selected' : '' }}>Prof</option>
+                    <option value="Mr" {{ old('prefix') == 'Mr' ? 'selected' : '' }}>Mr.</option>
+                    <option value="Ms" {{ old('prefix') == 'Ms' ? 'selected' : '' }}>Ms.</option>
+                    <option value="Mrs" {{ old('prefix') == 'Mrs' ? 'selected' : '' }}>Mrs.</option>
+                    <option value="Dr" {{ old('prefix') == 'Dr' ? 'selected' : '' }}>Dr.</option>
+                    <option value="Prof" {{ old('prefix') == 'Prof' ? 'selected' : '' }}>Prof.</option>
                 </select>
                 <x-input-error :messages="$errors->get('prefix')" class="mt-2" />
             </div>
         </div>
 
         <!-- First Name -->
-        <div class="col-lg-5">
+        <div class="col-lg-10">
             <div class="form-group">
                 <label for="first_name" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="first_name" name="name" :value="old('name')" required>
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Last Name -->
-        <div class="col-lg-5">
+        <div class="col-lg-6">
             <div class="form-group">
                 <label for="last_name" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" :value="old('last_name')" required>
@@ -120,7 +120,7 @@
         <!-- Terms & Conditions -->
         <div class="col-lg-12 d-flex justify-content-center">
             <div class="form-check mb-3 d-flex align-items-center justify-content-center">
-                <input type="checkbox" class="form-check-input me-2" id="customCheck1" required>
+                <input type="checkbox" class="form-check-input border-primary me-2" id="customCheck1" required>
                 <label class="form-check-label" for="customCheck1">I agree with the terms of use</label>
             </div>
         </div>

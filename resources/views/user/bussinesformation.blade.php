@@ -176,12 +176,12 @@
                                                 <label>
                                                     <input type="radio" id="levelserviceStandard" name="levelservice"
                                                         value="Standard"
-                                                        class="radio radio radioInput  form-check-input " required>
+                                                        class="radio radio radioInput   form-check-input border-primary" required>
                                                     Standard</label>
                                                 <label>
                                                     <input type="radio" id="levelserviceExpedited" name="levelservice"
                                                         value="Expedited"
-                                                        class="radio radio radioInput  form-check-input " required>
+                                                        class="radio radio radioInput   form-check-input border-primary" required>
                                                     Expedited
                                                     (Additional Fee of
                                                     $50.00)</label>
@@ -193,12 +193,12 @@
                                             <div class="radiobox">
                                                 <label>
                                                     <input type="radio" id="eintaxid" name="eintaxid"
-                                                        value="eintaxidYes" class="radio radioInput  form-check-input "
+                                                        value="eintaxidYes" class="radio radioInput   form-check-input border-primary"
                                                         required>
                                                     Yes</label>
                                                 <label>
                                                     <input type="radio" id="eintaxid" name="eintaxid" value="eintaxidNo"
-                                                        class="radio radioInput  form-check-input " required>
+                                                        class="radio radioInput   form-check-input border-primary" required>
                                                     No</label>
                                             </div>
                                         </div>
@@ -987,17 +987,17 @@
                                     <div class="media-body row">
                                         <div class="col-lg-2">
                                             <label class="form-check-label"><input type="radio" id="isit" name="isitllc"
-                                                    value="LLC" class="radio radioInput  form-check-input ">
+                                                    value="LLC" class="radio radioInput   form-check-input border-primary">
                                                 LLC</label>
                                         </div>
                                         <div class="col-lg-2">
                                             <label class="form-check-label"><input type="radio" id="isit" name="isitllc"
-                                                    value="C-CORP" class="radio radioInput  form-check-input ">
+                                                    value="C-CORP" class="radio radioInput   form-check-input border-primary">
                                                 C-CORP</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <label class="form-check-label"><input type="radio" id="isit" name="isitllc"
-                                                    value="S-Corp" class="radio radioInput  form-check-input "> S-Corp -
+                                                    value="S-Corp" class="radio radioInput   form-check-input border-primary"> S-Corp -
                                                 An
                                                 additional fee ($249.00) will apply to complete S CORP
                                                 Election (Federal & State).</label>
@@ -1049,13 +1049,13 @@
                                         <div class="col-lg-1">
                                             <label class="form-check-label"><input type="radio" id="llckit"
                                                     name="llckit" value="LLCkit_Yes"
-                                                    class="radio radioInput  form-check-input " required>
+                                                    class="radio radioInput   form-check-input border-primary" required>
                                                 Yes</label>
                                         </div>
                                         <div class="col-lg-1">
                                             <label class="form-check-label"><input type="radio" id="llckit"
                                                     name="llckit" value="LLCkit_No"
-                                                    class="radio radioInput  form-check-input " required>
+                                                    class="radio radioInput   form-check-input border-primary" required>
                                                 No</label>
                                         </div>
                                     </div>
@@ -1109,7 +1109,7 @@
                                                             <p class="mb-3">PromptFiling Services: </p>
                                                         </td>
                                                         <td>
-                                                            <p class="mb-3"><span id="pfservicefee">$149.00</span></p>
+                                                            <p class="mb-3"><span id="pfservicefee">$49.00</span></p>
                                                         </td>
                                                     </tr>
 
@@ -1222,7 +1222,7 @@
                                                 delays or complications.</small></div>
                                         <div class="col-lg-12 d-flex align-items-center">
                                             <input type="checkbox" id="terms" name="terms"
-                                                class="form-check-input me-2 " required="">
+                                                class="form-check-input border-primary me-2 " required="">
                                             <label for="terms">I have read the <a
                                                     href="https://promptfilings.com/terms-of-service/"
                                                     target="_blank">terms of
@@ -1233,7 +1233,8 @@
                                         <div class="col-lg-12 mt-5 mb-5">
                                             <button type="button" class="btn btn-primary" id="reviewapplicationn">Review
                                                 Your Application</button>
-                                            <button type="submit" class="btn btn-success" data-package-id="9"
+                                            <button type="submit" class="btn btn-success" 
+                                            data-bs-toggle="modal"  data-bs-target="#upgradeModal" data-package-id="9"
                                                 data-package-name="Business Formation" data-package-price=""
                                                 id="llcformvalidate">Pay Now to Submit
                                                 Application</button>
@@ -1247,9 +1248,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 mt-3 p-5"><small style="font-size:13px">Disclaimer: Please note that while
-                                we aim to
-                                offer accurate information, this sample application for forming a Limited
+                        <div class="col-md-12 mt-3 p-5"><small style="font-size:13px">Disclaimer: Please note that while we aim to offer accurate information, this sample application for forming a Limited
                                 Liability Company (LLC) is intended for illustrative purposes only and
                                 should not be taken as legal or financial advice. The steps and requirements
                                 for establishing an LLC may vary depending on your location and individual
@@ -1274,28 +1273,29 @@
                 <div id="modalContent"></div> <!-- Form data will be injected here -->
                 <button id="confirmBtn" class="btn btn-primary m-4 ">Proceed to submit</button>
             </div>
-        </div>
-        <div class="modal fade formarea" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="d-flex align-items-start justify-content-start">
+        </div> 
+    </div>
+    <div class="modal fade formarea" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-body">
+            <div class="d-flex align-items-start justify-content-start">
 
             <div class="col-md-5 cardside">
-            <h4  class="payamount" id="amount2" name="amount2"></h4>
-            <p><small>3.5% plus 10c<br>Pay with Credit/Debit Card (a non-refundable portal processing fee applies)</small></p>
+              <small>You'll Pay</small>
+              <h4  class="payamount" id="amount2" name="amount2"></h4>
+              <p><small>Pay with Credit/Debit Card Fee "3.5% plus 10c" (a non-refundable portal processing fee applies)</small></p>
             <div class="d-table bg-white p-3 text-center secureimg">
                     <img src="https://promptfilings.com/wp-content/uploads/2024/04/secure.png" width="80%" alt="secure">
                     </div>
-                    </div>
+          </div>
                 <div class="formareacontent col-md-7">
                     <form action="{{ route('payment.create') }}" method="POST" class="d-flex align-items-center justify-content-between flex-wrap">  
                     <div class="packgename" id="packageNameDisplay">Service: </div>
                     @csrf
                     <!-- Hidden Field for Package ID -->
-                    <input type="hidden" id="package_id" name="package_id" value="3">
-                    <input type="hidden" id="package_name" name="package_name" value="Business Formation">
+                    <input type="hidden" id="package_id" name="package_id" value="9">
+                    <input type="hidden" id="package_name" name="package_name" value="BOI Reporting">
                     <input type="hidden" id="package_type" name="package_type" value="one-time">
                     <div class="mb-3 col-md-12">
                         <label for="card_name" class="form-label">Card Holder Name</label>
@@ -1323,62 +1323,27 @@
                         <input type="text" class="form-control" id="card_city" name="card_city" required>
                     </div>
 
-                                    <!-- Billing Information -->
-                                    <fieldset class="border p-3 mb-4">
-                                        <legend class="text-primary fw-bold px-2">Billing Information</legend>
-
-                                        <div class="mb-3">
-                                            <label for="billing_address" class="form-label">Billing Address</label>
-                                            <input type="text" class="form-control" id="billing_address"
-                                                name="billing_address" placeholder="123 Main Street" required>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label for="billing_city" class="form-label">City</label>
-                                                <input type="text" class="form-control" id="billing_city"
-                                                    name="billing_city" placeholder="City" required>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label for="billing_zip" class="form-label">ZIP/Postal Code</label>
-                                                <input type="text" class="form-control" id="billing_zip"
-                                                    name="billing_zip" placeholder="ZIP Code" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="billing_country" class="form-label">Country</label>
-                                            <input type="text" class="form-control" id="billing_country"
-                                                name="billing_country" placeholder="Country" required>
-                                        </div>
-                                    </fieldset>
-
-                                    <div class="mb-3 col-md-6">
-                                        <label for="card_state" class="form-label">State</label>
-                                        <input type="text" class="form-control" id="card_state" name="card_state"
-                                            required>
-                                    </div>
-
-                                    <div class="mb-3 col-md-6">
-                                        <label for="card_zipcode" class="form-label">Zipcode</label>
-                                        <input type="text" class="form-control" id="card_zipcode" name="card_zipcode"
-                                            required>
-                                    </div>
-
-                                    <div class="mb-3" style="display:none">
-                                        <label for="amount" class="form-label">Amount</label>
-                                        <!-- Set the amount field to be readonly and set the value dynamically -->
-                                        <input type="number" class="form-control" value='987' id="amount" name="amount"
-                                            required readonly>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary w-100">Pay Now!</button>
-                                    </div>
-
-                            </div>
-                        </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="card_state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="card_state" name="card_state" required>
                     </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="card_zipcode" class="form-label">Zipcode</label>
+                        <input type="text" class="form-control" id="card_zipcode" name="card_zipcode" required>
+                    </div>
+                    <div class="mb-3" style="display:none">
+                        <label for="amount" class="form-label">Amount</label>
+                        <!-- Set the amount field to be readonly and set the value dynamically -->
+                        <input type="number" class="form-control" id="amount" name="amount" required readonly>
+                    </div>
+
+                    <div class="col-md-12">
+                <button type="submit" class="btn btn-primary w-100">Pay Now!</button>
+                </div>
+                
+                </div> 
+                </div>
                 </div>
             </div>
         </div>
@@ -2821,39 +2786,41 @@
             // You can add any additional logic here for form submission or processing
         });
 
+      
+
         document.addEventListener('DOMContentLoaded', function () {
-            const upgradeButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+        const upgradeButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
 
-            upgradeButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const packageId = this.getAttribute('data-package-id');
-                    const packageName = this.getAttribute('data-package-name');
-                    //const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
-                    const packagePrice = document.getElementById('authpricing').value;
+        upgradeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const packageId = this.getAttribute('data-package-id');
+                const packageName = this.getAttribute('data-package-name');
+                //const packagePrice = this.getAttribute('data-package-price'); // Price from data attribute
+                const packagePrice = document.getElementById('authpricing').value;
+                
 
-
-                    // Update the modal with the correct package information
-                    document.getElementById('package_id').value = packageId;
-                    document.getElementById('packageNameDisplay').innerText = `Package: ${packageName}`;
-
-                    // Set the amount to the package price and make it readonly
-                    const amountField2 = document.getElementById('amount2');
-                    const amountField = document.getElementById('amount');
-                    amountField2.textContent = "$" + packagePrice; // Set the price dynamically
-                    amountField.value = packagePrice; // Set the price dynamically
-                    amountField.setAttribute('readonly', true); // Prevent editing
-                });
+                // Update the modal with the correct package information
+                document.getElementById('package_id').value = packageId;
+                document.getElementById('packageNameDisplay').innerText = `Package: ${packageName}`;
+                
+                // Set the amount to the package price and make it readonly
+                const amountField2 = document.getElementById('amount2');
+                const amountField = document.getElementById('amount');
+                amountField2.textContent = "$" + packagePrice; // Set the price dynamically
+                amountField.value = packagePrice; // Set the price dynamically
+                amountField.setAttribute('readonly', true); // Prevent editing
             });
         });
+    });
 
-
-        document.getElementById('expiry_date').addEventListener('input', function (e) {
-            let value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-            if (value.length > 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            e.target.value = value;
-        });
+    
+document.getElementById('expiry_date').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    if (value.length > 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    e.target.value = value;
+});
 
     </script>
 

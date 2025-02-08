@@ -29,32 +29,7 @@
                 <input type="number" id="amount" name="amount" class="form-control" required placeholder="Enter amount">
             </div>
         </fieldset>
-
-        <!-- Billing Address Section -->
-        <fieldset class="border p-4 mb-4">
-            <legend class="text-primary fw-bold px-2">Billing Address</legend>
-
-            <div class="mb-3">
-                <label for="billing_address" class="form-label">Address</label>
-                <input type="text" id="billing_address" name="billing_address" class="form-control" required placeholder="123 Main Street">
-            </div>
-
-            <div class="mb-3 row">
-                <div class="col">
-                    <label for="billing_city" class="form-label">City</label>
-                    <input type="text" id="billing_city" name="billing_city" class="form-control" required placeholder="City">
-                </div>
-                <div class="col">
-                    <label for="billing_zip" class="form-label">ZIP/Postal Code</label>
-                    <input type="text" id="billing_zip" name="billing_zip" class="form-control" required placeholder="ZIP Code">
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="billing_country" class="form-label">Country</label>
-                <input type="text" id="billing_country" name="billing_country" class="form-control" required placeholder="Country">
-            </div>
-        </fieldset>
+ 
 
         <!-- Shipping Information Section -->
         <fieldset class="border p-4 mb-4">

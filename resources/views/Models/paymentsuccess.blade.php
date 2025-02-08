@@ -30,14 +30,14 @@
         <div class="text-center">
           <i class="fas fa-check-circle fa-3x text-success"></i>
           <h4 class="mt-3">Your payment was successful!</h4>
-          <p>You have successfully upgraded to the <span id="successPackageName"></span>.</p>
-          <p>Your payment amount was: <span id="successAmount"></span></p>
+          <p>You have successfully upgraded to the <b><span id="successPackageName"></span></b>.</p>
+          <p>Your payment amount was: <b><span id="successAmount"></span></b></p>
         </div>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-        <a href="{{ route('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
-      </div> -->
+      <div class="modal-footer text-center">
+      <!--button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button-->
+        <a href="{{ route('dashboard') }}" class="btn btn-primary">Get Started</a>
+      </div>
     </div>
   </div>
 </div>
