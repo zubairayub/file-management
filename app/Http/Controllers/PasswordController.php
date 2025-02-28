@@ -42,8 +42,7 @@ class PasswordController extends Controller
       // Show the forgot password form
       public function showForgotPasswordForm()
       { 
-        echo 'hi';
-        exit;
+       
           return view('user.forgot-password');
       }
   

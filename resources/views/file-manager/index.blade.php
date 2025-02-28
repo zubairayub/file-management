@@ -41,7 +41,8 @@
             </ul>
             <form method="POST" action="{{ route('file-manager.upload-file') }}" enctype="multipart/form-data">
                 @csrf
-                <input type="file" name="file" required>
+                <input type="file" name="file" id="file" class="form-control" required accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp,.svg,.heic,.heif">
+
                 <select name="folder_id">
                     <option value="">Select Folder</option>
                     @foreach($folders as $folder)

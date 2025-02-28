@@ -277,7 +277,8 @@
                     @csrf
                     <div class="mb-3">
                         <label for="file" class="form-label">Choose File</label>
-                        <input type="file" name="file" id="file" class="form-control" required>
+                        <input type="file" name="file" id="file" class="form-control" required accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp,.svg,.heic,.heif">
+
                     </div>
                     <div class="mb-3">
                         <input type="hidden" name="user_id" id="user_id" class="form-control" value="{{ $subfolder->user->id ?? $folder->user->id }}">

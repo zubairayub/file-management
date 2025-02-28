@@ -11,6 +11,10 @@ use App\Models\UserPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Exception;
+use App\Mail\FileUploadMail;
 
 class FileManagerController extends Controller
 {
@@ -278,7 +282,7 @@ class FileManagerController extends Controller
     {
         // Validate the incoming request
         $request->validate([
-            'file' => 'required|file|mimes:jpg,jpeg,png,PNG,pdf,docx,doc,xlsx,xls,txt|max:2048',
+            'file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,csv,txt,jpg,jpeg,png,gif,bmp,tiff,webp,svg,heic,heif|max:2048',
             'subfolder_id' => 'nullable|exists:sub_folder,id',
             'user_id' => 'nullable|exists:users,id', // For admin to specify target user
         ]);
@@ -320,18 +324,18 @@ class FileManagerController extends Controller
 
         // Get all user packages
         $packages = UserPackage::where('user_id', $user->id)
-        ->when(function ($query) {
-            // Apply expiry date check only if package_type is not 'one_time'
-            return $query->where('package_type', '!=', 'one_time');
-        }, function ($query) {
-            return $query->where('expiry_date', '>=', now());
-        })
-        ->orWhere(function ($query) {
-            // If package_type is 'one_time', skip expiry check
-            return $query->where('package_type', 'one_time');
-        })
-        ->with('package')
-        ->get();
+            ->when(function ($query) {
+                // Apply expiry date check only if package_type is not 'one_time'
+                return $query->where('package_type', '!=', 'one_time');
+            }, function ($query) {
+                return $query->where('expiry_date', '>=', now());
+            })
+            ->orWhere(function ($query) {
+                // If package_type is 'one_time', skip expiry check
+                return $query->where('package_type', 'one_time');
+            })
+            ->with('package')
+            ->get();
 
         if ($packages->isEmpty()) {
             return response()->json(['error' => 'Invalid package, please upgrade your package.'], 400);
@@ -385,7 +389,7 @@ class FileManagerController extends Controller
         $path = $file->store($directory, 'local'); // Store file in the private disk
 
         // Store file metadata in the database
-        File::create([
+        $fileRecord = File::create([
             'name' => $file->getClientOriginalName(),
             'path' => $path,
             'user_id' => $user_ids->id,
@@ -406,9 +410,37 @@ class FileManagerController extends Controller
         $user->quota_used += $fileSizeInKB; // Add the file size in KB to the quota_used
         $user->save(); // Save the updated quota_used
         $quotaExceeded = checkQuota(); // Call the checkQuota method
+        $fileid = $fileRecord->id; // Get the file name
+        $fileName = $fileRecord->name; // Get the file name
+        $fileDownloadUrl = route('file.download', ['file_id' => $fileid]);
+        // Get admin email from .env file
+        $adminEmail = env('MAIL_FROM_ADDRESS', 'noreply@promptfilings.com');
+
+
+        try {
+            Mail::to($user->email)->send(new FileuploadMail($user->name, $fileDownloadUrl, $fileName));
+            Mail::to($user->adminEmail)->send(new FileuploadMail($user->name, $fileDownloadUrl, $fileName));
+        } catch (Exception $e) {
+            Log::error('File Upload Email sending failed: ' . $e->getMessage());
+        }
+
+
+
+        return view('folders.subfolders', compact(
+            'folder',
+            'subfolder',
+            'nestedSubfolders',
+            'files',
+            'quotaExceeded',
+            'subfolderCount',
+            'isSubfolder',
+            'subfolderIdmain',
+            'folderIdmain'
+        ));
+
 
         // Return the view with the appropriate data
-        return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files', 'subfolderCount', 'isSubfolder', 'subfolderIdmain', 'folderIdmain', 'quotaExceeded'));
+        // return view('folders.subfolders', compact('folder', 'subfolder', 'nestedSubfolders', 'files', 'subfolderCount', 'isSubfolder', 'subfolderIdmain', 'folderIdmain', 'quotaExceeded'));
     }
 
 

@@ -8,21 +8,28 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Attachment;
 
 class FileuploadMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
+    public $filePath;
+    public $fileName;
 
-   /**
+    /**
      * Create a new message instance.
      *
      * @param $user
+     * @param $filePath
+     * @param $fileName
      */
-    public function __construct($user)
+    public function __construct($user, $filePath, $fileName)
     {
         $this->user = $user;
+        $this->filePath = $filePath;
+        $this->fileName = $fileName;
     }
 
     /**
@@ -31,7 +38,7 @@ class FileuploadMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome to ' . config('app.name'),
+            subject: 'File Upload Confirmation - ' . config('app.name'),
         );
     }
 
@@ -42,7 +49,11 @@ class FileuploadMail extends Mailable
     {
         return new Content(
             view: 'email.fileemail', // Your email view file
-            with: ['user' => $this->user],
+            with: [
+                'user' => $this->user,
+                'fileName' => $this->fileName,
+                'filePath' => $this->filePath,
+            ],
         );
     }
 
@@ -51,8 +62,12 @@ class FileuploadMail extends Mailable
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function attachments(): array
-    {
-        return [];
-    }
+    // public function attachments(): array
+    // {
+    //     return [
+    //         Attachment::fromPath(storage_path('app/private/' . $this->filePath))
+    //             ->as($this->fileName) // Rename file if necessary
+    //             ->withMime(mime_content_type(storage_path('app/private/' . $this->filePath))),
+    //     ];
+    // }
 }
