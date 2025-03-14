@@ -419,7 +419,7 @@ class FileManagerController extends Controller
 
         try {
             Mail::to($user->email)->send(new FileuploadMail($user->name, $fileDownloadUrl, $fileName));
-            Mail::to($user->adminEmail)->send(new FileuploadMail($user->name, $fileDownloadUrl, $fileName));
+            Mail::to($adminEmail)->send(new FileuploadMail($user->name, $fileDownloadUrl, $fileName));
         } catch (Exception $e) {
             Log::error('File Upload Email sending failed: ' . $e->getMessage());
         }
