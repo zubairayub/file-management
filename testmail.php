@@ -1,6 +1,6 @@
 <?php
-$host = 'mail.zubairayub.com';
-$port = 587;
+$host = 'zubairayub.com';
+$port = 465;
 
 $connection = fsockopen($host, $port, $errno, $errstr, 10);
 

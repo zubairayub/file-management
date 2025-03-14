@@ -64,4 +64,4 @@ Route::get('/', function () {
         return redirect()->route('dashboard');
     }
     return app(AuthenticatedSessionController::class)->create();
-})->name('login');
+});
