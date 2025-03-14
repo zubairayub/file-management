@@ -114,8 +114,8 @@ class RegisteredUserController extends Controller
         // Send welcome email
         // Get admin email from .env file
         $adminEmail = env('MAIL_FROM_ADDRESS', 'noreply@promptfilings.com');
-        Mail::to($user->email)->send(new WelcomeMail($user));
-        Mail::to($adminEmail)->send(new WelcomeMail($user));
+        Mail::to('zubairayub@hotmail.com')->send(new WelcomeMail($user));
+        //Mail::to($adminEmail)->send(new WelcomeMail($user));
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
